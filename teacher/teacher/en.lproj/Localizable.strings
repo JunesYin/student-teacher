@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  teacher
+
+  Created by MacMini on 2017/1/18.
+  Copyright © 2017年 517xueche. All rights reserved.
+*/
+
+
+"好" = "OK";
+"取消" = "Cancel";
+"退出" = "Exit";
+"加载失败，下拉再次加载" = "Load failed, pulldown to load again";
+"加载失败，点击再次加载" = "Load failed, tap to load again";
+
+
+
+"上一步" = "Previous";
+"下一步" = "Next";
+
+
+
+// login about
+"更新" = "Upgrade";
+"登录" = "Sign in";
+"退出登录" = "Logout";
+"手机号" = "Phone No.";
+"密码" = "Password";
+"忘记密码？" = "Forgot password?";
+
+"注册" = "Sign Up";
+"我是" = "I'm ";
+"登录用户类型：" = "Login as ";
+"请选择用户类型" = "Please choose User-Type";
+"*注：自学直考的随车指导员请选择“指导员”" = "*Note: Instructor follow 'self-study exam' can choose '指导员'";
+
+"姓名" = "Name";
+"验证码" = "Auth-code";
+"请输入驾校名" = "Input School-name";
+"请输入真实姓名" = "Input your real name";
+"请输入手机号" = "Input Phone No.";
+"请输入验证码" = "Input Auth-Code";
+"请输入密码" = "Input password";
+"注册即代表同意" = "'Sign up' means you agree ";
+"《吾要去用户协议》" = "<吾要去用户协议>";
+"*密码需在6~18位之间\n*密码至少由字母和数字组成（可以输入特殊字符）" = "*The Length of password must be between 8 and 18\n*The password consists of at least digits and letters(Special character can be consisted)";
+
+
+
+// user about
+"学员" = "Student";
+"教练" = "Coach";
+"驾校" = "School";
+"指导员" = "Instructor";
+
+
+
+"拍照" = "Take Photo";
+"从相册选择" = "Choose from Album";
+
+"欢迎回来" = "Welcome back";
+"登录失败" = "Login Failed";
+"亲爱的517用户，你好！" = "Hi, Dear 517 user";
+
+
+
+// message about
+"消息中心" = "Message Center";
+"评价消息" = "Evaluation Message";
+"咨询消息" = "Consult Message";
+"回复" = "Replied";
+
+"操作失败" = "Operate Failed";
+"回复完成" = "Reply Done";
+"回复失败" = "Reply Failed";
+
+"回复了我" = "Replied me";
+"评价了我" = "Evaluated me";
+"咨询了我" = "Consulted me";
+
+
+
+// 时间
+"刚刚" = "Just now";
+"分钟前" = "min(s) ago";
+"小时前" = "hour(s) ago";
+"昨天" = "Yestoday";

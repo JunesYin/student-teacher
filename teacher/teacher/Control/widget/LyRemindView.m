@@ -33,6 +33,9 @@ NSTimeInterval const LyRemindViewDelayTime = 0.1f;
     UIImageView             *ivIcon;
     
     UILabel                 *lbTitle;
+    
+    
+    CGFloat     yVUD;
 }
 @end
 
@@ -62,20 +65,30 @@ NSTimeInterval const LyRemindViewDelayTime = 0.1f;
     {
         if ( !_title)
         {
-            _mode = mode;
             _title = title;
         }
         
+        _mode = mode;
+        
         [self initSubviews];
     }
+    
     
     return self;
 }
 
 
+- (void)dealloc {
+    [self removeObserverForNotification];
+}
+
 
 - (void)initSubviews
 {
+    [self addObserverForNotification];
+    yVUD = SCREEN_CENTER_Y;
+    
+    
     btnBig = [[UIButton alloc] initWithFrame:self.frame];
     [btnBig setBackgroundColor:[UIColor clearColor]];
     
@@ -86,15 +99,14 @@ NSTimeInterval const LyRemindViewDelayTime = 0.1f;
         widthViewUseful = widthLbTitle + horizontalSpace;
     }
     
-    
     widthViewUseful = ( widthViewUseful > SCREEN_WIDTH/2.0f) ? SCREEN_WIDTH/2.0f : widthViewUseful;
     
     
-    CGFloat fHeight = SCREEN_HEIGHT/2.0 - widthViewUseful/2.0;
+    CGFloat fY = SCREEN_HEIGHT/2.0 - widthViewUseful/2.0;
     if ([LyUtil isKeybaordShowing]) {
-        fHeight = SCREEN_HEIGHT/2.0 - widthViewUseful;
+        fY = SCREEN_HEIGHT/2.0 - widthViewUseful;
     }
-    viewUseful = [[UIView alloc] initWithFrame:CGRectMake( SCREEN_WIDTH/2.0f-widthViewUseful/2.0f, fHeight, widthViewUseful, widthViewUseful)];
+    viewUseful = [[UIView alloc] initWithFrame:CGRectMake( SCREEN_WIDTH/2.0f-widthViewUseful/2.0f, fY, widthViewUseful, widthViewUseful)];
     [viewUseful setBackgroundColor:LyMaskColor];
     [[viewUseful layer] setCornerRadius:10.0f];
     
@@ -189,6 +201,52 @@ NSTimeInterval const LyRemindViewDelayTime = 0.1f;
                                                   [_delegate remindViewDidHide:self];
                                               }
                                           }];
+}
+
+
+- (void)addObserverForNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionForNotification_keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionForNotificaton_keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)removeObserverForNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - NSNotification -- UIKeyboard
+- (void)actionForNotification_keyboardWillShow:(NSNotification *)notification
+{
+    CGFloat fHeightKeyboard = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+    if (SCREEN_HEIGHT - fHeightKeyboard > viewUseful.ly_y + viewUseful.ly_height + 10)
+    {
+        viewUseful.ly_y = SCREEN_HEIGHT - fHeightKeyboard - viewUseful.ly_height - 10;
+    }
+}
+
+- (void)actionForNotificaton_keyboardWillHide:(NSNotification *)notification
+{
+    
+    if (viewUseful.ly_y < yVUD) {
+        [UIView animateWithDuration:0.1
+                              delay:0
+             usingSpringWithDamping:0.5
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionAllowAnimatedContent
+                         animations:^{
+                             viewUseful.ly_y = yVUD;
+                         } completion:nil];
+    }
 }
 
 

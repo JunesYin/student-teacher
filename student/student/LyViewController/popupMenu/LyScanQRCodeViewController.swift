@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import CoreImage
+
 
 import SwiftyJSON
 
@@ -43,6 +45,8 @@ fileprivate enum LyScanQRCodeButtonTag: Int {
 @objc(LyScanQRCodeViewController)
 class LyScanQRCodeViewController: UIViewController {
 
+    
+    var userId: String!
     
     var device: AVCaptureDevice?
     var scanSession: AVCaptureSession?
@@ -117,6 +121,11 @@ class LyScanQRCodeViewController: UIViewController {
     }()
     lazy var btnLight: UIButton = { [unowned self] in
         self.button(with: .light)
+    }()
+    
+    
+    lazy var indicator: LyIndicator = {
+        LyIndicator(title: nil)
     }()
     
     
@@ -268,12 +277,104 @@ class LyScanQRCodeViewController: UIViewController {
             let myQRCode = LyMyQRCodeViewController()
             self.navigationController?.pushViewController(myQRCode, animated: true)
         case .album:
-            break
+            LyJurisdictionUtil.shared.choosePhoto(self, editor: false, options: [.photoLibrary]) { [unowned self] (image) -> Swift.Void in
+                self.discernQRCode(image)
+            }
         case .light:
             btn.isSelected = !btn.isSelected
             switchLight()
         }
     }
+    
+    func discernQRCode(_ image: UIImage) {
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+        let features = detector?.features(in: CoreImage.CIImage(cgImage: image.cgImage!))
+        guard (features?.count)! > 0 else {
+            handleQRCodeContent(nil)
+            return
+        }
+        
+        let feature = features?.first as? CIQRCodeFeature
+        
+        handleQRCodeContent(feature?.messageString)
+    }
+    
+    func handleQRCodeContent(_ content: String?) {
+        guard nil != content else {
+            LyJurisdictionUtil.confirmAlert(target: self, title: nil, message: "当前二维码无有效数据") { [unowned self] (_) -> Swift.Void in
+                self.startScan()
+            }
+            
+            return
+        }
+        
+        if let url = URL(string: content!) {
+            if LyJurisdictionUtil.openUrl(url) {
+                return
+            }
+        }
+        
+        
+        judgeUserId(content!)
+        
+    }
+    
+    
+    func displayContent(_ content: String) {
+        LyJurisdictionUtil.confirmAlert(target: self, title: nil, message: content) { [unowned self] (_) in
+            self.startScan()
+        }
+    }
+    
+    
+    func judgeUserId(_ content: String) {
+        guard "" != content else {
+            return
+        }
+        
+        userId = content
+        
+        indicator.title = "正在处理"
+        indicator.startAnimation()
+        
+        LyHttpRequest.start(issetUserId_url,
+                            body: [userIdKey: content],
+                            type: .asynPost,
+                            timeOut: 0) { [unowned self, weak indicator] (_, resData, _) in
+                                guard nil != resData else {
+                                    self.handleHttpFailed(true)
+                                    return
+                                }
+                                
+                                let json: JSON! = analysisHttpResult(resData!, delegate: self)
+                                guard nil != json && .dictionary == json.type else {
+                                    self.handleHttpFailed(true)
+                                    return
+                                }
+                                
+                                let iCode = json[codeKey].intValue
+                                switch iCode {
+                                case 0:
+                                    
+                                    indicator?.stopAnimation()
+                                    
+                                    let userDetail = LyUserDetailViewController()
+                                    userDetail.delegate = self
+                                    
+                                    if LyCurrentUser.cur().isLogined {
+                                        self.navigationController?.pushViewController(userDetail, animated: true)
+                                    } else {
+                                        LyUtil.showLoginVc(self, nextVC: userDetail, show: .push)
+                                    }
+                                    
+                                default:
+                                    self.handleHttpFailed(true)
+                                }
+        }
+    }
+    
+    
+    
     
     
     /*
@@ -295,15 +396,31 @@ extension LyScanQRCodeViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        indicator.title = ""
+        indicator.startAnimation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         startScan()
+        
+        indicator.stopAnimation()
     }
     
 }
+
+
+
+// MARK:  - LySUtilDelegate
+extension LyScanQRCodeViewController: LySUtilDelegate {
+    func handleHttpFailed(_ needRemind: Bool) {
+        indicator.stopAnimation()
+        
+        displayContent(userId)
+    }
+}
+
 
 
 // MARK: - AVCaptureMetadataOutputObjectsDelegate
@@ -314,15 +431,16 @@ extension LyScanQRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         
         if metadataObjects.count > 0 {
             if let result = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
-                
-                let alert = UIAlertController(title: "result", message: result.stringValue, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default) { [unowned self] (_) in
-                    self.startScan()
-                })
-                
-                self.present(alert, animated: true, completion: nil)
+                handleQRCodeContent(result.stringValue)
             }
         }
     }
 }
 
+
+// MARK: - LyUserDetailViewControllerDelegate
+extension LyScanQRCodeViewController: LyUserDetailDelegate {
+    func obtainUserId() -> String! {
+        return userId
+    }
+}

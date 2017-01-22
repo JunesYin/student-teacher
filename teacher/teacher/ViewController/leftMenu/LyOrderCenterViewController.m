@@ -35,11 +35,7 @@ typedef NS_ENUM(NSInteger, LyOrderCenterHttpMethod) {
 
 @interface LyOrderCenterViewController () <UITableViewDelegate, UITableViewDataSource, LyDateViewDelegate, LyOrderStateViewDelegate, LyHttpRequestDelegate, LyTableViewFooterViewDelegate, LyOrderDetailViewControllerDelegate, LyOrderDispatchTableViewControllerDelegate, LyOrderCenterTableViewCellDelegate>
 {
-    LyDateView                  *dateView;
-//    LyOrderStateView            *orderStateView;
-    
     NSArray                     *arrOrder;
-    LyOrderPayStatus            curOrderPayStatus;
     NSIndexPath                 *curIdx;
     
     LyIndicator                 *indicator;
@@ -50,6 +46,7 @@ typedef NS_ENUM(NSInteger, LyOrderCenterHttpMethod) {
     BOOL        flagPush;
 }
 
+@property (strong, nonatomic)       LyDateView      *dateView;
 @property (strong, nonatomic)       LyOrderStateView        *orderStateView;
 
 @property (strong, nonatomic)   UIRefreshControl        *refreshControl;
@@ -71,7 +68,8 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.orderStateView setOrderState:self.orderState];
+//    [self.orderStateView setOrderState:self.orderState];
+    [self.orderStateView setOrderPayStatus:self.curPayStatus];
     
     [self load];
 }
@@ -84,18 +82,14 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
     
     
-    dateView = [[LyDateView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT+NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, LyDateViewHeight)];
-    [dateView setDelegate:self];
-    [self.view addSubview:dateView];
-    
-    
+    [self.view addSubview:self.dateView];
     [self.view addSubview:self.orderStateView];
     
     [self.view addSubview:self.tableView];
     
     
     if (!flagPush) {
-        _orderState = 5;
+        self.curPayStatus = LyOrderPayStatus_close + 1;;
     }
 }
 
@@ -112,9 +106,19 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
 }
 
 
+- (LyDateView *)dateView {
+    if (!_dateView) {
+        _dateView = [[LyDateView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT+NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, LyDateViewHeight)];
+        [_dateView setDelegate:self];
+    }
+    
+    return _dateView;
+}
+
+
 - (LyOrderStateView *)orderStateView {
     if (!_orderStateView) {
-        _orderStateView = [[LyOrderStateView alloc] initWithFrame:CGRectMake(0, STATUSBAR_HEIGHT + NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, LyOrderStateViewHeight)];;
+        _orderStateView = [[LyOrderStateView alloc] initWithFrame:CGRectMake(0, self.dateView.ly_y + self.dateView.ly_height, SCREEN_WIDTH, LyOrderStateViewHeight)];;
         [_orderStateView setDelegate:self];
     }
     
@@ -123,8 +127,8 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        CGFloat y = self.orderStateView.ly_y+CGRectGetHeight(self.orderStateView.frame);
-        CGFloat height = SCREEN_HEIGHT-STATUSBAR_HEIGHT-NAVIGATIONBAR_HEIGHT-LyDateViewHeight-LyOrderStateViewHeight;
+        CGFloat y = self.orderStateView.ly_y + self.orderStateView.ly_height;
+        CGFloat height = SCREEN_HEIGHT - STATUSBAR_HEIGHT - NAVIGATIONBAR_HEIGHT - self.dateView.ly_height - self.orderStateView.ly_height;
         
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y, SCREEN_WIDTH, height)
                                                 style:UITableViewStylePlain];
@@ -151,9 +155,9 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
 
 - (void)reloadData:(BOOL)needFlag {
     
-    arrOrder = [[LyOrderManager sharedInstance] getOrderWithOrderStatus:curOrderPayStatus
-                                                                dtaStart:dateView.dateStart
-                                                                 dataEnd:dateView.dateEnd
+    arrOrder = [[LyOrderManager sharedInstance] getOrderWithOrderStatus:self.curPayStatus
+                                                                dtaStart:self.dateView.dateStart
+                                                                 dataEnd:self.dateView.dateEnd
                                                                   userId:[LyCurrentUser curUser].userId];
     
     [self.tableView reloadData];
@@ -172,10 +176,10 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
 }
 
 
-- (void)setOrderState:(LyOrderState)orderState {
-    flagPush = YES;
+- (void)setCurPayStatus:(LyOrderPayStatus)curPayStatus
+{
+    _curPayStatus = curPayStatus;
     
-    _orderState = orderState;
     [self reloadData:YES];
 }
 
@@ -205,11 +209,11 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
     }) forKey:userTypeKey];
     [dic setObject:[LyUtil httpSessionId] forKey:sessionIdKey];
     [dic setObject:@(0) forKey:startKey];
-    [dic setObject:@(curOrderPayStatus) forKey:orderStateKey];
+    [dic setObject:@(self.curPayStatus) forKey:orderStateKey];
     
-    if (dateView.dateStart && dateView.dateEnd) {
-        [dic setObject:[LyUtil stringOnlyDateFromDate:dateView.dateStart] forKey:startDateKey];
-        [dic setObject:[LyUtil stringOnlyDateFromDate:[dateView.dateEnd dateByAddingTimeInterval:3600 * 24]] forKey:endDateKey];
+    if (self.dateView.dateStart && self.dateView.dateEnd) {
+        [dic setObject:[LyUtil stringOnlyDateFromDate:self.dateView.dateStart] forKey:startDateKey];
+        [dic setObject:[LyUtil stringOnlyDateFromDate:[self.dateView.dateEnd dateByAddingTimeInterval:3600 * 24]] forKey:endDateKey];
     }
     
 //    if (LyUserType_coach == [LyCurrentUser curUser].userType) {
@@ -245,10 +249,10 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
     }) forKey:userTypeKey];
     [dic setObject:[LyUtil httpSessionId] forKey:sessionIdKey];
     [dic setObject:@(0) forKey:startKey];
-    [dic setObject:@(curOrderPayStatus) forKey:orderStateKey];
+    [dic setObject:@(self.curPayStatus) forKey:orderStateKey];
     
-    [dic setObject:[LyUtil stringOnlyDateFromDate:dateView.dateStart] forKey:startDateKey];
-    [dic setObject:[LyUtil stringOnlyDateFromDate:[dateView.dateEnd dateByAddingTimeInterval:3600 * 24]] forKey:endDateKey];
+    [dic setObject:[LyUtil stringOnlyDateFromDate:self.dateView.dateStart] forKey:startDateKey];
+    [dic setObject:[LyUtil stringOnlyDateFromDate:[self.dateView.dateEnd dateByAddingTimeInterval:3600 * 24]] forKey:endDateKey];
     
 //    if (LyUserType_coach == [LyCurrentUser curUser].userType) {
 //        [dic setObject:@([LyCurrentUser curUser].coachMode) forKey:coachModeKey];
@@ -279,11 +283,11 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
     }) forKey:userTypeKey];
     [dic setObject:[LyUtil httpSessionId] forKey:sessionIdKey];
     [dic setObject:@(arrOrder.count) forKey:startKey];
-    [dic setObject:@(curOrderPayStatus) forKey:orderStateKey];
+    [dic setObject:@(self.curPayStatus) forKey:orderStateKey];
 
-    if (dateView.dateStart && dateView.dateEnd) {
-        [dic setObject:[LyUtil stringOnlyDateFromDate:dateView.dateStart] forKey:startDateKey];
-        [dic setObject:[LyUtil stringOnlyDateFromDate:dateView.dateEnd] forKey:endDateKey];
+    if (self.dateView.dateStart && self.dateView.dateEnd) {
+        [dic setObject:[LyUtil stringOnlyDateFromDate:self.dateView.dateStart] forKey:startDateKey];
+        [dic setObject:[LyUtil stringOnlyDateFromDate:self.dateView.dateEnd] forKey:endDateKey];
     }
     
 //    if (LyUserType_coach == [LyCurrentUser curUser].userType) {
@@ -957,8 +961,8 @@ static NSString *lyOrderCenterTvOrdersCellReuseIdentifier = @"lyOrderCenterTvOrd
 
 
 #pragma mark -LyOrderStateViewDelegate
-- (void)orderStateView:(LyOrderStateView *)aOrderStateView didSelectItemAtIndex:(LyOrderState)aOrderState {
-    [self setOrderState:aOrderState];
+- (void)orderStateView:(LyOrderStateView *)aOrderStateView didSelectLyOrderPayStatus:(LyOrderPayStatus)orderPayStatus {
+    self.curPayStatus = orderPayStatus;
 }
 
 

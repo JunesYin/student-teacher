@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-
 @interface LyIndicator : UIView
 
 @property ( strong, nonatomic, readonly)    UIActivityIndicatorView     *indicator;
@@ -36,23 +35,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)indicatorWithTitle:(nullable NSString *)title;
 
-+ (instancetype)indicatorWithTitle:(NSString *)title allowCancel:(BOOL)forbidCancel;
++ (instancetype)indicatorWithTitle:(nullable NSString *)title allowCancel:(BOOL)forbidCancel;
 
-- (instancetype)initWithTitle:(NSString *)title;
+- (instancetype)initWithTitle:(nullable NSString *)title;
 
-- (instancetype)initWithTitle:(NSString *)title allowCancel:(BOOL)forbidCancel;
+- (instancetype)initWithTitle:(nullable NSString *)title allowCancel:(BOOL)forbidCancel;
 
 - (BOOL)isAnimating;
 
-- (void)startAnimationInView:(UIView *)view;
+- (void)startInView:(UIView *)view NS_DEPRECATED_IOS(2_0, 8_0, "Please use startAnimating") NS_EXTENSION_UNAVAILABLE_IOS("startAnimating");
 
 - (void)startAnimation;
 
 - (void)stopAnimation;
 
+- (void)start NS_DEPRECATED_IOS(2_0, 8_0, "Please use startAnimating") NS_EXTENSION_UNAVAILABLE_IOS("startAnimating");
+
+- (void)stop NS_DEPRECATED_IOS(2_0, 8_0, "Please use stopAnimating") NS_EXTENSION_UNAVAILABLE_IOS("stopAnimating");
 
 @end
-
 
 
 NS_ASSUME_NONNULL_END

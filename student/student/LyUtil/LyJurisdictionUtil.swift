@@ -24,13 +24,15 @@ typealias imageFinished = (_ image: UIImage) -> ()
 
 class LyJurisdictionUtil: NSObject {
 
-    static let util = LyJurisdictionUtil()
-    
+    static let shared = LyJurisdictionUtil()
     private override init() {}
     
     var imageFinished: imageFinished?
     var isEditor = false
     
+    
+    // MARK: - Private property
+    private var infoPlist: [String: Any]? = { Bundle.main.infoDictionary }()
     
     class func playSound(_ soundName: String?) {
         var name = soundName
@@ -105,10 +107,12 @@ class LyJurisdictionUtil: NSObject {
     
     open func openCamera(_ target: UIViewController, editor: Bool = false) {
         
-//        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-//        if .restricted == authStatus || .denied == authStatus {
-//            LyJurisdictionUtil.showAlertSingleFunc(target: target, title: "", message: <#T##String?#>, funcTitle: <#T##String?#>, funcStyle: <#T##UIAlertActionStyle#>, preferredStyle: <#T##UIAlertControllerStyle#>, handler: <#T##((UIAlertAction) -> Void)?##((UIAlertAction) -> Void)?##(UIAlertAction) -> Void#>)
-//        }
+        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if .restricted == authStatus || .denied == authStatus {
+            LyJurisdictionUtil.showAlertSingleFunc(target: target, title: "无法访问相机", message: "请开启相机权限", funcTitle: "设置", funcStyle: .default, preferredStyle: .alert, handler: { (_) in
+                LyJurisdictionUtil.openUrl(URL(string: UIApplicationOpenSettingsURLString)!)
+            })
+        }
         
         
         let imagePicker = UIImagePickerController()
@@ -121,7 +125,12 @@ class LyJurisdictionUtil: NSObject {
     
     open func openPhotoLibrary(_ target: UIViewController, editor: Bool = false) {
         
-        
+        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if .restricted == authStatus || .denied == authStatus {
+            LyJurisdictionUtil.showAlertSingleFunc(target: target, title: "无法访问相册", message: "请开启相册权限", funcTitle: "设置", funcStyle: .default, preferredStyle: .alert, handler: { (_) in
+                LyJurisdictionUtil.openUrl(URL(string: UIApplicationOpenSettingsURLString)!)
+            })
+        }
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -135,8 +144,27 @@ class LyJurisdictionUtil: NSObject {
     
     
     
+    class func openUrl(_ url: URL) -> Bool {
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.openURL(url)
+            return true
+        }
+        
+        return false
+    }
     
     
+    class func appDisplayName() -> String? {
+        return shared.infoPlist?["CFBundleDisplayName"] as? String
+    }
+    
+    class func appVersion() -> String? {
+        return shared.infoPlist?["CFBundleShortVersionString"] as? String
+    }
+    
+    class func appBuildVersoin() -> String? {
+        return shared.infoPlist?[String(kCFBundleVersionKey)] as? String
+    }
     
     
 }

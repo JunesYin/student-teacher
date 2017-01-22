@@ -21,6 +21,9 @@
 #import "LyHttpRequest.h"
 #import "FMDatabase.h"
 
+#import "UIView+LyExtension.h"
+#import "UIScrollView+LyExtension.h"
+
 
 
 
@@ -62,7 +65,7 @@
 #define LyBlackColor                                    [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]
 #define LyCellSelectedBackgroundColor                   [UIColor colorWithWhite:1 alpha:.2f]
 #define LyUserCenterCellSelectedBackgroundColor         [UIColor colorWithWhite:1 alpha:.2f]
-#define LyMaskColor                                     [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]
+#define LyMaskColor                                     [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]
 #define LyLightMaskColor                                [UIColor colorWithWhite:1 alpha:.5f]
 #define LyWarnColor                                     LyWrongColor
 #define LyNotificationColor                             [UIColor colorWithRed:255.0f/255.0f green:60/255.0 blue:50/255.0f alpha:1.0f]
@@ -738,10 +741,6 @@ lySingle_interface
 + (nullable NSString *)machineName;
 + (nullable NSString *)osName;
 + (float)osVersion;
-
-
-
-
 
 
 

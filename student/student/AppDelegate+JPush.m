@@ -143,6 +143,7 @@
     else
     {
         // local notification
+        self.lastUserInfo = userInfo;
     }
     
     [self push_prepare:userInfo];
@@ -168,6 +169,7 @@
     else
     {
         // local notification
+        self.lastUserInfo = userInfo;
     }
     
     [self push_prepare:userInfo];
@@ -217,8 +219,7 @@
     NSString *msg = [[NSString alloc] initWithFormat:@"%@", userInfo[@"aps"][@"alert"]];
     
     if (target) {
-        [self push_genuine:code userInfo:userInfo target:target];
-        self.lastUserInfo = nil;
+        [self push_genuine:code target:target];
     } else {
         target = [UIViewController currentViewController];
         
@@ -231,7 +232,7 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"立即查看"
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                    [self push_genuine:code userInfo:userInfo target:target];
+                                                    [self push_genuine:code target:target];
                                                 }]];
         
         [target presentViewController:alert animated:YES completion:nil];
@@ -240,7 +241,7 @@
 }
 
 // push VC
-- (void)push_genuine:(LyPushMode)mode userInfo:(NSDictionary *)dictionary target:(__kindof UIViewController *)target {
+- (void)push_genuine:(LyPushMode)mode target:(__kindof UIViewController *)target {
     switch (mode) {
         case LyPushMode_reserNoFinish: {
             LyOrderCenterViewController *orderCenter = [[LyOrderCenterViewController alloc] init];
@@ -283,6 +284,8 @@
             break;
         }
     }
+    
+    self.lastUserInfo = nil;
     
 }
 

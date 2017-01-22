@@ -25,6 +25,8 @@
 #import <MessageUI/MessageUI.h>
 
 
+#import "teacher-Swift.h"
+
 
 
 CGFloat const LyViewErrorHeight = 400;
@@ -2902,6 +2904,20 @@ NSData* getDataFromHexString(NSString *strSour)
     
     
     return image;
+}
+
+
+
+#pragma mark -
++ (void)showWebViewController:(LyWebMode)mode target:(__kindof UIViewController *)target
+{
+    LyWebViewController *web = [[LyWebViewController alloc] init];
+    web.mode = mode;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:web];
+    
+    //    [target presentViewController:nav animated:YES completion:nil];
+    [target.navigationController pushViewController:web animated:YES];
+    
 }
 
 

@@ -11,11 +11,8 @@
 #import "LyUtil.h"
 
 
-#define viewUsefulWidth                     170.0f
+#define viewUsefulWidth                     147.0f
 #define viewUsefulHeight                    viewUsefulWidth
-
-#define viewUsefulWidth_light               100.0f
-#define viewUsefulHeight_light              viewUsefulWidth_light
 
 
 #define indicatorWidth                      40.0f
@@ -24,7 +21,7 @@
 
 #define titleWidth                           viewUsefulWidth
 #define titleHeight                          20.0f
-#define titleFont                            LyFont(15)
+#define titleFont                            LyFont(14)
 
 
 @interface LyIndicator ()
@@ -39,6 +36,9 @@
     UIView                      *viewUseful;
     UIButton                    *btnInterupt;
     UILabel                     *lbTitle;
+    
+    
+    CGFloat     yVUD;
 }
 @end
 
@@ -97,11 +97,18 @@
 }
 
 
+- (void)dealloc
+{
+    [self removeObserverForNotification];
+}
 
 
 
 - (void)initAndLayoutSubview
 {
+    yVUD = SCREEN_CENTER_Y;
+    [self addObserverForNotification];
+    
     btnBig = [[UIButton alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     if (![LyUtil validateString:_title]) {
@@ -122,6 +129,7 @@
     
     
     lbTitle = [[UILabel alloc] initWithFrame:CGRectMake( 0, _indicator.ly_y+CGRectGetHeight(_indicator.frame)+verticalSpace*2, titleWidth, titleHeight)];
+    lbTitle.font = titleFont;
     [lbTitle setTextColor:[UIColor whiteColor]];
     [lbTitle setTextAlignment:NSTextAlignmentCenter];
     [lbTitle setText:_title];
@@ -256,6 +264,50 @@
 }
 
 
+- (void)addObserverForNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionForNotification_keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionForNotificaton_keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)removeObserverForNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - NSNotification -- UIKeyboard
+- (void)actionForNotification_keyboardWillShow:(NSNotification *)notification
+{
+    CGFloat fHeightKeyboard = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+    if (SCREEN_HEIGHT - fHeightKeyboard > viewUseful.ly_y + viewUseful.ly_height + 10)
+    {
+        viewUseful.ly_y = SCREEN_HEIGHT - fHeightKeyboard - viewUseful.ly_height - 10;
+    }
+}
+
+- (void)actionForNotificaton_keyboardWillHide:(NSNotification *)notification
+{
+    
+    if (viewUseful.ly_y < yVUD) {
+        [UIView animateWithDuration:0.1
+                              delay:0
+             usingSpringWithDamping:0.5
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionAllowAnimatedContent
+                         animations:^{
+                             viewUseful.ly_y = yVUD;
+                         } completion:nil];
+    }
+}
 
 
 @end

@@ -842,6 +842,48 @@ UIKIT_EXTERN NSString *const deleteNews_url;
 UIKIT_EXTERN NSString *const userDetail_url;
 
 
+
+
+//用户协议
+UIKIT_EXTERN NSString *const userProtocol_url;
+
+//常见问题
+UIKIT_EXTERN NSString *const FAQ_url;
+
+//学车指南
+//学车流程
+UIKIT_EXTERN NSString *const guide_studyFlow_url;
+//驾考大纲
+UIKIT_EXTERN NSString *const guide_outline_url;
+//择校指南
+UIKIT_EXTERN NSString *const guide_selectionGuide_url;
+//报名须知
+UIKIT_EXTERN NSString *const guide_applyNote_url;
+//体检事项
+UIKIT_EXTERN NSString *const guide_physicalExam_url;
+//学车费用
+UIKIT_EXTERN NSString *const guide_studyFee_url;
+//作弊处量
+UIKIT_EXTERN NSString *const guide_cheating_url;
+//残疾人学车
+UIKIT_EXTERN NSString *const guide_deformedMan_url;
+
+//自学直考
+UIKIT_EXTERN NSString *const selfStudy_url;
+
+//学车成本
+UIKIT_EXTERN NSString *const studyCost_url;
+
+
+
+// school
+UIKIT_EXTERN NSString *const schoolProtocol_url;
+
+// coach - guider
+UIKIT_EXTERN NSString *const coaInsProtocol_url;
+
+
+
 #define ly_url(realmName, class, category, interface)   [[NSString alloc] initWithFormat:@"%@/%@/%@/%@", realmName, class, category, interface]
 
 
@@ -855,328 +897,6 @@ UIKIT_EXTERN NSString *const userDetail_url;
 //获取驾校banner
 //http://58.215.177.233:8080/web/xueche/Upload/banner/imageName.png
 #define getDriveSchoolBanner(imageName)                 ly_url( realmName_517, model_upload, category_banner, imageName)
-
-
-
-/*
- //Admin/Index/index(模块/控制器/方法)
- 
- 
- //活动图
- //http://58.215.177.233:8080/Upload/active/iamgename
- #define activity_url(imaegName)                         ly_url( realmName_517, model_upload, category_activity, imaegName)
- 
- //获取当前最低支持的应用版本号
- //http://58.215.177.233:8080/Admin/index/version
- #define lowestAppVersion_url                            ly_url( realmName_517, model_admin, category_index, @"version")
- //登录网址
- //http://58.215.177.233:8080/Admin/index/check
- #define login_url                                       ly_url( realmName_517, model_admin, category_index, @"check")
- //注册网址
- //http://58.215.177.233:8080/Admin/index/adduser
- #define register_url                                    ly_url( realmName_517, model_admin,  category_index, @"adduser")
- //退出接口
- //http://58.215.177.233:8080/Admin/index/logout
- #define logout_url                                      ly_url( realmName_517, model_admin, category_index, @"logout")
- //个人信息
- //http://58.215.177.233:8080/Admin/index/userinfo
- #define userInfo_url                                    ly_url( realmName_517, model_admin, category_index, @"userinfo")
- //修改个人信息
- //http://58.215.177.233:8080/Admin/index/updateuinfo
- #define modifyUserInfo_url                              ly_url( realmName_517, model_admin, category_index, @"updateuinfo")
- 
- //获取用户头像
- //http://58.215.177.233:8080/Upload/small/userid.png
- #define getAvatar_url(userId)                           ly_url( realmName_517, model_upload, category_small, userId)
- 
- //获取用户名称
- //http://58.215.177.233:8080/admin/index/getUserName
- #define getUserName_url                                ly_url( realmName_517, model_admin, category_index, @"getUserName")
- 
- 
- 
- 
- 
- //发送验证码
- //http://58.215.177.233:8080/Admin/index/sends
- #define getAuthCode_url                                 ly_url( realmName_517, model_admin, category_index, @"sends")
- 
- 
- //验证验证码
- //http://58.215.177.233:8080/Admin/index/verification
- #define checkAuchCode_url                               ly_url( realmName_517, model_admin, category_index, @"verification")
- 
- 
- //修改密码
- //http://58.215.177.233:8080/Admin/index/passupdate
- #define modifyPassword_url                              ly_url( realmName_517, model_admin, category_index,  @"passupdate")
- 
- //重设密码
- //http://58.215.177.233:8080/Admin/index/passreset
- #define resetPassword_url                               ly_url( realmName_517, model_admin, category_index, @"passreset")
- 
- 
- 
- 
- 
- //搜索驾校
- //http://58.215.177.233:8080/admin/search/search
- #define searchSchool_url                                ly_url( realmName_517, model_admin, category_search, @"search")
- //搜索教练
- //http://58.215.177.233:8080/admin/search/searchCoach
- #define searchCoach_url                                 ly_url( realmName_517, model_admin, category_search, @"searchCoach")
- //搜索指导员
- //http://58.215.177.233:8080/admin/search/searchGuider
- #define searchGuider_url                                ly_url( realmName_517, model_admin, category_search, @"searchGuider")
- 
- 
- 
- //获取驾校列表
- //http://58.215.177.233:8080/Admin/coach/getpublicList
- #define getTeacherList_url                              ly_url( realmName_517, model_admin, category_coach, @"getpublicList")
- 
- //详情
- //http://58.215.177.233:8080/Admin/coach/getTeacherDetail
- #define getTeacherDetail_url                            ly_url( realmName_517, model_admin, category_coach, @"getTeacherDetail")
- 
- //获取驾校banner
- //http://58.215.177.233:8080/Upload/banner/imageName.png
- #define getDriveSchoolBanner(imageName)                 ly_url( realmName_517, model_upload, category_banner, imageName)
- 
- //获取附近驾校
- //http://58.215.177.233:8080/admin/coach/getCoachadd
- #define getNearTeacher_url                              ly_url ( realmName_517, model_admin, category_coach, @"getCoachadd")
- 
- 
- 
- 
- 
- 
- //获取所有评论
- //http://58.215.177.233:8080/Admin/coach/getAllList
- #define getEvalution_url                                ly_url( realmName_517, model_admin, category_coach, @"getAllList")
- 
- //获取所有提问
- ////http://58.215.177.233:8080/web/xueche/Admin/coach/getAllconList
- #define getConsult_url                                  ly_url ( realmName_517, model_admin, category_coach, @"getAllconList")
- 
- //发表提问
- //http://58.215.177.233:8080/Admin/coach/addconsult
- #define sendConsult_url                                 ly_url( realmName_517, model_admin, category_coach, @"addconsult")
- 
- 
- //添加关注
- //http://58.215.177.233:8080/admin/index/addmycon
- #define attente_url                                ly_url( realmName_517, model_admin, category_index, @"addmycon")
- //取消
- //http://58.215.177.233:8080/admin/index/removemycon
- #define removeAttention_url                                ly_url( realmName_517, model_admin, category_index, @"removemycon")
- //获取我的关注
- //http://58.215.177.233:8080/admin/index/myconcern
- #define getMyAttention_url                              ly_url( realmName_517, model_admin, category_index, @"myconcern")
- 
- 
- //用户详情
- //http://127.0.0.1:8080/web/xueche/Admin/Dynamic/userDetails
- #define userDetail_url                                  ly_url( realmName_517, model_admin, category_dynamic, @"userDetails")
- 
- 
- 
- 
- //我的钱包
- //http://58.215.177.233:8080/index.php/Admin/Wallet/getMyWallet
- #define myWallet_url                                    ly_url( realmName_517, model_admin, category_wallet, @"getMyWallet")
- 
- 
- 
- //驾考学堂
- //http://58.215.177.233:8080/Admin/driving/dirsch
- #define driveExam_url                                   ly_url( realmName_517, model_admin, category_driving, @"dirsch")
- //添加
- //http://58.215.177.233:8080/Admin/driving/addMyTeacher
- #define addMyTeacher_url                                ly_url( realmName_517, model_admin, category_driving, @"addMyTeacher")
- //更换
- //http://58.215.177.233:8080/Admin/driving/updateTeacher
- #define replaceTeacher_url                              ly_url( realmName_517, model_admin, category_driving, @"updateTeacher")
- //指导员
- //http://127.0.0.1:8080/web/xueche/admin/driving/selfCity
- #define selfCitys_url                                   ly_url( realmName_517, model_admin, category_driving, @"selfCity")
- //添加时获取所有
- //http://58.215.177.233:8080/admin/Driving/returnAllTeacher
- #define getTeacher_url                                  ly_url( realmName_517, model_admin, category_driving, @"returnAllTeacher")
- //我的驾校
- //http://58.215.177.233:8080/Admin/driving/mydrisch
- #define myDriveShcool_url                               ly_url( realmName_517, model_admin, category_driving, @"mydrisch")
- //根据驾校基地科目获取教练
- //http://58.215.177.233:8080/Admin/driving/getTrainCoach
- #define getTrainCoach_url                               ly_url( realmName_517, model_admin, category_driving, @"getTrainCoach")
- //我的驾校更多教练
- //http://58.215.177.233:8080/Admin/driving/getMoreCoach
- #define getMoreCoach_url                                ly_url( realmName_517, model_admin, category_driving, @"getMoreCoach")
- //我的驾校预约教练
- //http://58.215.177.233:8080/Admin/driving/reserCoach
- #define reservateCoach_url                              ly_url( realmName_517, model_admin, category_driving, @"reserCoach")
- 
- 
- //我的教练
- //http://58.215.177.233:8080/Admin/driving/getCoachInfo
- #define myChoach_url                                    ly_url( realmName_517, model_admin, category_driving, @"getCoachInfo")
- 
- //创建预约
- //http://58.215.177.233:8080/Admin/driving/addmyreser
- #define reservate_url                                   ly_url( realmName_517, model_admin, category_driving, @"addmyreser")
- 
- 
- //我的指导员
- //http://58.215.177.233:8080/Admin/driving/getGuiderinfo
- #define myGuider_url                                    ly_url( realmName_517, model_admin, category_driving, @"getGuiderinfo")
- 
- 
- 
- //报名咨询
- //http://58.215.177.233:8080/Admin/driving/guiderList
- #define guiderApply_url                                 ly_url( realmName_517, model_admin, category_driving, @"guiderList")
- 
- 
- 
- 
- 
- 
- //创建订单
- //http://58.215.177.233:8080/admin/Driving/mylist
- #define createOrder_url                                 ly_url( realmName_517, model_admin, category_driving, @"mylist")
- //订单中心
- //http://58.215.177.233:8080/admin/Driving/listcenter
- #define orderCenter_url                                 ly_url( realmName_517, model_admin, category_driving, @"listcenter")
- //取消订单
- //http://58.215.177.233:8080/admin/Driving/cancellist
- #define cancelOrder_url                                 ly_url( realmName_517, model_admin, category_driving, @"cancellist")
- //删除订单
- //http://58.215.177.233:8080/admin/Driving/dellist
- #define deleteOrder_url                                 ly_url( realmName_517, model_admin, category_driving, @"dellist")
- //评价订单
- //http://58.215.177.233:8080/adminDriving/evaluatlist
- #define evaluateOrder_url                               ly_url( realmName_517, model_admin, category_driving, @"evaluatlist")
- //确认订单
- //http://58.215.177.233:8080/adminDriving/confirmlist
- #define confirmOrder_url                                ly_url( realmName_517, model_admin, category_driving, @"confirmlist")
- 
- //获取订单支付状态
- //http://58.215.177.233:8080/adminDriving/returnOrderState
- #define confirmPayState_url                             ly_url( realmName_517, model_admin, category_driving, @"returnOrderState")
- 
- 
- 
- //意见反馈
- //http://58.215.177.233:8080/admin/index/feedback
- #define feedback_url                                    ly_url( realmName_517, model_admin, category_index, @"feedback")
- 
- 
- 
- 
- //理论学习
- //全真模考
- //http://58.215.177.233:8080/admin/theory/truetheory
- #define examing_url                                     ly_url( realmName_517, model_admin, category_theory, @"truetheory")
- //全真模考-科目四
- //http://58.215.177.233:8080/admin/theory/truetheory4
- #define examing4_url                                     ly_url( realmName_517, model_admin, category_theory, @"truetheory4")
- //考试完成
- //http://58.215.177.233:8080/admin/theory/savescore
- #define saveScore_url                                   ly_url( realmName_517, model_admin, category_theory, @"savescore")
- //考试纪录
- //http://58.215.177.233:8080/Admin/Theory/returnscore
- #define examHistory_url                                 ly_url( realmName_517, model_admin, category_theory, @"returnscore")
- 
- //章节练习
- //http://127.0.0.1/web/xueche/admin/theory/zjtestnum1
- #define chapterStudy_url                                ly_url( realmName_517, model_admin, category_theory, @"zjtestnum1")
- //章节练习---题目
- //http://58.215.177.233:8080/admin/theory/chapter
- #define chapterExecise_url                              ly_url( realmName_517, model_admin, category_theory, @"chapter")
- //章节练习--收藏
- //http://58.215.177.233:8080/admin/theory/addMytheory
- #define collecte_url                                    ly_url( realmName_517, model_admin, category_theory, @"addMytheory")
- 
- //试题分析
- //http://58.215.177.233:8080/admin/theory/getAnalysis
- #define questionAnalysis_url                            ly_url(realmName_517, model_admin, category_theory, @"getAnalysis")
- 
- //我的错题
- //http://58.215.177.233:8080/admin/Theory/ctestnum1
- #define myMistake_url                                   ly_url( realmName_517, model_admin, category_theory, @"ctestnum1")
- //查看错题
- //http://58.215.177.233:8080/admin/Theory/viewMyerror
- #define viewMyMistake_url                               ly_url( realmName_517, model_admin, category_theory, @"viewMyerror")
- //练习错题
- //http://58.215.177.233:8080/admin/Theory/myerrorTest
- #define execiseMyMistake_url                            ly_url( realmName_517, model_admin, category_theory, @"myerrorTest")
- //清空我的错题
- //http://58.215.177.233:8080/admin/Theory/trunMyerrorTheory
- #define clearMyMistake_url                              ly_url( realmName_517, model_admin, category_theory, @"trunMyerrorTheory")
- 
- //我的题库
- //http://58.215.177.233:8080/admin/Theory/Mytheory
- #define myLibrary_url                                   ly_url( realmName_517, model_admin, category_theory, @"Mytheory")
- //清空我的题库
- //http://58.215.177.233:8080/admin/Theory/trunMyBank
- #define clearMyLibrary_url                              ly_url( realmName_517, model_admin, category_theory, @"trunMyBank")
- //查看我的题库
- //http://58.215.177.233:8080/admin/Theory/MytheoryTest
- #define viewMyLibrary_url                               ly_url( realmName_517, model_admin, category_theory, @"MytheoryTest")
- //删除我的错题
- //http://58.215.177.233:8080/admin/Theory/delMyBank
- #define decollecteQuestion_url                          ly_url( realmName_517, model_admin, category_theory, @"delMyBank")
- 
- 
- //驾考圈
- //发表动态
- //http://58.215.177.233:8080/admin/Dynamic/sendDynamic
- #define sendNews_url                                    ly_url( realmName_517, model_admin, category_dynamic, @"sendDynamic")
- //获取我的动态
- // http://58.215.177.233:8080/web/xueche/admin/getMyDynamic
- #define getMyNews_url                                   ly_url( realmName_517, model_admin, category_dynamic, @"getMyDynamic")
- 
- //获取所有动态
- //http://58.215.177.233:8080/admin/dynamic/getAllDynamic
- #define getAllNews_url                                  ly_url( realmName_517, model_admin, category_dynamic, @"getAllDynamic")
- //点赞
- //http://58.215.177.233:8080/admin/dynamic/thumb
- #define praise_url                                      ly_url( realmName_517, model_admin, category_dynamic, @"thumb")
- //取消赞
- ////http://58.215.177.233:8080/web/xueche/admin/dynamic/cancelthumb
- #define depraise_url                                    ly_url( realmName_517, model_admin, category_dynamic, @"cancelthumb")
- //评论（动态）
- //http://58.215.177.233:8080/admin/Dynamic/evaluate
- #define statusEvalute_url                               ly_url( realmName_517, model_admin, category_dynamic, @"evaluate")
- //转发（动态）
- //http://58.215.177.233:8080/admin/Dynamic/forwDynamic
- #define statusTransmit_url                              ly_url( realmName_517, model_admin, category_dynamic, @"forwDynamic")
- //动态详情
- //http://58.215.177.233:8080/admin/Dynamic/getNewsDetail
- #define statusDetail_url                                ly_url( realmName_517, model_admin, category_dynamic, @"getNewsDetail")
- //更多评价
- ////http://58.215.177.233:8080/web/xueche/admin/Dynamic/moreEvaluation
- #define statusMoreEvalution_url                         ly_url( realmName_517, model_admin, category_dynamic, @"moreEvaluation")
- 
- //与我相关
- //http://58.215.177.233:8080/admin/Dynamic/aboutMe
- #define aboutMe_url                                     ly_url( realmName_517, model_admin, category_dynamic, @"aboutMe")
- //回复
- //http://58.215.177.233:8080/admin/Dynamic/returnEvaluate
- #define communityReply_url                              ly_url( realmName_517, model_admin, category_dynamic, @"returnEvaluate")
- //删除动态
- //http://58.215.177.233:8080/admin/Dynamic/delDynamic
- #define deleteNews_url                                  ly_url( realmName_517, model_admin, category_dynamic, @"delDynamic")
- 
- 
- 
- 
- //扫一扫用户验证
- //http://58.215.177.233:8080/admin/Index/userisset
- #define issetUserId_url                                 ly_url( realmName_517, model_admin, category_index, @"userisset")
- */
-
 
 
 

@@ -92,18 +92,19 @@ typedef NS_ENUM(NSInteger, AuthPhotoAlertViewMode)
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = LyLocalize(@"认证");
     [self.view setBackgroundColor:LyWhiteLightgrayColor];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    [self.navigationItem setTitle:@"认证"];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
     
-    UIBarButtonItem *bbiClose = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+    
+    UIBarButtonItem *bbiClose = [[UIBarButtonItem alloc] initWithTitle:LyLocalize(@"返回")
                                                                  style:UIBarButtonItemStyleDone
                                                                 target:self
                                                                 action:@selector(targetForBarButtonItem:)];
     [bbiClose setTag:authPhotoBarButtonItemMode_close];
     
-    bbiNext = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(targetForBarButtonItem:)];
+    bbiNext = [[UIBarButtonItem alloc] initWithTitle:LyLocalize(@"下一步") style:UIBarButtonItemStyleDone target:self action:@selector(targetForBarButtonItem:)];
     [bbiNext setTag:authPhotoBarButtonItemMode_next];
 
     [self.navigationItem setLeftBarButtonItem:bbiClose];

@@ -15,7 +15,7 @@
 CGFloat const LyOrderStateViewHeight = 40.0f;
 
 
-int const cvStatesRowNumber = 5;
+int const cvStatesRowNumber = 4;
 #define cvStatesCellWidth                       (SCREEN_WIDTH/cvStatesRowNumber)
 
 @interface LyOrderStateView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -42,18 +42,6 @@ static NSArray *arrOrderStates = nil;
 {
     if (self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, SCREEN_WIDTH, LyOrderStateViewHeight)])
     {
-        
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            arrOrderStates = @[
-                               @"全部",
-                               @"待支付",
-                               @"待确认",
-                               @"待评价",
-                               @"已完成"
-                               ];
-        });
-        
         UICollectionViewFlowLayout *cvStatesFlowLayout = [[UICollectionViewFlowLayout alloc] init];
         [cvStatesFlowLayout setMinimumLineSpacing:0];
         [cvStatesFlowLayout setMinimumInteritemSpacing:0];
@@ -68,39 +56,80 @@ static NSArray *arrOrderStates = nil;
         [cvStates registerClass:[LyFragmentCollectionViewCell class] forCellWithReuseIdentifier:lyOrderStateCvStatesCellReuseIdentifier];
         [self addSubview:cvStates];
         
-        [cvStates selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                               animated:NO
-                         scrollPosition:UICollectionViewScrollPositionNone];
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            arrOrderStates = @[
+                               @"全部",
+                               @"交易中",
+                               @"交易成功",
+                               @"交易关闭"
+                               ];
+        });
+        
+        [cvStates selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     }
     
     return self;
 }
 
-- (void)setOrderState:(LyOrderState)orderState {
+
+
+- (void)setOrderPayStatus:(LyOrderPayStatus)orderPayStatus
+{
+    _orderPayStatus = orderPayStatus;
     
-    _orderState = orderState;
     NSInteger index = 0;
-    if (5 == _orderState) {
-        index = 0;
-    } else {
-        index = _orderState + 1;
+    switch (_orderPayStatus) {
+        case LyOrderPayStatus_ing: {
+            index = 1;
+            break;
+        }
+        case LyOrderPayStatus_done: {
+            index = 2;
+            break;
+        }
+        case LyOrderPayStatus_close: {
+            index = 3;
+            break;
+        }
+        default: {
+            index = 0;
+            break;
+        }
     }
     
-    [cvStates selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
-                           animated:NO
-                     scrollPosition:UICollectionViewScrollPositionNone];
+    [cvStates selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
 }
+
+
 
 #pragma mark -UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.row) {
-        _orderState = 5;
-    } else {
-        _orderState = indexPath.row - 1;
+    switch (indexPath.row) {
+        case 0: {
+            _orderPayStatus = 5;
+            break;
+        }
+        case 1: {
+            _orderPayStatus = LyOrderPayStatus_ing;
+            break;
+        }
+        case 2: {
+            _orderPayStatus = LyOrderPayStatus_done;
+            break;
+        }
+        case 3: {
+            _orderPayStatus = LyOrderPayStatus_close;
+            break;
+        }
+        default: {
+            _orderPayStatus = 5;
+            break;
+        }
     }
     
-    [_delegate orderStateView:self didSelectItemAtIndex:_orderState];
+    [_delegate orderStateView:self didSelectLyOrderPayStatus:self.orderPayStatus];
 }
 
 

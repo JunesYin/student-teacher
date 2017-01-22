@@ -2,59 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>10001</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>全真模考</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string></string>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string></string>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>/resource.bundle/images/3DTouch_simulate</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<string></string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>10002</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>扫一扫</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string></string>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string></string>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>/resource.bundle/images/3DTouch_sweep</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<string></string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>10003</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>我的二维码</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string></string>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string></string>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>/resource.bundle/images/3DTouch_myQRCode</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<string></string>
-		</dict>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
 	<string>我要去学车</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -64,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.2</string>
+	<string>1.1.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -135,7 +88,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>25</string>
+	<string>26</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>baidumap</string>
@@ -285,6 +240,37 @@
 	<string>用于定位</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>用于头像、动态</string>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>/resource.bundle/images/3DTouch_simulate</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string></string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string></string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>全真模考</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>10001</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>/resource.bundle/images/3DTouch_sweep</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string></string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string></string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>扫一扫</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>10002</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<string></string>
+		</dict>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

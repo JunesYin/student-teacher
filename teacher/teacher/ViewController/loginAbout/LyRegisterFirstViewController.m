@@ -63,10 +63,13 @@ typedef NS_ENUM(NSInteger, RegisterFirstBarButtonTag)
     {
         if (!bbiClose)
         {
-            bbiClose = [[UIBarButtonItem alloc] initWithTitle:@"取消"
+            bbiClose = [[UIBarButtonItem alloc] initWithTitle:LyLocalize(@"取消")
                                                            style:UIBarButtonItemStyleDone
                                                           target:self
                                                           action:@selector(targetForBarButtonItem:)];
+//            bbiClose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+//                                                                     target:self
+//                                                                     action:@selector(targetForBarButtonItem:)];
             [bbiClose setTag:registerFirstBarButtonTag_close];
         }
         [self.navigationItem setLeftBarButtonItem:bbiClose];

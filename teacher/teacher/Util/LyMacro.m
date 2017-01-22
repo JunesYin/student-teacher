@@ -544,7 +544,7 @@ NSString *const register_url                     = @"https://www.517xc.com/Admin
 //退出接口
 NSString *const logout_url                       = @"https://www.517xc.com/Admin/Index/logout";
 //个人信息
-NSString *const userInfo_url                     = @"https://www.517xc.com/Admin/index/coachUinfo1";
+NSString *const userInfo_url                     = @"https://www.517xc.com/Admin/Index/coachUinfo1";
 //修改个人信息
 NSString *const modifyUserInfo_url               = @"https://www.517xc.com/Admin/Index/updateuinfo";
 //获取用户名称
@@ -820,5 +820,47 @@ NSString *const userDetail_url                   = @"https://www.517xc.com/Admin
 
 
 
+
+//用户协议
+NSString *const userProtocol_url         = @"https://www.517xc.com/Home/Index/protocol";
+
+//常见问题
+NSString *const FAQ_url                  = @"https://www.517xc.com/Home/Index/problems";
+
+//学车指南
+//学车流程
+NSString *const guide_studyFlow_url      = @"https://www.517xc.com/Home/Index/process";
+//驾考大纲
+NSString *const guide_outline_url        = @"https://www.517xc.com/Home/Index/test";
+//择校指南
+NSString *const guide_selectionGuide_url = @"https://www.517xc.com/Home/Index/choice";
+//报名须知
+NSString *const guide_applyNote_url      = @"https://www.517xc.com/Home/Index/baoming";
+//体检事项
+NSString *const guide_physicalExam_url   = @"https://www.517xc.com/Home/Index/examination";
+//学车费用
+NSString *const guide_studyFee_url       = @"https://www.517xc.com/Home/Index/cost";
+//作弊处量
+NSString *const guide_cheating_url       = @"https://www.517xc.com/Home/Index/cheat";
+//残疾人学车
+NSString *const guide_deformedMan_url    = @"https://www.517xc.com/Home/Index/disabled";
+
+//自学直考
+NSString *const selfStudy_url            = @"https://www.517xc.com/Home/Index/selfstudy";
+
+//学车成本
+NSString *const studyCost_url            = @"";
+
+
+
+// school
+NSString *const schoolProtocol_url      = @"https://www.517xc.com/Home/Index/jxprotocol";
+
+// coach - guider
+NSString *const coaInsProtocol_url      = @"https://www.517xc.com/Home/Index/jlprotocol";
+
+
+
+//
 
 

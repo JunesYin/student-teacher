@@ -16,8 +16,6 @@
 
 #import "LyUtil.h"
 
-
-#import "LyTxtViewController.h"
 #import "LyFeedbackViewController.h"
 
 
@@ -247,11 +245,7 @@ static NSString *lyUserCenterAboutUsTableViewCellReuseIdentifier = @"lyUserCente
     
     switch (curIdx.row) {
         case 0: {
-            LyTxtViewController *txt = [[LyTxtViewController alloc] init];
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:txt];
-            [self presentViewController:navigationController animated:YES completion:^{
-                [txt setMode:LyTxtViewControllerMode_FAQ];
-            }];
+            [LyUtil showWebViewController:LyWebMode_FAQ target:self];
             break;
         }
         case 1: {

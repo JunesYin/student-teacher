@@ -21,7 +21,6 @@
 
 #import "LyUtil.h"
 
-#import "LyTxtViewController.h"
 #import "LyAuthPhotoViewController.h"
 
 
@@ -316,11 +315,7 @@ typedef NS_ENUM(NSInteger, LyRegisterSecondHttpMethod) {
 
 - (void)targetForTapGestureFromLb517Protocol:(UITapGestureRecognizer *)tap
 {
-    LyTxtViewController *txt = [[LyTxtViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:txt];
-    [self presentViewController:nav animated:YES completion:^{
-        [txt setMode:LyTxtViewControllerMode_517UserProtocol];
-    }];
+    [LyUtil showWebViewController:LyWebMode_userProtocol target:self];
 }
 
 

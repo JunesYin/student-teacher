@@ -124,14 +124,6 @@ class LyAboutUsViewController: UIViewController{
 extension LyAboutUsViewController: LyShareViewDelegate {
     func onClickButtonClose(_ aShareView: LyShareView!) {
         aShareView.hide()
-        
-        LyShareManager.share(.subTypeQQFriend,
-                             alertTitle: "分享到QQ好友",
-                             content: shareContent,
-                             images: [LyUtil.image(forImageName: "icon_517", needCache: false)!],
-                             title: shareTitle,
-                             url: URL(string: share_url)!,
-                             viewController: self)
     }
     
     func onShared(byQQFriend aShareView: LyShareView!) {

@@ -197,6 +197,8 @@ static NSString *const lyNewsDetailTableViewCellResueIdentifier = @"lyNewsDetail
 //        [_tableView setShowsHorizontalScrollIndicator:NO];
         [_tableView registerClass:[LyEvaluationForNewsTableViewCell class] forCellReuseIdentifier:lyNewsDetailTableViewCellResueIdentifier];
         
+        _tableView.tableFooterView = [UIView new];
+        
         [_tableView addSubview:self.refreshControl];
     }
     
@@ -333,6 +335,10 @@ static NSString *const lyNewsDetailTableViewCellResueIdentifier = @"lyNewsDetail
             }
             break;
         }
+    }
+    
+    if (fNewOffsetY < 0) {
+        fNewOffsetY = 0;
     }
     
     [self.tableView setContentOffset:CGPointMake(0, fNewOffsetY)];

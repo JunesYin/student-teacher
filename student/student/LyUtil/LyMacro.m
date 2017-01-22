@@ -721,7 +721,7 @@ NSString *const guide_cheating_url       = @"https://www.517xc.com/Home/index/ch
 NSString *const guide_deformedMan_url    = @"https://www.517xc.com/Home/index/disabled";
 
 //自学直考
-NSString *const selfStudy_url            = @"";
+NSString *const selfStudy_url            = @"https://www.517xc.com/Home/index/selfstudy";
 
 //学车成本
 NSString *const studyCost_url            = @"";

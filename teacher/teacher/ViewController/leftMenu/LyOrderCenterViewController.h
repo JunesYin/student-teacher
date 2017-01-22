@@ -11,6 +11,6 @@
 
 @interface LyOrderCenterViewController : UIViewController
 
-@property (assign, nonatomic)       LyOrderState    orderState;
+@property (assign, nonatomic)   LyOrderPayStatus    curPayStatus;
 
 @end

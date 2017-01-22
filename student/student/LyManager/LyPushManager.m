@@ -33,7 +33,7 @@ NSString *const JPushReuqestTitle_threeMonths = @"学车如逆水行舟，不进
 NSString *const JPushReuqestTitle_fourMonths = @"学车如逆水行舟，不进则退，你已经四个月没有学车了";
 NSString *const JPushReuqestTitle_fiveMonths = @"学车如逆水行舟，不进则退，你已经五个月没有学车了";
 NSString *const JPushReuqestTitle_hlafYear = @"学车如逆水行舟，不进则退，你已经半年没有学车了";
-NSString *const JPushReuqestTitle_year = @"学车如逆水行舟，不进则退，你已经一年没有学车了";
+NSString *const JPushReuqestTitle_year = @"你已经一年没有学车了，可以卸载了";
 
 
 @implementation LyPushManager
@@ -138,17 +138,18 @@ lySingle_implementation(LyPushManager)
         content.body = arrJPushRequestionSubtitle[i];
         content.badge = @1;
         content.userInfo = @{
-                             @"code": @(LyPushMode_local_theory)
+                             @"code": @(LyPushMode_local_theory),
+                             @"aps": @{@"alert": @"现在就去学习"}
                              };
         
         JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
         
         if ([LyUtil osVersion] >= 10.0) {
 #if DEBUG
-            trigger.dateComponents = [[LyUtil calendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond
+            trigger.dateComponents = [[LyUtil calendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone | NSCalendarUnitCalendar
                                                           fromDate:[now dateByAddingTimeInterval:5 * arrJPushRequestionTimeInterval[i]]];
 #else
-            trigger.dateComponents = [[LyUtil calendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay
+            trigger.dateComponents = [[LyUtil calendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone | NSCalendarUnitCalendar
                                                           fromDate:[now dateByAddingTimeInterval:86400 * arrJPushRequestionTimeInterval[i]]];
 #endif
         } else {

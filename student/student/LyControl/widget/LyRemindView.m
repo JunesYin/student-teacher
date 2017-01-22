@@ -62,9 +62,10 @@ NSTimeInterval const LyRemindViewDelayTime = 0.1f;
     {
         if ( !_title)
         {
-            _mode = mode;
             _title = title;
         }
+        
+        _mode = mode;
         
         [self initSubviews];
     }

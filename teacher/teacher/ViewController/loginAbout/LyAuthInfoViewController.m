@@ -24,7 +24,6 @@
 
 #import "LyAuthPhotoViewController.h"
 #import "LyVerifyProgressViewController.h"
-#import "LyTxtViewController.h"
 #import "LyChooseSchoolTableViewController.h"
 #import "LyChooseTrainBaseTableViewController.h"
 
@@ -560,19 +559,29 @@ static NSString *const btnTrainBaseDefaultTitle = @"请选择所在基地";
 }
 
 - (void)targetForTapGestureFromLbProtocol {
-    
-    LyTxtViewControllerMode txtMode;
-    if (LyUserType_school == [LyCurrentUser curUser].userType) {
-        txtMode = LyTxtViewControllerMode_517CooperationProtocol;
-    } else {
-        txtMode = LyTxtViewControllerMode_517InfoServiceProtocol;
-    }
-    
-    LyTxtViewController *txt = [[LyTxtViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:txt];
-    [self presentViewController:nav animated:YES completion:^{
-        [txt setMode:txtMode];
-    }];
+    [LyUtil showWebViewController:({
+        LyWebMode webMode;
+        switch ([LyCurrentUser curUser].userType) {
+            case LyUserType_normal: {
+                webMode = LyWebMode_userProtocol;
+                break;
+            }
+            case LyUserType_coach: {
+                webMode = LyWebMode_coaInsProtocol;
+                break;
+            }
+            case LyUserType_school: {
+                webMode = LyWebMode_schoolProtocol;
+                break;
+            }
+            case LyUserType_guider: {
+                webMode = LyWebMode_coaInsProtocol;
+                break;
+            }
+        }
+        
+        webMode;
+    }) target:self];
 }
 
 - (void)allControlResignFirstResponder

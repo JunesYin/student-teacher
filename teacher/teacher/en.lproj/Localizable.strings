@@ -10,8 +10,10 @@
 "好" = "OK";
 "取消" = "Cancel";
 "退出" = "Exit";
+"返回" = "Back";
 "加载失败，下拉再次加载" = "Load failed, pulldown to load again";
 "加载失败，点击再次加载" = "Load failed, tap to load again";
+"秒" = "s";
 
 
 
@@ -36,13 +38,16 @@
 
 "姓名" = "Name";
 "验证码" = "Auth-code";
+"驾校名" = "School name";
+"获取验证码" = "Get Auth-Code";
+"正在获取..." = "Getting...";
 "请输入驾校名" = "Input School-name";
 "请输入真实姓名" = "Input your real name";
 "请输入手机号" = "Input Phone No.";
 "请输入验证码" = "Input Auth-Code";
 "请输入密码" = "Input password";
 "注册即代表同意" = "'Sign up' means you agree ";
-"《吾要去用户协议》" = "<吾要去用户协议>";
+"《吾要去用户协议》" = "<517 User Protocol>";
 "*密码需在6~18位之间\n*密码至少由字母和数字组成（可以输入特殊字符）" = "*The Length of password must be between 8 and 18\n*The password consists of at least digits and letters(Special character can be consisted)";
 
 
@@ -85,3 +90,18 @@
 "分钟前" = "min(s) ago";
 "小时前" = "hour(s) ago";
 "昨天" = "Yestoday";
+
+
+
+
+//
+"获取成功" = "Get successed";
+"获取失败" = "Get failed";
+
+
+
+//
+"认证" = "certification";
+"教练证" = "Coach card";
+"驾驶证" = "Driving licence";
+"身份证" = "Identity card";

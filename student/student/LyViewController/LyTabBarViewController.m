@@ -239,9 +239,12 @@ lySingle_implementation(LyTabBarViewController)
             
         case 202:
         {
-            LySweepViewController *sweep = [[LySweepViewController alloc] init];
+//#if DEBUG
 //            LyScanQRCodeViewController *sweep = [[LyScanQRCodeViewController alloc] init];
-//            [self.selectedViewController pushViewController:sweep animated:YES];
+//#else
+            LySweepViewController *sweep = [[LySweepViewController alloc] init];
+//#endif
+            
             nextVc = sweep;
             needLogin = NO;
             break;
@@ -269,7 +272,11 @@ lySingle_implementation(LyTabBarViewController)
     
     if (nextVc) {
         if (needLogin && ![LyCurrentUser curUser].isLogined) {
-            [LyUtil showLoginVc:[UIViewController currentViewController] nextVC:nextVc showMode:LyShowVcMode_push];
+            if ([nextVc isKindOfClass:[LyUserInfoTableViewController class]]) {
+                [LyUtil showLoginVc:[UIViewController currentViewController]];
+            } else {
+                [LyUtil showLoginVc:[UIViewController currentViewController] nextVC:nextVc showMode:LyShowVcMode_push];
+            }
         } else {
             [self.selectedViewController pushViewController:nextVc animated:YES];
         }

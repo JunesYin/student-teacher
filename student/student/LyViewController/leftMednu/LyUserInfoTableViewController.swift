@@ -380,7 +380,7 @@ extension LyUserInfoTableViewController {
     
     
     func startModify() {
-        indicator_oper.startAnimation(in: self.view)
+        indicator_oper.startAnimation()
     }
     
     func stopModify(_ isSuccessful: Bool) {
@@ -401,7 +401,7 @@ extension LyUserInfoTableViewController {
 extension LyUserInfoTableViewController {
     func load(_ isRefresh: Bool) {
         if isRefresh || !LyUtil.flagForGetUserInfo() {
-            indicator.startAnimation(in: self.view)
+            indicator.startAnimation()
             
             LyHttpRequest.start(userInfo_url,
                                 body: [userIdKey: LyCurrentUser.cur().userId,

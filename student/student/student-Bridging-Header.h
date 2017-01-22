@@ -69,6 +69,7 @@
 #import "LyModifyPhoneViewController.h"
 #import "LyModifySignatureViewController.h"
 #import "LyMyQRCodeViewController.h"
+#import "LyUserDetailViewController.h"
 
 
 #import "VPImageCropperViewController.h"

@@ -175,7 +175,17 @@ class LyWebViewController: UIViewController {
         case .studyCost:
             self.title = "学车成本"
             urlStr = studyCost_url
+            
+            
+        case .schoolProtocol:
+            self.title = "517协议"
+            urlStr = schoolProtocol_url
+        case .coaInsProtocol:
+            self.title = "517协议"
+            urlStr = coaInsProtocol_url
         }
+        
+        
     }
 
     /*

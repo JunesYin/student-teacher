@@ -450,7 +450,7 @@ CGFloat const octcBtnItemHeight = 30.0f;
     if (LyOrderMode_reservation != _order.orderMode) {
         strLbName = _order.orderDetail;
     } else {
-        strLbName = [_order.orderDetail substringToIndex:5];
+        strLbName = [_order.orderDetail substringToIndex:6];
     }
     CGSize sizelbName = [strLbName sizeWithAttributes:@{NSFontAttributeName:lbTextFont}];
     [lbName setFrame:CGRectMake( lbMaster.frame.origin.x, lbMaster.ly_y+lbMaster.frame.size.height, sizelbName.width, lbItemHeight)];

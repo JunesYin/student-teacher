@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger, LyGetAuthCodeButtonHttpMethod) {
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [self.titleLabel setFont:SELFTITLEFONT];
-    [self setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [self setTitle:LyLocalize(@"获取验证码") forState:UIControlStateNormal];
     
     [self addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, LyGetAuthCodeButtonHttpMethod) {
         [self send];
         
         [self setEnabled:NO];
-        [self setTitle:@"正在获取..." forState:UIControlStateDisabled];
+        [self setTitle:LyLocalize(@"正在获取...") forState:UIControlStateDisabled];
     }
 }
 
@@ -99,7 +99,7 @@ typedef NS_ENUM(NSInteger, LyGetAuthCodeButtonHttpMethod) {
         
         _curTime = _timeTotal;
         [self setEnabled:NO];
-        [self setTitle:@"再次获取(60s)" forState:UIControlStateDisabled];
+        [self setTitle:[NSString stringWithFormat:@"(60%@)", LyLocalize(@"秒")] forState:UIControlStateDisabled];
         _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(targetForTimerAuth) userInfo:nil repeats:YES];
         
         [_timer fire];
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, LyGetAuthCodeButtonHttpMethod) {
 - (void)targetForTimerAuth {
     if ( _curTime > 0) {
         _curTime -= _timeInterval;
-        [self setTitle:[[NSString alloc] initWithFormat:@"再次获取(%ds)", _curTime] forState:UIControlStateDisabled];
+        [self setTitle:[[NSString alloc] initWithFormat:@"(%d%@)", _curTime, LyLocalize(@"秒")] forState:UIControlStateDisabled];
     } else {
         [self setEnabled:YES];
         [_timer invalidate];
@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, LyGetAuthCodeButtonHttpMethod) {
 - (void)handleHttpFailed {
     
     [self setEnabled:YES];
-    [[LyRemindView remindWithMode:LyRemindViewMode_fail withTitle:@"发送失败"] show];
+    [[LyRemindView remindWithMode:LyRemindViewMode_fail withTitle:LyLocalize(@"获取成功")] show];
 }
 
 - (void)analysisHttpResult:(NSString *)result {
@@ -170,7 +170,7 @@ typedef NS_ENUM(NSInteger, LyGetAuthCodeButtonHttpMethod) {
                     
                     [self sendSuccess];
                     
-                    [[LyRemindView remindWithMode:LyRemindViewMode_success withTitle:@"发送成功"] show];
+                    [[LyRemindView remindWithMode:LyRemindViewMode_success withTitle:LyLocalize(@"获取失败")] show];
                     if (_delegate && [_delegate respondsToSelector:@selector(sendSuccessByGetAuthCodeButton:time:trueAuth:)]) {
                         [_delegate sendSuccessByGetAuthCodeButton:self time:_time trueAuth:_trueAuthCode];
                     }

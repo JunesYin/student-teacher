@@ -535,6 +535,29 @@ typedef NS_ENUM(NSInteger, LyAlertViewForAuthorityMode) {
 };
 
 
+
+typedef NS_ENUM(NSInteger, LyWebMode) {
+    LyWebMode_userProtocol,
+    
+    LyWebMode_FAQ,
+    
+    LyWebMode_studyFlow,
+    LyWebMode_outline,
+    LyWebMode_selectionGuide,
+    LyWebMode_applyNote,
+    LyWebMode_physicalExam,
+    LyWebMode_studyFee,
+    LyWebMode_cheating,
+    LyWebMode_deformedMan,
+    
+    LyWebMode_studySelf,
+    LyWebMode_studyCost,
+    
+    LyWebMode_schoolProtocol,
+    LyWebMode_coaInsProtocol
+};
+
+
 typedef NS_ENUM(NSInteger, LyPushMode) {
     /* student - reservation not finish */
     LyPushMode_reserNoFinish = 1001,
@@ -873,6 +896,10 @@ lySingle_interface
 #pragma mark 颜色生成图
 + (nullable UIImage *)imageWithColor:(nullable UIColor *)color withSize:(CGSize)size;
 
+
+
+#pragma mark -
++ (void)showWebViewController:(LyWebMode)mode target:(__kindof UIViewController *)target;
 
 
 

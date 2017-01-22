@@ -60,6 +60,7 @@
 		2F4BC5981E2F53A200800137 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F4BC59A1E2F53A200800137 /* InfoPlist.strings */; };
 		2F4BC59E1E2F53E900800137 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F4BC5A01E2F53E900800137 /* Localizable.strings */; };
 		2F5269441E16686C0097BA92 /* LyMsgCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5269431E16686C0097BA92 /* LyMsgCenterTableViewController.swift */; };
+		2F5DD2C61E345C340078528F /* LyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5DD2C51E345C340078528F /* LyWebViewController.swift */; };
 		2F88B5241E1CD88E00CA868A /* LyReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B5231E1CD88E00CA868A /* LyReplyView.swift */; };
 		2FF7C2FE1E1B74680054D1FB /* LySUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7C2FD1E1B74680054D1FB /* LySUtil.swift */; };
 		2FF99F1E1E1E19CC0042B19B /* LyConMsgDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF99F1D1E1E19CC0042B19B /* LyConMsgDetailViewController.swift */; };
@@ -191,7 +192,6 @@
 		9C4BA4501D61C3BF000F02A7 /* LyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4BA3751D61C3BE000F02A7 /* LyLoginViewController.m */; };
 		9C4BA4511D61C3BF000F02A7 /* LyRegisterFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4BA3771D61C3BE000F02A7 /* LyRegisterFirstViewController.m */; };
 		9C4BA4521D61C3BF000F02A7 /* LyRegisterSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4BA3791D61C3BE000F02A7 /* LyRegisterSecondViewController.m */; };
-		9C4BA4531D61C3BF000F02A7 /* LyTxtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4BA37B1D61C3BE000F02A7 /* LyTxtViewController.m */; };
 		9C4BA4551D61C3BF000F02A7 /* LyCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4BA37F1D61C3BE000F02A7 /* LyCommunityViewController.m */; };
 		9C4BA4561D61C3BF000F02A7 /* LyLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4BA3811D61C3BE000F02A7 /* LyLeftMenuViewController.m */; };
 		9C4BA4571D61C3BF000F02A7 /* LyPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C4BA3831D61C3BE000F02A7 /* LyPublishViewController.m */; };
@@ -443,6 +443,7 @@
 		2F4BC59F1E2F53E900800137 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2F4BC5A11E2F53EB00800137 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2F5269431E16686C0097BA92 /* LyMsgCenterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyMsgCenterTableViewController.swift; sourceTree = "<group>"; };
+		2F5DD2C51E345C340078528F /* LyWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyWebViewController.swift; sourceTree = "<group>"; };
 		2F88B5231E1CD88E00CA868A /* LyReplyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyReplyView.swift; sourceTree = "<group>"; };
 		2FF7C2FD1E1B74680054D1FB /* LySUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LySUtil.swift; sourceTree = "<group>"; };
 		2FF99F1D1E1E19CC0042B19B /* LyConMsgDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyConMsgDetailViewController.swift; sourceTree = "<group>"; };
@@ -703,8 +704,6 @@
 		9C4BA3771D61C3BE000F02A7 /* LyRegisterFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyRegisterFirstViewController.m; sourceTree = "<group>"; };
 		9C4BA3781D61C3BE000F02A7 /* LyRegisterSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyRegisterSecondViewController.h; sourceTree = "<group>"; };
 		9C4BA3791D61C3BE000F02A7 /* LyRegisterSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyRegisterSecondViewController.m; sourceTree = "<group>"; };
-		9C4BA37A1D61C3BE000F02A7 /* LyTxtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyTxtViewController.h; sourceTree = "<group>"; };
-		9C4BA37B1D61C3BE000F02A7 /* LyTxtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyTxtViewController.m; sourceTree = "<group>"; };
 		9C4BA37E1D61C3BE000F02A7 /* LyCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyCommunityViewController.h; sourceTree = "<group>"; };
 		9C4BA37F1D61C3BE000F02A7 /* LyCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyCommunityViewController.m; sourceTree = "<group>"; };
 		9C4BA3801D61C3BE000F02A7 /* LyLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyLeftMenuViewController.h; sourceTree = "<group>"; };
@@ -1967,8 +1966,6 @@
 				9C4BA3771D61C3BE000F02A7 /* LyRegisterFirstViewController.m */,
 				9C4BA3781D61C3BE000F02A7 /* LyRegisterSecondViewController.h */,
 				9C4BA3791D61C3BE000F02A7 /* LyRegisterSecondViewController.m */,
-				9C4BA37A1D61C3BE000F02A7 /* LyTxtViewController.h */,
-				9C4BA37B1D61C3BE000F02A7 /* LyTxtViewController.m */,
 				9CBE58E61D8E2BDD009967E3 /* LyForgotPasswordViewController.h */,
 				9CBE58E71D8E2BDD009967E3 /* LyForgotPasswordViewController.m */,
 				9CBE58E91D8E380E009967E3 /* LyResetPasswordViewController.h */,
@@ -1981,6 +1978,7 @@
 				9C3CCCD31D9CDEAB00E4B9EE /* LyResetPhoneViewController.m */,
 				9CAC83D61DA8BBF7004CEFC0 /* LyAuthInfoViewController.h */,
 				9CAC83D71DA8BBF7004CEFC0 /* LyAuthInfoViewController.m */,
+				2F5DD2C51E345C340078528F /* LyWebViewController.swift */,
 			);
 			path = loginAbout;
 			sourceTree = "<group>";
@@ -2441,7 +2439,6 @@
 				9C5EFAA61DCC4E1A002124DE /* UIImage+GIF.m in Sources */,
 				9C5782531DDEE66B0058BEFB /* LyTeachManageTableViewController.m in Sources */,
 				9C72E9181DD59307007DE43C /* LyTrainBaseManageTableViewController.m in Sources */,
-				9C4BA4531D61C3BF000F02A7 /* LyTxtViewController.m in Sources */,
 				9C87E6D41DCC8B6E00CC450F /* ASIInputStream.m in Sources */,
 				9C5782491DDEE66B0058BEFB /* LyModifyNameViewController.m in Sources */,
 				9C4BA42A1D61C3BF000F02A7 /* LyPinyinGroup.m in Sources */,
@@ -2570,6 +2567,7 @@
 				9C78D87C1D93EB48009EFF5B /* LyPriceDetailTableViewCell.m in Sources */,
 				9C5EFAA91DCC4E1A002124DE /* UIImageView+HighlightedWebCache.m in Sources */,
 				2F2386041E2F524D00D1D950 /* LyCurrentUser.m in Sources */,
+				2F5DD2C61E345C340078528F /* LyWebViewController.swift in Sources */,
 				9C29958B1DAA42D200180537 /* LyLocation.m in Sources */,
 				9C3CCCD11D9CDC6000E4B9EE /* LyModifyPhoneViewController.m in Sources */,
 				2F1E1DE71DFE9E7D00EE08DF /* UIPickerView+clearSpearator.m in Sources */,

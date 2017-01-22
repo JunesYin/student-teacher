@@ -338,6 +338,10 @@ static NSString *const lyNewsDetailTableViewCellResueIdentifier = @"lyNewsDetail
         }
     }
     
+    if (fNewOffsetY < 0) {
+        fNewOffsetY = 0;
+    }
+    
     [self.tableView setContentOffset:CGPointMake(0, fNewOffsetY)];
 }
 

@@ -790,7 +790,7 @@ static LyShowVcMode showVcModeBacklog = LyShowVcMode_push;
 #else
     
 #endif
-    NSDate *date = [[LyUtil dateFormatterForAll] dateFromString:@"2016-12-15 00:00:00 +0800"];
+    NSDate *date = [[LyUtil dateFormatterForAll] dateFromString:@"2016-02-02 00:00:00 +0800"];
     if ([[NSDate date] timeIntervalSinceDate:date] > 0) {
         animation.type = @"pageCurl";
     } else {
@@ -3600,7 +3600,7 @@ NSData* getDataFromHexString(NSString *strSour)
 {
     LyWebViewController *web = [[LyWebViewController alloc] init];
     web.mode = mode;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:web];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:web];
     
 //    [target presentViewController:nav animated:YES completion:nil];
     [target.navigationController pushViewController:web animated:YES];

@@ -171,8 +171,6 @@ static NSString *lyDriveSchoolTableViewCellReuseIdentifier = @"lyDriveSchoolTabl
 
 
 
-
-
 - (void)viewDidAppear:(BOOL)animated {
     
     [LyUtil ready:YES target:self];

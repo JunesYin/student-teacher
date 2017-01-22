@@ -24,7 +24,7 @@ typedef NS_ENUM( NSInteger, LyOrderState)
 
 typedef NS_ENUM(NSInteger, LyOrderPayStatus) {
     LyOrderPayStatus_ing = LyOrderState_waitPay,
-    LyOrderPayStatus_done,
+    LyOrderPayStatus_done = LyOrderState_waitConfirm,
     LyOrderPayStatus_close = LyOrderState_cancel
 };
 

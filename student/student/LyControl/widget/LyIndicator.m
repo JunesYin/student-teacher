@@ -11,13 +11,18 @@
 #import "LyUtil.h"
 
 
-CGFloat const indViewUsefulSize = 150;
+#define viewUsefulWidth                     147.0
+#define viewUsefulHeight                    viewUsefulWidth
 
-CGFloat const indIndicatorSize = 40;
 
-CGFloat const indLbTitleWidth = indViewUsefulSize;
-CGFloat const indLbTitleHieght = 20;
-#define indLbTitleFont                            LyFont(15)
+
+#define indicatorWidth                      40.0f
+#define indicatorHeight                     indicatorWidth
+
+
+#define titleWidth                           viewUsefulWidth
+#define titleHeight                          20.0f
+#define titleFont                            LyFont(14)
 
 
 @interface LyIndicator ()
@@ -32,6 +37,9 @@ CGFloat const indLbTitleHieght = 20;
     UIView                      *viewUseful;
     UIButton                    *btnInterupt;
     UILabel                     *lbTitle;
+    
+    
+    CGFloat     yVUD;
 }
 @end
 
@@ -90,11 +98,18 @@ CGFloat const indLbTitleHieght = 20;
 }
 
 
+- (void)dealloc
+{
+    [self removeObserverForNotification];
+}
 
 
 
 - (void)initAndLayoutSubview
 {
+    yVUD = SCREEN_CENTER_Y;
+    [self addObserverForNotification];
+    
     btnBig = [[UIButton alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     if (![LyUtil validateString:_title]) {
@@ -104,26 +119,26 @@ CGFloat const indLbTitleHieght = 20;
     [btnBig setBackgroundColor:[UIColor clearColor]];
     
 
-    viewUseful = [[UIView alloc] initWithFrame:CGRectMake( SCREEN_WIDTH/2.0f-indViewUsefulSize/2.0f, SCREEN_HEIGHT/2.0f-indViewUsefulSize/2.0f, indViewUsefulSize, indViewUsefulSize)];
+    viewUseful = [[UIView alloc] initWithFrame:CGRectMake( SCREEN_WIDTH/2.0f-viewUsefulWidth/2.0f, SCREEN_HEIGHT/2.0f-viewUsefulHeight/2.0f, viewUsefulWidth, viewUsefulHeight)];
     [viewUseful setBackgroundColor:LyMaskColor];
     [[viewUseful layer] setCornerRadius:10.0f];
     
     
-    _indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake( indViewUsefulSize/2.0f-indIndicatorSize/2.0f, indViewUsefulSize/2.0f-(indIndicatorSize + indLbTitleHieght + verticalSpace*2)/2.0f, indIndicatorSize, indIndicatorSize)];
+    _indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake( viewUsefulWidth/2.0f-indicatorWidth/2.0f, viewUsefulHeight/2.0f-(indicatorHeight+titleHeight+verticalSpace*2)/2.0f, indicatorWidth, indicatorHeight)];
     [_indicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [_indicator setColor:[UIColor whiteColor]];
     
     
-    lbTitle = [[UILabel alloc] initWithFrame:CGRectMake( 0, _indicator.frame.origin.y+CGRectGetHeight(_indicator.frame)+verticalSpace*2, indLbTitleWidth, indLbTitleHieght)];
-    lbTitle.font = indLbTitleFont;
-    lbTitle.textColor = [UIColor whiteColor];
-    lbTitle.textAlignment = NSTextAlignmentCenter;
-    lbTitle.text = _title;
+    lbTitle = [[UILabel alloc] initWithFrame:CGRectMake( 0, _indicator.ly_y+CGRectGetHeight(_indicator.frame)+verticalSpace*2, titleWidth, titleHeight)];
+    lbTitle.font = titleFont;
+    [lbTitle setTextColor:[UIColor whiteColor]];
+    [lbTitle setTextAlignment:NSTextAlignmentCenter];
+    [lbTitle setText:_title];
     
     
     if (_allowCancel)
     {
-        btnCancel = [[UIButton alloc] initWithFrame:CGRectMake( indViewUsefulSize-10-20, 10, 20, 20)];
+        btnCancel = [[UIButton alloc] initWithFrame:CGRectMake( viewUsefulWidth-10-20, 10, 20, 20)];
         [btnCancel setImage:[UIImage imageNamed:@"pv_btn_close"] forState:UIControlStateNormal];
         [btnCancel addTarget:self action:@selector(targetForBtnCancel:) forControlEvents:UIControlEventTouchUpInside];
         [viewUseful addSubview:btnCancel];
@@ -133,6 +148,8 @@ CGFloat const indLbTitleHieght = 20;
     [viewUseful addSubview:_indicator];
     [viewUseful addSubview:lbTitle];
 
+
+    
     [self addSubview:btnBig];
     [self addSubview:viewUseful];
 }
@@ -141,9 +158,9 @@ CGFloat const indLbTitleHieght = 20;
 
 - (void)setTitle:(NSString *)title
 {
-    if ( !title)
+    if (!title || [title isEqualToString:@""])
     {
-        return;
+        title = @"正在加载...";
     }
     
     _title = title;
@@ -170,7 +187,7 @@ CGFloat const indLbTitleHieght = 20;
 
 
 
-- (void)startAnimationInView:(UIView *)view
+- (void)startInView:(UIView *)view
 {
     [[[UIApplication sharedApplication] keyWindow] addSubview:self];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -184,7 +201,16 @@ CGFloat const indLbTitleHieght = 20;
 
 
 - (void)startAnimation {
-    [self startAnimationInView:[UIApplication sharedApplication].keyWindow];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    if ( ![_indicator isAnimating]) {
+        [_indicator startAnimating];
+    }
+    
+    if ( [_delegate respondsToSelector:@selector(onDidStartIndicator:)]) {
+        [_delegate onDidStartIndicator:self];
+    }
 }
 
 - (void)stopAnimation {
@@ -203,6 +229,86 @@ CGFloat const indLbTitleHieght = 20;
 
 
 
+- (void)start
+{
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    if ( ![_indicator isAnimating])
+    {
+        [_indicator startAnimating];
+    }
+    
+    if ( [_delegate respondsToSelector:@selector(onDidStartIndicator:)])
+    {
+        [_delegate onDidStartIndicator:self];
+    }
+}
+
+
+- (void)stop
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
+    if ( [_indicator isAnimating])
+    {
+        [_indicator stopAnimating];
+    }
+
+    [self removeFromSuperview];
+    
+    if ( [_delegate respondsToSelector:@selector(onDidStopIndicator:)])
+    {
+        [_delegate onDidStopIndicator:self];
+    }
+    
+}
+
+
+- (void)addObserverForNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionForNotification_keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(actionForNotificaton_keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)removeObserverForNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - NSNotification -- UIKeyboard
+- (void)actionForNotification_keyboardWillShow:(NSNotification *)notification
+{
+    CGFloat fHeightKeyboard = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+    if (SCREEN_HEIGHT - fHeightKeyboard > viewUseful.ly_y + viewUseful.ly_height + 10)
+    {
+        viewUseful.ly_y = SCREEN_HEIGHT - fHeightKeyboard - viewUseful.ly_height - 10;
+    }
+}
+
+- (void)actionForNotificaton_keyboardWillHide:(NSNotification *)notification
+{
+    
+    if (viewUseful.ly_y < yVUD) {
+        [UIView animateWithDuration:0.1
+                              delay:0
+             usingSpringWithDamping:0.5
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionAllowAnimatedContent
+                         animations:^{
+                             viewUseful.ly_y = yVUD;
+                         } completion:nil];
+    }
+}
 
 
 @end

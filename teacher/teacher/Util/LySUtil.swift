@@ -16,6 +16,10 @@ import SwiftyJSON
 let Ly517ThemeColor = UIColor(red: 255/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1)
 let LyWhiteLightgrayColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 245/255.0, alpha: 1)
 let LyBlackColor = UIColor(red: 50/255.0, green: 50/255.0, blue: 50/255.0, alpha: 1)
+let LyGreenColor = UIColor(red: 40/255.0, green: 195/255.0, blue: 19/255.0, alpha: 1)
+let LyBlueColor = UIColor(red: 0/255.0, green: 162/255.0, blue: 255/255.0, alpha: 1)
+let LyMaskColor = UIColor(white: 0, alpha: 0.5)
+
 
 
 let SCREEN_BOUNDS = UIScreen.main.bounds
@@ -28,12 +32,6 @@ let NAVIGATIONBAR_HEIGHT: CGFloat = 44.0
 let STATUSBAR_NAVIGATIONBAR_HEIGHT: CGFloat = 64.0
 
 
-// MARK: - LySFont(size)
-func LySFont(_ size: CGFloat) -> UIFont {
-    return UIFont.systemFont(ofSize: size)
-}
-
-
 // MARK: - LySPrint(size)
 func LySPrint(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     #if SDEBUG
@@ -42,7 +40,14 @@ func LySPrint(_ items: Any..., separator: String = " ", terminator: String = "\n
 }
 
 
-// MARK: - LySLocalize(key, comment)
+
+// MARK: - LySFont(size)
+func LySFont(_ size: CGFloat) -> UIFont {
+    return UIFont.systemFont(ofSize: size)
+}
+
+
+// MARK: - LySLocalize(key)
 func LySLocalize(_ key: String, _ comment: String? = nil) -> String {
     if let comment = comment {
         return NSLocalizedString(key, comment: comment)
@@ -62,33 +67,21 @@ protocol LySUtilDelegate {
 
 func analysisHttpResult(_ resData: Data, delegate: LySUtilDelegate) -> JSON! {
     let json: JSON = JSON(data: resData)
-    guard Type.dictionary == json.type else {
-        return nil
-    }
     
-    let iCode: Int? = json[codeKey].int
-    guard nil != iCode else {
-        return nil
-    }
-    
-    guard codeTimeOut != iCode! else {
-        delegate.handleHttpFailed(false)
-        LyUtil.sessionTimeOut()
-        return nil
-    }
-    
-    guard codeMaintaining != iCode! else {
-        delegate.handleHttpFailed(false)
-        LyUtil.serverMaintaining()
-        return nil
-    }
-    
-    return json
+    return anasisJson(json, delegate: delegate)
 }
 
 
 func analysisHttpResult(_ resStr: String, delegate: LySUtilDelegate) -> JSON! {
-    let json: JSON = JSON(parseJSON: resStr)
+    let resData: Data? = resStr.data(using: .utf8)
+    guard nil != resData else {
+        return nil
+    }
+    
+    return analysisHttpResult(resData!, delegate: delegate)
+}
+
+private func anasisJson(_ json: JSON, delegate: LySUtilDelegate) -> JSON! {
     guard Type.dictionary == json.type else {
         return nil
     }
@@ -100,7 +93,11 @@ func analysisHttpResult(_ resStr: String, delegate: LySUtilDelegate) -> JSON! {
     
     guard codeTimeOut != iCode! else {
         delegate.handleHttpFailed(false)
-        LyUtil.sessionTimeOut()
+        if delegate is UIViewController {
+            LyUtil.sessionTimeOut()
+        } else {
+            LyUtil.sessionTimeOut()
+        }
         return nil
     }
     

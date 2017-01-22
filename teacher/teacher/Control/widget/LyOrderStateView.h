@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "LyOrder.h"
+
 
 UIKIT_EXTERN CGFloat const LyOrderStateViewHeight;
 
@@ -19,7 +19,7 @@ UIKIT_EXTERN CGFloat const LyOrderStateViewHeight;
 
 @property (weak, nonatomic)         id<LyOrderStateViewDelegate>            delegate;
 
-@property (assign, nonatomic)       LyOrderState        orderState;
+@property (assign, nonatomic)     LyOrderPayStatus        orderPayStatus;
 
 @end
 
@@ -28,6 +28,7 @@ UIKIT_EXTERN CGFloat const LyOrderStateViewHeight;
 @protocol LyOrderStateViewDelegate <NSObject>
 
 @required
-- (void)orderStateView:(LyOrderStateView *)aOrderStateView didSelectItemAtIndex:(LyOrderState)aOrderState;
+//- (void)orderStateView:(LyOrderStateView *)aOrderStateView didSelectItemAtIndex:(NSInteger)index;
+- (void)orderStateView:(LyOrderStateView *)aOrderStateView didSelectLyOrderPayStatus:(LyOrderPayStatus)orderPayStatus;
 
 @end

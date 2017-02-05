@@ -150,24 +150,27 @@ NSTimeInterval const LyRemindViewDelayTime = 0.1f;
 
 
 - (void)show {
-    [self performSelector:@selector(showRightNow) withObject:nil afterDelay:LyRemindViewDelayTime];
+    [self performSelector:@selector(showRightNow) withObject:nil afterDelay:0];
 }
 
 - (void)showRightNow {
     [[[UIApplication sharedApplication] keyWindow] addSubview:self];
     
-    [self performSelector:@selector(hide) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(hide) withObject:nil afterDelay:1];
 }
 
 
 - (void)showWithTime:(NSNumber *)duration {
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
-    [self performSelector:@selector(hide) withObject:nil afterDelay:[duration floatValue]];
+    
+    [self performSelector:@selector(showRightNowWithTime:) withObject:duration afterDelay:0];
 }
 
 
 - (void)showRightNowWithTime:(NSTimeInterval)duration {
-    [self performSelector:@selector(showWithTime:) withObject:@(duration) afterDelay:LyRemindViewDelayTime];
+    
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
+    
+    [self performSelector:@selector(hide) withObject:nil afterDelay:1];
 }
 
 

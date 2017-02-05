@@ -145,19 +145,19 @@ lySingle_implementation(LyPushManager)
         JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
         
         if ([LyUtil osVersion] >= 10.0) {
-#if DEBUG
-            trigger.dateComponents = [[LyUtil calendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone | NSCalendarUnitCalendar
-                                                          fromDate:[now dateByAddingTimeInterval:5 * arrJPushRequestionTimeInterval[i]]];
-#else
+//#if DEBUG
+//            trigger.dateComponents = [[LyUtil calendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone | NSCalendarUnitCalendar
+//                                                          fromDate:[now dateByAddingTimeInterval:5 * arrJPushRequestionTimeInterval[i]]];
+//#else
             trigger.dateComponents = [[LyUtil calendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone | NSCalendarUnitCalendar
                                                           fromDate:[now dateByAddingTimeInterval:86400 * arrJPushRequestionTimeInterval[i]]];
-#endif
+//#endif
         } else {
-#if DEBUG
-            trigger.fireDate = [now dateByAddingTimeInterval:5 * arrJPushRequestionTimeInterval[i]];
-#else
+//#if DEBUG
+//            trigger.fireDate = [now dateByAddingTimeInterval:5 * arrJPushRequestionTimeInterval[i]];
+//#else
             trigger.fireDate = [now dateByAddingTimeInterval:86400 * arrJPushRequestionTimeInterval[i]];
-#endif
+//#endif
             
         }
 

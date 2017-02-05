@@ -119,7 +119,7 @@ extension LyFeedbackViewController {
     func commit() {
         indicator.startAnimation()
         
-        perform(#selector(commit_genuine), with: nil, afterDelay: LyDelayTime)
+        _ = perform(#selector(commit_genuine), with: nil, afterDelay: LyDelayTime)
     }
     
     func commit_genuine() {

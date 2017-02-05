@@ -51,7 +51,7 @@ class LyScanQRCodeViewController: UIViewController {
     var device: AVCaptureDevice?
     var scanSession: AVCaptureSession?
     lazy var scanPane: UIView = { [unowned self] in
-        let view = UIView(frame: CGRect(x: SCREEN_WIDTH/2.0 - sqScanPaneSize/2.0, y: STATUSBAR_NAVIGATIONBAR_HEIGHT + 50, width: sqScanPaneSize, height: sqScanPaneSize))
+        let view = UIView(frame: CGRect(x: SCREEN_WIDTH/2.0 - sqScanPaneSize/2.0, y: SCREEN_HEIGHT/2.0 - (sqScanPaneSize + verticalSpace * 4 + 50)/2.0, width: sqScanPaneSize, height: sqScanPaneSize))
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         
@@ -226,6 +226,9 @@ class LyScanQRCodeViewController: UIViewController {
             
         } catch {
             LySPrint("setupScanSession--摄像头不可用")
+            
+            
+            
             return
         }
     }
@@ -402,6 +405,24 @@ extension LyScanQRCodeViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        let videoStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if videoStatus == .restricted || videoStatus == .denied {
+            let alert = UIAlertController.init(title: "请打开相机权限", message: "请前往系统【设置】>【稳私】>【相机】允许“我要去学车”访问相机", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel) { [unowned self] (_) -> Swift.Void in
+                _ = self.navigationController?.popViewController(animated: true)
+            })
+            
+            alert.addAction(UIAlertAction(title: "设置", style: .default) { (_) -> Swift.Void in
+                _ = LyJurisdictionUtil.openUrl(NSURL(string: UIApplicationOpenSettingsURLString) as! URL)
+            })
+            
+            self.present(alert, animated: true) { [unowned self] in
+                self.indicator.stopAnimation()
+            }
+            
+            return
+        }
         
         startScan()
         

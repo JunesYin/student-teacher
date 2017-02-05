@@ -343,7 +343,7 @@ static NSString *const lyQuestionAnalysisLocalTableViewCellReuseIdentifier = @"l
 
 
 - (void)load {
-    [self.indicator setTitle:nil];
+    [self.indicator setTitle:@""];
     [self.indicator startAnimation];
     
     [self performSelector:@selector(load_genuine) withObject:nil afterDelay:LyDelayTime];

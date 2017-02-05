@@ -158,7 +158,7 @@ extension LyAskViewController {
         
         indicator?.startAnimation()
         
-        _ = [self .perform(#selector(LyAskViewController.ask_genuine), with: nil, afterDelay: validateSensitiveWordDelayTime)]
+        _ = self .perform(#selector(LyAskViewController.ask_genuine), with: nil, afterDelay: validateSensitiveWordDelayTime)
     }
     
     internal func ask_genuine() {

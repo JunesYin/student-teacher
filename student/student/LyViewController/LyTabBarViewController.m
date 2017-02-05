@@ -239,11 +239,11 @@ lySingle_implementation(LyTabBarViewController)
             
         case 202:
         {
-//#if DEBUG
-//            LyScanQRCodeViewController *sweep = [[LyScanQRCodeViewController alloc] init];
-//#else
+#if DEBUG
+            LyScanQRCodeViewController *sweep = [[LyScanQRCodeViewController alloc] init];
+#else
             LySweepViewController *sweep = [[LySweepViewController alloc] init];
-//#endif
+#endif
             
             nextVc = sweep;
             needLogin = NO;

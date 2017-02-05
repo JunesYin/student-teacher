@@ -2824,7 +2824,8 @@ NSData* getDataFromHexString(NSString *strSour)
     [lbError setFont:LyLbErrorFont];
     [lbError setTextColor:LyLbErrorTextColor];
     [lbError setTextAlignment:NSTextAlignmentCenter];
-    [lbError setBackgroundColor:LyWhiteLightgrayColor];
+//    [lbError setBackgroundColor:LyWhiteLightgrayColor];
+    lbError.backgroundColor = [UIColor whiteColor];
     if (1 == mode)
     {
         [lbError setText:@"加载失败，点击再次加载"];
@@ -2839,7 +2840,8 @@ NSData* getDataFromHexString(NSString *strSour)
     [lbNull setFont:LyLbErrorFont];
     [lbNull setTextColor:LyLbErrorTextColor];
     [lbNull setTextAlignment:NSTextAlignmentCenter];
-    [lbNull setBackgroundColor:LyWhiteLightgrayColor];
+//    [lbNull setBackgroundColor:LyWhiteLightgrayColor];
+    lbNull.backgroundColor = [UIColor whiteColor];
     [lbNull setText:text];
     
     return lbNull;

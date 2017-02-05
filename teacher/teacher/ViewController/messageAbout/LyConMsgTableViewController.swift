@@ -522,7 +522,7 @@ extension LyConMsgTableViewController: LyReplyViewDelegate {
     func sendByReplyView(_ aReplyView: LyReplyView, text: String) {
         aReplyView.hide()
         
-        _ = self.perform(#selector(reply), with: text, afterDelay: LyDelayTime)
+        _ = perform(#selector(reply(_:)), with: text, afterDelay: LyDelayTime)
     }
 }
 

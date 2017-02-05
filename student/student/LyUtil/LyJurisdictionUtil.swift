@@ -110,7 +110,7 @@ class LyJurisdictionUtil: NSObject {
         let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if .restricted == authStatus || .denied == authStatus {
             LyJurisdictionUtil.showAlertSingleFunc(target: target, title: "无法访问相机", message: "请开启相机权限", funcTitle: "设置", funcStyle: .default, preferredStyle: .alert, handler: { (_) in
-                LyJurisdictionUtil.openUrl(URL(string: UIApplicationOpenSettingsURLString)!)
+                _ = LyJurisdictionUtil.openUrl(URL(string: UIApplicationOpenSettingsURLString)!)
             })
         }
         
@@ -128,7 +128,7 @@ class LyJurisdictionUtil: NSObject {
         let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if .restricted == authStatus || .denied == authStatus {
             LyJurisdictionUtil.showAlertSingleFunc(target: target, title: "无法访问相册", message: "请开启相册权限", funcTitle: "设置", funcStyle: .default, preferredStyle: .alert, handler: { (_) in
-                LyJurisdictionUtil.openUrl(URL(string: UIApplicationOpenSettingsURLString)!)
+                _ = LyJurisdictionUtil.openUrl(URL(string: UIApplicationOpenSettingsURLString)!)
             })
         }
         

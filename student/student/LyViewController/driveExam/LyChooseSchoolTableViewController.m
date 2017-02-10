@@ -282,8 +282,7 @@ NSString * const lyChooseSchoolTableViewControllerIdentifier = @"lySchoolTableVi
                         
                         
                         if ([LyUtil validateString:strId]) {
-                            LyDriveSchool *school = [LyDriveSchool driveSchoolWithIdNoAvatar:strId
-                                                                                    userName:strName];
+                            LyDriveSchool *school = [LyDriveSchool userWithId:strId userName:strName];
                             
                             if ( !arrSchool) {
                                 arrSchool = [[NSMutableArray alloc] initWithCapacity:1];

@@ -320,6 +320,9 @@ static NSString *const lyEvaluationForTeacherDetailTableViewCellReuseIdentifier 
     
     [self.indicator startAnimation];
     
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(arrRep) weakArrRep = arrRep;
+    
     [LyHttpRequest startHttpRequest:evaDetail_url
                                body:@{
                                       idKey: _eva.oId,
@@ -328,13 +331,17 @@ static NSString *const lyEvaluationForTeacherDetailTableViewCellReuseIdentifier 
                                type:LyHttpType_asynPost
                             timeOut:0
                   completionHandler:^(NSString *resStr, NSData *resData, NSError *error) {
+                      __strong typeof(weakSelf) strongSelf = weakSelf;
+                      __strong typeof(weakArrRep) strongArrRep = weakArrRep;
+
+                      
                       if (error) {
-                          [self handleHttpFailed:YES];
+                          [strongSelf handleHttpFailed:YES];
                           
                       } else {
                           NSDictionary *dic = [LyUtil analysisHttpResult:resStr delegate:self];
                           if (![LyUtil validateDictionary:dic]) {
-                              [self handleHttpFailed:YES];
+                              [strongSelf handleHttpFailed:YES];
                               return ;
                           }
                           
@@ -364,19 +371,19 @@ static NSString *const lyEvaluationForTeacherDetailTableViewCellReuseIdentifier 
                                                                            time:sTime
                                                                      objectRpId:nil];
                                           
-                                          [arrRep addObject:reply];
+                                          [strongArrRep addObject:reply];
                                       }
                                   }
                                   
-                                  [self reloadData];
+                                  [strongSelf reloadData];
                                   
-                                  [self.indicator stopAnimation];
-                                  [self.refreshControl endRefreshing];
+                                  [strongSelf.indicator stopAnimation];
+                                  [strongSelf.refreshControl endRefreshing];
                                   
                                   break;
                               }
                               default: {
-                                  [self handleHttpFailed:YES];
+                                  [strongSelf handleHttpFailed:YES];
                                   break;
                               }
                           }

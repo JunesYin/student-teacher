@@ -436,9 +436,10 @@ extension LyConMsgDetailViewController {
 // MARK: - LyReplyViewDelegate
 extension LyConMsgDetailViewController {
     func sendByReplyView(_ aReplyView: LyReplyView, text: String) {
+        let sText = text
         aReplyView.hide()
         
-        _ = perform(#selector(LyConMsgDetailViewController.reply(_:)), with: text, afterDelay: LyDelayTime)
+        _ = perform(#selector(reply(_:)), with: sText, afterDelay: LyDelayTime)
     }
 }
 

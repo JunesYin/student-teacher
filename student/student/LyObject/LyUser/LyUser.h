@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, LyTeacherVerifyState)
 
 
 + (nullable instancetype)userWithId:(nullable NSString *)userId
-                           userNmae:(nullable NSString *)userName;
+                           userName:(nullable NSString *)userName;
 
 - (nullable instancetype)initWithId:(nullable NSString *)userId
                            userName:(nullable NSString *)userName;

@@ -558,30 +558,30 @@ lySingle_implementation(LyCommunityViewController)
                                 switch (masterUserType) {
                                     case LyUserType_normal: {
                                         user = [LyUser userWithId:strMasterId
-                                                         userNmae:strMasterName];
+                                                         userName:strMasterName];
                                         break;
                                     }
                                     case LyUserType_coach: {
-                                        LyCoach *coach = [LyCoach coachWithId:strMasterId
-                                                                      coaName:strMasterName];
+                                        LyCoach *coach = [LyCoach userWithId:strMasterId
+                                                                      userName:strMasterName];
                                         user = coach;
                                         break;
                                     }
                                     case LyUserType_school: {
-                                        LyDriveSchool *school = [LyDriveSchool driveSchoolWithId:strMasterId
-                                                                                        dschName:strMasterName];
+                                        LyDriveSchool *school = [LyDriveSchool userWithId:strMasterId
+                                                                                        userName:strMasterName];
                                         user = school;
                                         break;
                                     }
                                     case LyUserType_guider: {
-                                        LyGuider *guider = [LyGuider guiderWithGuiderId:strMasterId
-                                                                                guiName:strMasterName];
+                                        LyGuider *guider = [LyGuider userWithId:strMasterId
+                                                                                userName:strMasterName];
                                         user = guider;
                                         break;
                                     }
                                     default: {
                                         user = [LyUser userWithId:strMasterId
-                                                         userNmae:strMasterName];
+                                                         userName:strMasterName];
                                         break;
                                     }
                                 }
@@ -739,30 +739,30 @@ lySingle_implementation(LyCommunityViewController)
                                 switch (masterUserType) {
                                     case LyUserType_normal: {
                                         user = [LyUser userWithId:strMasterId
-                                                         userNmae:strMasterName];
+                                                         userName:strMasterName];
                                         break;
                                     }
                                     case LyUserType_coach: {
-                                        LyCoach *coach = [LyCoach coachWithId:strMasterId
-                                                                      coaName:strMasterName];
+                                        LyCoach *coach = [LyCoach userWithId:strMasterId
+                                                                      userName:strMasterName];
                                         user = coach;
                                         break;
                                     }
                                     case LyUserType_school: {
-                                        LyDriveSchool *school = [LyDriveSchool driveSchoolWithId:strMasterId
-                                                                                        dschName:strMasterName];
+                                        LyDriveSchool *school = [LyDriveSchool userWithId:strMasterId
+                                                                                        userName:strMasterName];
                                         user = school;
                                         break;
                                     }
                                     case LyUserType_guider: {
-                                        LyGuider *guider = [LyGuider guiderWithGuiderId:strMasterId
-                                                                                guiName:strMasterName];
+                                        LyGuider *guider = [LyGuider userWithId:strMasterId
+                                                                                userName:strMasterName];
                                         user = guider;
                                         break;
                                     }
                                     default: {
                                         user = [LyUser userWithId:strMasterId
-                                                         userNmae:strMasterName];
+                                                         userName:strMasterName];
                                         break;
                                     }
                                 }
@@ -1198,7 +1198,13 @@ lySingle_implementation(LyCommunityViewController)
 
 
 - (void)needRefresh:(LyNewsTableViewCell *)aCell {
-    [tvNews reloadRowsAtIndexPaths:@[[tvNews indexPathForCell:aCell]] withRowAnimation:UITableViewRowAnimationNone];
+//    NSIndexPath *indexPath = [tvNews indexPathForCell:aCell];
+//    if (indexPath) {
+//        [tvNews reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    }
+    
+    [tvNews reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[cyArrNews indexOfObject:aCell.news] inSection:0]]
+                  withRowAnimation:UITableViewRowAnimationNone];
 }
 
 

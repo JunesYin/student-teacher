@@ -43,3 +43,8 @@
 
 
 #import "LyUtil.h"
+
+
+
+#import "LyMyQRCodeViewController.h"
+#import "LyUserDetailViewController.h"

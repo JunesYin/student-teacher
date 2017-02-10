@@ -1008,8 +1008,8 @@ NSString *const lyMyCoachTrainClassTableViewCellReuseIdentifier = @"lyMyCoachTra
                     } else {
                         coach = [[LyUserManager sharedInstance] getCoachWithCoachId:strCoachId];
                         if ( !coach || LyUserType_coach != coach.userType) {
-                            coach = [LyCoach coachWithId:strCoachId
-                                                 coaName:strCoachName];
+                            coach = [LyCoach userWithId:strCoachId
+                                                 userName:strCoachName];
                             [[LyUserManager sharedInstance] addUser:coach];
                         }
                         [coach setUserName:strCoachName];
@@ -1029,8 +1029,8 @@ NSString *const lyMyCoachTrainClassTableViewCellReuseIdentifier = @"lyMyCoachTra
                     if ([LyUtil validateString:strMasterId]) {
                         driveSchool = [[LyUserManager sharedInstance] getDriveSchoolWithDriveSchoolId:strMasterId];
                         if ( !driveSchool) {
-                            driveSchool = [LyDriveSchool driveSchoolWithId:strMasterId
-                                                                  dschName:strMasterName];
+                            driveSchool = [LyDriveSchool userWithId:strMasterId
+                                                                  userName:strMasterName];
                             
                             [[LyUserManager sharedInstance] addUser:driveSchool];
                         }

@@ -69,15 +69,20 @@
 
 
 
++ (nullable instancetype)userWithId:(nullable NSString *)userId
+                           userName:(nullable NSString *)userName;
+
+- (nullable instancetype)initWithId:(nullable NSString *)userId
+                           userName:(nullable NSString *)userName;
 
 
 
 
-+ (instancetype)coachWithIdNoAvatar:(NSString *)userId
-                               name:(NSString *)name;
-
-- (instancetype)initWithIdNoAvatar:(NSString *)userId
-                              name:(NSString *)name;
+//+ (instancetype)coachWithIdNoAvatar:(NSString *)userId
+//                               name:(NSString *)name;
+//
+//- (instancetype)initWithIdNoAvatar:(NSString *)userId
+//                              name:(NSString *)name;
 
 
 + (instancetype)coachWithId:(NSString *)coaId
@@ -108,11 +113,11 @@
                      price:(float)price;
 
 
-+ (instancetype)coachWithId:(NSString *)coaId
-                    coaName:(NSString *)coaName;
-
-- (instancetype)initWithId:(NSString *)coaId
-                   coaName:(NSString *)coaName;
+//+ (instancetype)coachWithId:(NSString *)coaId
+//                    coaName:(NSString *)coaName;
+//
+//- (instancetype)initWithId:(NSString *)coaId
+//                   coaName:(NSString *)coaName;
 
 
 + (instancetype)coachWithId:(NSString *)coaId

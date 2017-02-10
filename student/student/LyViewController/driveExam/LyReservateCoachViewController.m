@@ -1045,8 +1045,8 @@ typedef NS_ENUM( NSInteger, LyReservateCoachHttpMethod)
                     }
                     
                     if ( !coach || LyUserType_coach != coach.userType) {
-                        coach = [LyCoach coachWithId:strCoachId
-                                             coaName:strCoachName];
+                        coach = [LyCoach userWithId:strCoachId
+                                             userName:strCoachName];
                         [[LyUserManager sharedInstance] addUser:coach];
                     }
                     [coach setCoaMasterId:strMasterId];
@@ -1064,8 +1064,8 @@ typedef NS_ENUM( NSInteger, LyReservateCoachHttpMethod)
                     if ([LyUtil validateString:strMasterId]) {
                         LyDriveSchool *driveSchool = [[LyUserManager sharedInstance] getDriveSchoolWithDriveSchoolId:strMasterId];
                         if ( !driveSchool) {
-                            driveSchool = [LyDriveSchool driveSchoolWithId:strMasterId
-                                                                  dschName:strMasterName];
+                            driveSchool = [LyDriveSchool userWithId:strMasterId
+                                                                  userName:strMasterName];
                             
                             [[LyUserManager sharedInstance] addUser:driveSchool];
                         }

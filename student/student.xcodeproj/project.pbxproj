@@ -183,7 +183,6 @@
 		9C20C07A1DB9C282002A2AAB /* LyTheoryStudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BFA11DB9C282002A2AAB /* LyTheoryStudyViewController.m */; };
 		9C20C07B1DB9C282002A2AAB /* LyUserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BFA31DB9C282002A2AAB /* LyUserCenterViewController.m */; };
 		9C20C07E1DB9C282002A2AAB /* LyMyQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BFAB1DB9C282002A2AAB /* LyMyQRCodeViewController.m */; };
-		9C20C07F1DB9C282002A2AAB /* LySweepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BFAD1DB9C282002A2AAB /* LySweepViewController.m */; };
 		9C20C0851DB9C282002A2AAB /* LyTrainClassDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BFBA1DB9C282002A2AAB /* LyTrainClassDetailViewController.m */; };
 		9C20C0931DB9C283002A2AAB /* LyTeachByTimeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BFDC1DB9C282002A2AAB /* LyTeachByTimeDetailViewController.m */; };
 		9C20C0971DB9C2C4002A2AAB /* LyNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20C0961DB9C2C4002A2AAB /* LyNews.m */; };
@@ -842,8 +841,6 @@
 		9C20BFA31DB9C282002A2AAB /* LyUserCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyUserCenterViewController.m; sourceTree = "<group>"; };
 		9C20BFAA1DB9C282002A2AAB /* LyMyQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyMyQRCodeViewController.h; sourceTree = "<group>"; };
 		9C20BFAB1DB9C282002A2AAB /* LyMyQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyMyQRCodeViewController.m; sourceTree = "<group>"; };
-		9C20BFAC1DB9C282002A2AAB /* LySweepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LySweepViewController.h; sourceTree = "<group>"; };
-		9C20BFAD1DB9C282002A2AAB /* LySweepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LySweepViewController.m; sourceTree = "<group>"; };
 		9C20BFB91DB9C282002A2AAB /* LyTrainClassDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyTrainClassDetailViewController.h; sourceTree = "<group>"; };
 		9C20BFBA1DB9C282002A2AAB /* LyTrainClassDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyTrainClassDetailViewController.m; sourceTree = "<group>"; };
 		9C20BFDB1DB9C282002A2AAB /* LyTeachByTimeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyTeachByTimeDetailViewController.h; sourceTree = "<group>"; };
@@ -1981,8 +1978,6 @@
 			children = (
 				9C20BFAA1DB9C282002A2AAB /* LyMyQRCodeViewController.h */,
 				9C20BFAB1DB9C282002A2AAB /* LyMyQRCodeViewController.m */,
-				9C20BFAC1DB9C282002A2AAB /* LySweepViewController.h */,
-				9C20BFAD1DB9C282002A2AAB /* LySweepViewController.m */,
 				2F1C89DE1E2DC388004E4BBE /* LyScanQRCodeViewController.swift */,
 			);
 			path = popupMenu;
@@ -3303,7 +3298,6 @@
 				9C2FC7721DCB0DD8006EA6B3 /* SDWebImagePrefetcher.m in Sources */,
 				9C20C0751DB9C282002A2AAB /* LyGuiderViewController.mm in Sources */,
 				9C445F271D61D07D001BE221 /* ZLPhotoPickerGroup.m in Sources */,
-				9C20C07F1DB9C282002A2AAB /* LySweepViewController.m in Sources */,
 				9C20C09B1DB9C2F7002A2AAB /* UITextView+textCount.m in Sources */,
 				9C445F2C1D61D07D001BE221 /* ZLPhotoPickerViewController.m in Sources */,
 				9C6583E31DF012C000944A9A /* LyUserInfoTableViewCell.m in Sources */,

@@ -368,6 +368,9 @@ static CGFloat const cvLDItemHeight = 40.0f;
             [self changeBbiEdit:landMarkManageBarButtonItemMode_edit];  //更改为展示状态
             return;
         }
+        arrIdxs = [arrIdxs sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 row] < [obj2 row];
+        }];
         
         NSString *message;
         NSIndexPath *idx = [arrIdxs objectAtIndex:0];
@@ -651,6 +654,7 @@ static CGFloat const cvLDItemHeight = 40.0f;
 //                        }
 //                    }
                     
+                    
                     for (NSIndexPath *indexPath in arrIdxs) {
                         if (!indexPath) {
                             continue;
@@ -663,6 +667,8 @@ static CGFloat const cvLDItemHeight = 40.0f;
                         
                         [district.dArrLandMark removeObjectAtIndex:indexPath.row];
                     }
+                    
+                    arrIdxs = nil;
                     
                     [self reloadData];
                     [self targetForBarButtonItem:bbiCancel];

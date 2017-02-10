@@ -20,10 +20,9 @@
 #import "NSMutableArray+SingleElement.h"
 
 #import "LyUtil.h"
-
+#import "student-Swift.h"
 
 #import "LyUserDetailViewController.h"
-#import "LySweepViewController.h"
 
 
 enum {
@@ -127,7 +126,7 @@ static NSString *const lyFriendsTvCellReuseIdentifier = @"lyFriendsTvCellReuseId
 
 - (void)targetForBarButtonItem:(UIBarButtonItem *)bbi {
     if (friendsBarButtonItemTag_add == bbi.tag) {
-        LySweepViewController *sweep = [[LySweepViewController alloc] init];
+        LyScanQRCodeViewController *sweep = [[LyScanQRCodeViewController alloc] init];
         [self.navigationController pushViewController:sweep animated:YES];
     }
 }
@@ -298,21 +297,21 @@ static NSString *const lyFriendsTvCellReuseIdentifier = @"lyFriendsTvCellReuseId
                                                                coaSex:[strSex integerValue]];
                                 tmpUser = coach;
                             } else if ( [strUserType isEqualToString:@"jx"]) {
-                                LyDriveSchool *dsch = [LyDriveSchool driveSchoolWithId:strId
-                                                                              dschName:strName];
+                                LyDriveSchool *dsch = [LyDriveSchool userWithId:strId
+                                                                              userName:strName];
                                 [dsch setUserSignature:strSignature];
                                 
                                 tmpUser = dsch;
                             } else if ( [strUserType isEqualToString:@"zdy"]) {
-                                LyGuider *guider = [LyGuider guiderWithGuiderId:strId
-                                                                        guiName:strName];
+                                LyGuider *guider = [LyGuider userWithId:strId
+                                                                        userName:strName];
                                 [guider setUserSignature:strSignature];
                                 [guider setUserSex:[strSex integerValue]];
                                 
                                 tmpUser = guider;
                             } else {
                                 LyUser *user = [LyUser userWithId:strId
-                                                         userNmae:strName];
+                                                         userName:strName];
                                 [user setUserSignature:strSignature];
                                 [user setUserSex:[strSex integerValue]];
                                 
@@ -372,21 +371,21 @@ static NSString *const lyFriendsTvCellReuseIdentifier = @"lyFriendsTvCellReuseId
                                                                coaSex:[strSex integerValue]];
                                 tmpUser = coach;
                             } else if ( [strUserType isEqualToString:@"jx"]) {
-                                LyDriveSchool *dsch = [LyDriveSchool driveSchoolWithId:strId
-                                                                              dschName:strName];
+                                LyDriveSchool *dsch = [LyDriveSchool userWithId:strId
+                                                                              userName:strName];
                                 [dsch setUserSignature:strSignature];
                                 
                                 tmpUser = dsch;
                             } else if ( [strUserType isEqualToString:@"zdy"]) {
-                                LyGuider *guider = [LyGuider guiderWithGuiderId:strId
-                                                                        guiName:strName];
+                                LyGuider *guider = [LyGuider userWithId:strId
+                                                                        userName:strName];
                                 [guider setUserSignature:strSignature];
                                 [guider setUserSex:[strSex integerValue]];
                                 
                                 tmpUser = guider;
                             } else {
                                 LyUser *user = [LyUser userWithId:strId
-                                                         userNmae:strName];
+                                                         userName:strName];
                                 [user setUserSignature:strSignature];
                                 [user setUserSex:[strSex integerValue]];
                                 

@@ -35,64 +35,83 @@
 
 
 
-+ (instancetype)driveSchoolWithIdNoAvatar:(NSString *)userId
-                                 userName:(NSString *)userName
++ (instancetype)userWithId:(NSString *)userId userName:(NSString *)userName
 {
-    LyDriveSchool *school = [[LyDriveSchool alloc] initWithIdNoAvatar:userId
-                                                             userName:userName];
+    LyDriveSchool *school = [[LyDriveSchool alloc] initWithId:userId userName:userName];
     
     return school;
 }
 
-- (instancetype)initWithIdNoAvatar:(NSString *)userId
-                          userName:(NSString *)userName
+- (instancetype)initWithId:(NSString *)userId userName:(NSString *)userName
 {
-    if (self = [super init]) {
+    if (self = [super initWithId:userId userName:userName]) {
         _userId = userId;
         _userName = userName;
+        _userType = LyUserType_school;
     }
-    
-    _userType = LyUserType_school;
     
     return self;
 }
 
 
-
-
-
-+ (instancetype)driveSchoolWithId:(NSString *)dschId
-                         dschName:(NSString *)dschName
-{
-    LyDriveSchool *tmpDsch = [[LyDriveSchool alloc] initWithId:dschId
-                                                      dschName:dschName];
-    
-    return tmpDsch;
-}
-
-- (instancetype)initWithId:(NSString *)dschId
-                  dschName:(NSString *)dschName
-{
-    if ( self = [super init])
-    {
-        _userId = dschId;
-        _userName = dschName;
-        
-        [LyImageLoader loadAvatarWithUserId:_userId
-                                   complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSString * _Nullable userId) {
-                                       if (!image) {
-                                           image = [LyUtil defaultAvatarForTeacher];
-                                       }
-                                       _userAvatar = image;
-                                   }];
-    }
-    
-    
-    _userType = LyUserType_school;
-    _distance = MAXFLOAT;
-    
-    return self;
-}
+//+ (instancetype)driveSchoolWithIdNoAvatar:(NSString *)userId
+//                                 userName:(NSString *)userName
+//{
+//    LyDriveSchool *school = [[LyDriveSchool alloc] initWithIdNoAvatar:userId
+//                                                             userName:userName];
+//    
+//    return school;
+//}
+//
+//- (instancetype)initWithIdNoAvatar:(NSString *)userId
+//                          userName:(NSString *)userName
+//{
+//    if (self = [super init]) {
+//        _userId = userId;
+//        _userName = userName;
+//    }
+//    
+//    _userType = LyUserType_school;
+//    
+//    return self;
+//}
+//
+//
+//
+//
+//
+//+ (instancetype)driveSchoolWithId:(NSString *)dschId
+//                         dschName:(NSString *)dschName
+//{
+//    LyDriveSchool *tmpDsch = [[LyDriveSchool alloc] initWithId:dschId
+//                                                      dschName:dschName];
+//    
+//    return tmpDsch;
+//}
+//
+//- (instancetype)initWithId:(NSString *)dschId
+//                  dschName:(NSString *)dschName
+//{
+//    if ( self = [super init])
+//    {
+//        _userId = dschId;
+//        _userName = dschName;
+//        
+//        [LyImageLoader loadAvatarWithUserId:_userId
+//                                   complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSString * _Nullable userId) {
+//                                       if (!image) {
+//                                           image = [LyUtil defaultAvatarForTeacher];
+//                                       }
+//                                       _userAvatar = image;
+//                                   }];
+//    }
+//    
+//    
+//    _userType = LyUserType_school;
+//    _distance = MAXFLOAT;
+//    
+//    return self;
+//}
 
 
 

@@ -1189,8 +1189,8 @@ static NSString *const lyCoachTableViewCellReuseIdentifier = @"lyCoachTableViewC
                                 strUserName = [LyUtil getUserNameWithUserId:strUserId];
                             }
                             
-                            LyCoach *coach = [LyCoach coachWithId:strUserId
-                                                          coaName:strUserName];
+                            LyCoach *coach = [LyCoach userWithId:strUserId
+                                                          userName:strUserName];
                             
                             [coach setSearching:YES];
                             
@@ -1280,8 +1280,8 @@ static NSString *const lyCoachTableViewCellReuseIdentifier = @"lyCoachTableViewC
                                 LyCoach *tmpCoach = [dicMapCoach objectForKey:strUserId];
                                 if (!tmpCoach)
                                 {
-                                    tmpCoach = [LyCoach coachWithId:strUserId
-                                                         coaName:strUserName];
+                                    tmpCoach = [LyCoach userWithId:strUserId
+                                                         userName:strUserName];
                                     [dicMapCoach setObject:tmpCoach forKey:strUserId];
                                 }
                                 

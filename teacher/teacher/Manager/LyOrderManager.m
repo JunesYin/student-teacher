@@ -88,9 +88,12 @@ lySingle_implementation(LyOrderManager)
         flag = NO;
         LyOrder *order = [containerOrder objectForKey:itemKey];
         if ([userId isEqualToString:order.orderObjectId] || [userId isEqualToString:order.recipient]) {
-            if (LyOrderPayStatus_close < payStatus) {
-                flag = YES;
-            } else if (payStatus == order.orderPayStatus) {
+//            if (LyOrderPayStatus_close < payStatus) {
+//                flag = YES;
+//            } else if (payStatus == order.orderPayStatus) {
+//                flag = YES;
+//            }
+            if (payStatus == order.orderPayStatus) {
                 flag = YES;
             }
         }

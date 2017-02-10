@@ -1172,8 +1172,8 @@ static NSString *const lyGuiderTableViewCellReuseIdentifier = @"lyGuiderTableVie
                                 strUserName = [LyUtil getUserNameWithUserId:strUserId];
                             }
                             
-                            LyGuider *tmpGuider = [LyGuider guiderWithGuiderId:strUserId
-                                                                       guiName:strUserName];
+                            LyGuider *tmpGuider = [LyGuider userWithId:strUserId
+                                                                       userName:strUserName];
                             
                             [tmpGuider setSearching:YES];
                             
@@ -1260,8 +1260,8 @@ static NSString *const lyGuiderTableViewCellReuseIdentifier = @"lyGuiderTableVie
                                 
                                 LyGuider *tmpGuider = [dicMapGuider objectForKey:strUserId];
                                 if (!tmpGuider) {
-                                    tmpGuider = [LyGuider guiderWithGuiderId:strUserId
-                                                                     guiName:strUserName];
+                                    tmpGuider = [LyGuider userWithId:strUserId
+                                                                     userName:strUserName];
                                     
                                     [dicMapGuider setObject:tmpGuider forKey:strUserId];
                                     

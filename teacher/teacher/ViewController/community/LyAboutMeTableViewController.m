@@ -57,7 +57,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
     
     NSArray                 *arrAboutMe;
     
-    NSIndexPath             *lastIp;
+    NSIndexPath             *curIdx;
     
     UIView                  *viewReply;
     UITextView              *tvReply;
@@ -267,7 +267,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
     }
     [indicator_reply startAnimation];
     
-    LyAboutMe *aboutMe = [[self.tableView cellForRowAtIndexPath:lastIp] aboutMe];
+    LyAboutMe *aboutMe = [[self.tableView cellForRowAtIndexPath:curIdx] aboutMe];
     
     LyHttpRequest *httpRequest = [LyHttpRequest httpRequestWithMode:aboutMeHttpMethod_reply];
     [httpRequest setDelegate:self];
@@ -848,7 +848,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
 #pragma mark -LyAboutMeTableViewCellDelegate
 - (void)onClickedButtonReplyByAboutMeTableViewCell:(LyAboutMeTableViewCell *)aCell
 {
-    lastIp = [self.tableView indexPathForCell:aCell];
+    curIdx = [self.tableView indexPathForCell:aCell];
     
     if ( !viewReply)
     {
@@ -876,7 +876,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
 
 - (void)onClickedUserByAboutMeTableViewCell:(LyAboutMeTableViewCell *)aCell
 {
-    lastIp = [self.tableView indexPathForCell:aCell];
+    curIdx = [self.tableView indexPathForCell:aCell];
     
     LyUserDetailViewController *userDetail = [[LyUserDetailViewController alloc] init];
     [userDetail setDelegate:self];
@@ -885,7 +885,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
 
 - (void)onClickedNewsByAboutMeTableViewCell:(LyAboutMeTableViewCell *)aCell
 {
-    lastIp = [self.tableView indexPathForCell:aCell];
+    curIdx = [self.tableView indexPathForCell:aCell];
     
     LyNewsDetailViewController *statusDetail = [[LyNewsDetailViewController alloc] init];
     [statusDetail setDelegate:self];
@@ -895,7 +895,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
 
 #pragma mark -LyNewsDetailViewControllerDelegate
 - (LyNews *)obtainNewsByNewsDetailVC:(LyNewsDetailViewController *)aNewsDetailVC {
-    LyNews *news = [[LyNewsManager sharedInstance] getNewsWithNewsId:[[[self.tableView cellForRowAtIndexPath:lastIp] aboutMe] amNewsId]];
+    LyNews *news = [[LyNewsManager sharedInstance] getNewsWithNewsId:[[[self.tableView cellForRowAtIndexPath:curIdx] aboutMe] amNewsId]];
     
     return news;
 }
@@ -910,7 +910,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
 #pragma mark -LyUserDetailDelegate
 - (NSString *)obtainUserId
 {
-    return [[[self.tableView cellForRowAtIndexPath:lastIp] aboutMe] amMasterId];
+    return [[[self.tableView cellForRowAtIndexPath:curIdx] aboutMe] amMasterId];
 }
 
 

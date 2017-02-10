@@ -302,14 +302,7 @@ static NSString *const baiduMapKey = @"AfrvFaQDgrNqdHfeMsNEDSROL0X7Hr3x";
         
         LyGuideViewController *guide = [[LyGuideViewController alloc] init];
         [guide setDelegate:self];
-        [self presentViewController:guide animated:YES completion:^{
-            NSString *sqlInsert = [[NSString alloc] initWithFormat:@"INSERT INTO %@ \
-                                   (version) VALUES \
-                                   ('%@')",
-                                   LyRecordTableName_guide,
-                                   [LyUtil getApplicationVersion]];
-            BOOL flag = [[LyUtil dbRecord] executeUpdate:sqlInsert];
-        }];
+        [self presentViewController:guide animated:YES completion:nil];
 
     }
 }
@@ -369,12 +362,12 @@ static NSString *const baiduMapKey = @"AfrvFaQDgrNqdHfeMsNEDSROL0X7Hr3x";
 - (void)showAlertViewForLocatoinDenied {
     if ( ![[LyUtil sharedInstance] isForbidRemindNetwork]) {
         if ( !alertNetwork) {
-            alertNetwork = [[UIAlertView alloc] initWithTitle:alertTitleForWiFi
-                                                      message:alertMessageForWiFi
+            alertNetwork = [[UIAlertView alloc] initWithTitle:alertTitleForLocate
+                                                      message:alertMessageForLocate
                                                      delegate:self
                                             cancelButtonTitle:@"不再提醒"
                                             otherButtonTitles:@"设置", nil];
-            [alertNetwork setTag:rootAlertViewTag_network];
+            [alertNetwork setTag:rootAlertViewTag_locationDenied];
         }
         if (!alertNetwork.isVisible) {
             [alertNetwork show];
@@ -422,13 +415,13 @@ static NSString *const baiduMapKey = @"AfrvFaQDgrNqdHfeMsNEDSROL0X7Hr3x";
     flagForGetAppVersion = YES;
     LyHttpRequest *hr = [LyHttpRequest httpRequestWithMode:rootHttpMethod_loadAppVersion];
     [hr setDelegate:self];
-    bHttpFlag = [hr startHttpRequest:lowestAppVersion_url
+    bHttpFlag = [[hr startHttpRequest:lowestAppVersion_url
                                 body:@{
                                        clientModeKey:@"xy",
                                        deviceModeKey:@"ios"
                                        }
                                 type:LyHttpType_asynPost
-                             timeOut:3.0f];
+                             timeOut:3.0f] boolValue];
 }
 
 
@@ -521,8 +514,13 @@ static NSString *const baiduMapKey = @"AfrvFaQDgrNqdHfeMsNEDSROL0X7Hr3x";
 #pragma mark -LyGuideViewControllerDelegate
 - (void)onClickButtonStart:(LyGuideViewController *)aGuideVC {
     [aGuideVC dismissViewControllerAnimated:NO completion:^{
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:objectKeyForFirstLaunch];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSString *sqlInsert = [[NSString alloc] initWithFormat:@"INSERT INTO %@ \
+                               (version) VALUES \
+                               ('%@')",
+                               LyRecordTableName_guide,
+                               [LyUtil getApplicationVersion]];
+        BOOL flag = [[LyUtil dbRecord] executeUpdate:sqlInsert];
+        
         [self rtShowNextViewController];
     }];
 }

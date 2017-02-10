@@ -36,27 +36,46 @@
 
 
 
-+ (instancetype)coachWithIdNoAvatar:(NSString *)userId
-                               name:(NSString *)name
++ (instancetype)userWithId:(NSString *)userId userName:(NSString *)userName
 {
-    LyCoach *coach = [[LyCoach alloc] initWithIdNoAvatar:userId
-                                                    name:name];
+    LyCoach *coach = [[LyCoach alloc] initWithId:userId userName:userName];
     
     return coach;
 }
 
-- (instancetype)initWithIdNoAvatar:(NSString *)userId
-                              name:(NSString *)name
+- (instancetype)initWithId:(NSString *)userId userName:(NSString *)userName
 {
-    if (self = [super init]) {
+    if (self = [super initWithId:userId userName:userName]) {
         _userId = userId;
-        _userName = name;
+        _userName = userName;
+        _userType = LyUserType_coach;
     }
-    _userType = LyUserType_coach;
-    
     
     return self;
 }
+
+
+//+ (instancetype)coachWithIdNoAvatar:(NSString *)userId
+//                               name:(NSString *)name
+//{
+//    LyCoach *coach = [[LyCoach alloc] initWithIdNoAvatar:userId
+//                                                    name:name];
+//    
+//    return coach;
+//}
+//
+//- (instancetype)initWithIdNoAvatar:(NSString *)userId
+//                              name:(NSString *)name
+//{
+//    if (self = [super init]) {
+//        _userId = userId;
+//        _userName = name;
+//    }
+//    _userType = LyUserType_coach;
+//    
+//    
+//    return self;
+//}
 
 
 
@@ -145,37 +164,37 @@
 }
 
 
-+ (instancetype)coachWithId:(NSString *)coaId
-                    coaName:(NSString *)coaName
-{
-    LyCoach *coach = [[LyCoach alloc] initWithId:coaId
-                                         coaName:coaName];
-    
-    return coach;
-}
-
-- (instancetype)initWithId:(NSString *)coaId
-                   coaName:(NSString *)coaName
-{
-    if ( self = [super init])
-    {
-        _userId = coaId;
-        _userName = coaName;
-        
-        [LyImageLoader loadAvatarWithUserId:_userId
-                                   complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSString * _Nullable userId) {
-                                       if (!image) {
-                                           image = [LyUtil defaultAvatarForTeacher];
-                                       }
-                                       _userAvatar = image;
-                                   }];
-    }
-    
-    _userType = LyUserType_coach;
-    _distance = MAXFLOAT;
-    
-    return self;
-}
+//+ (instancetype)coachWithId:(NSString *)coaId
+//                    coaName:(NSString *)coaName
+//{
+//    LyCoach *coach = [[LyCoach alloc] initWithId:coaId
+//                                         coaName:coaName];
+//    
+//    return coach;
+//}
+//
+//- (instancetype)initWithId:(NSString *)coaId
+//                   coaName:(NSString *)coaName
+//{
+//    if ( self = [super init])
+//    {
+//        _userId = coaId;
+//        _userName = coaName;
+//        
+//        [LyImageLoader loadAvatarWithUserId:_userId
+//                                   complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSString * _Nullable userId) {
+//                                       if (!image) {
+//                                           image = [LyUtil defaultAvatarForTeacher];
+//                                       }
+//                                       _userAvatar = image;
+//                                   }];
+//    }
+//    
+//    _userType = LyUserType_coach;
+//    _distance = MAXFLOAT;
+//    
+//    return self;
+//}
 
 
 + (instancetype)coachWithId:(NSString *)coaId

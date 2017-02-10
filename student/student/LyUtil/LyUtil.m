@@ -66,7 +66,7 @@ NSString *const alertMessageForNotificaion = @"请前往系统【设置】>【�
 //#define alertMessageForCamera                       [[NSString alloc] initWithFormat:@"请前往系统【设置】>【稳私】>【相机】允许“%@”访问相机", [LyUtil getAppDisplayName]]
 //#define alertMessageForNotificaion                  [[NSString alloc] initWithFormat:@"请前往系统【设置】>【通知】>【%@】打开“允许通知”", [LyUtil getAppDisplayName]]
 NSString *const alertMessageForLocationService = @"请前往系统【设置】>【隐私】>【定位服务】打开开关";
-NSString *const alertMessageForLocate = @"请前往系统【设置】>【隐私】>【定位服务】>【%@】允许“我要去学车”访问位置信息";
+NSString *const alertMessageForLocate = @"请前往系统【设置】>【隐私】>【定位服务】>【我要去学车】允许“我要去学车”访问位置信息";
 //#define alertMessageForLocate                [[NSString alloc] initWithFormat:@"请前往系统【设置】>【隐私】>【定位服务】>【%@】允许“%@”访问位置信息", [LyUtil getAppDisplayName]]
 NSString *const alertMessageForApplePay = @"还没有绑定的支付卡片";
 
@@ -762,22 +762,32 @@ static LyShowVcMode showVcModeBacklog = LyShowVcMode_push;
         return 0;
     }
     
-    if ([imageName hasSuffix:@".gif"])
+    if ([[imageName lowercaseString] hasSuffix:@".gif"])
     {
         NSData *data = [[NSData alloc] initWithContentsOfFile:[LyUtil filePathForTheory:imageName]];
+        if (!data) {
+            return 0;
+        }
         [GIFLoader loadGIFData:data to:iv];
     }
     else
     {
         UIImage *image = [LyUtil imageForImageNameForTheory:imageName];
+        if (!image) {
+            return 0;
+        }
         [iv setImage:image];
     }
     
     CGSize size = [iv sizeThatFits:CGSizeMake(SCREEN_WIDTH, MAXFLOAT)];
+    if (size.width < 1 || size.height < 1) {
+        return 0;
+    }
     CGFloat fHeight = size.height / (size.width / SCREEN_WIDTH);
     if (size.width / size.height < 1.5) {
         fHeight /= 2;
     }
+    
     return fHeight;
 }
 
@@ -786,16 +796,16 @@ static LyShowVcMode showVcModeBacklog = LyShowVcMode_push;
     CATransition *animation = [CATransition animation];
     animation.duration = LyAnimationDuration;
 #if DEBUG
-    
+    animation.type = @"pageCurl";
 #else
-    
-#endif
-    NSDate *date = [[LyUtil dateFormatterForAll] dateFromString:@"2016-02-02 00:00:00 +0800"];
+    NSDate *date = [[LyUtil dateFormatterForAll] dateFromString:@"2017-02-16 00:00:00 +0800"];
     if ([[NSDate date] timeIntervalSinceDate:date] > 0) {
         animation.type = @"pageCurl";
     } else {
         animation.type = kCATransitionPush;
     }
+#endif
+    
     
     if (subtype)
     {
@@ -1234,7 +1244,7 @@ static LyShowVcMode showVcModeBacklog = LyShowVcMode_push;
 }
 + (BOOL)validateString:(id)obj
 {
-    if (!obj || ![obj isKindOfClass:[NSString class]] || [obj length] < 1 || [obj rangeOfString:@"null"].length > 0)
+    if (!obj || ![obj isKindOfClass:[NSString class]] || [obj length] < 1 || [obj rangeOfString:@"null"].length > 0 || [obj rangeOfString:@"NULL"].length > 0)
     {
         return NO;
     }
@@ -1242,7 +1252,7 @@ static LyShowVcMode showVcModeBacklog = LyShowVcMode_push;
     return YES;
 }
 + (BOOL)validateUserId:(NSString *)userId {
-    if (!userId || ![userId isKindOfClass:[NSString class]] || userId.length != LyUserIdLength  || [userId rangeOfString:@"null"].length > 0) {
+    if (!userId || ![userId isKindOfClass:[NSString class]] || userId.length != LyUserIdLength  || [userId rangeOfString:@"null"].length > 0 || [userId rangeOfString:@"NULL"].length > 0) {
         return NO;
     }
     

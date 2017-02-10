@@ -384,26 +384,26 @@ static NSString *const lyOrderCenterTableViewCellReuseIdentifier = @"lyOrderCent
                                
                                switch (strMode.integerValue) {
                                    case LyOrderMode_driveSchool: {
-                                       LyDriveSchool *school = [LyDriveSchool driveSchoolWithId:strObjectid dschName:userName];
+                                       LyDriveSchool *school = [LyDriveSchool userWithId:strObjectid userName:userName];
                                        teacher = school;
                                        break;
                                    }
                                    case LyOrderMode_coach: {
-                                       LyCoach *coach = [LyCoach coachWithId:strObjectid coaName:userName];
+                                       LyCoach *coach = [LyCoach userWithId:strObjectid userName:userName];
                                        teacher = coach;
                                        break;
                                    }
                                    case LyOrderMode_guider: {
-                                       LyGuider *guider = [LyGuider guiderWithGuiderId:strObjectid guiName:userName];
+                                       LyGuider *guider = [LyGuider userWithId:strObjectid userName:userName];
                                        teacher = guider;
                                        break;
                                    }
                                    case LyOrderMode_reservation: {
                                        if ([strName rangeOfString:@"指导员"].length > 0) {
-                                           LyGuider *guider = [LyGuider guiderWithGuiderId:strObjectid guiName:userName];
+                                           LyGuider *guider = [LyGuider userWithId:strObjectid userName:userName];
                                            teacher = guider;
                                        } else {
-                                           LyCoach *coach = [LyCoach coachWithId:strObjectid coaName:userName];
+                                           LyCoach *coach = [LyCoach userWithId:strObjectid userName:userName];
                                            teacher = coach;
                                        }
                                        break;
@@ -572,26 +572,26 @@ static NSString *const lyOrderCenterTableViewCellReuseIdentifier = @"lyOrderCent
                                
                                switch (strMode.integerValue) {
                                    case LyOrderMode_driveSchool: {
-                                       LyDriveSchool *school = [LyDriveSchool driveSchoolWithId:strObjectid dschName:userName];
+                                       LyDriveSchool *school = [LyDriveSchool userWithId:strObjectid userName:userName];
                                        teacher = school;
                                        break;
                                    }
                                    case LyOrderMode_coach: {
-                                       LyCoach *coach = [LyCoach coachWithId:strObjectid coaName:userName];
+                                       LyCoach *coach = [LyCoach userWithId:strObjectid userName:userName];
                                        teacher = coach;
                                        break;
                                    }
                                    case LyOrderMode_guider: {
-                                       LyGuider *guider = [LyGuider guiderWithGuiderId:strObjectid guiName:userName];
+                                       LyGuider *guider = [LyGuider userWithId:strObjectid userName:userName];
                                        teacher = guider;
                                        break;
                                    }
                                    case LyOrderMode_reservation: {
                                        if ([strName rangeOfString:@"指导员"].length > 0) {
-                                           LyGuider *guider = [LyGuider guiderWithGuiderId:strObjectid guiName:userName];
+                                           LyGuider *guider = [LyGuider userWithId:strObjectid userName:userName];
                                            teacher = guider;
                                        } else {
-                                           LyCoach *coach = [LyCoach coachWithId:strObjectid coaName:userName];
+                                           LyCoach *coach = [LyCoach userWithId:strObjectid userName:userName];
                                            teacher = coach;
                                        }
                                        break;

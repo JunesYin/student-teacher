@@ -651,7 +651,7 @@ static NSString *const lyNewsDetailTableViewCellResueIdentifier = @"lyNewsDetail
                                 }
                                 
                                 user = [LyUser userWithId:strMasterId
-                                                 userNmae:strMasterName];
+                                                 userName:strMasterName];
                                 
                                 [[LyUserManager sharedInstance] addUser:user];
                             }
@@ -660,7 +660,7 @@ static NSString *const lyNewsDetailTableViewCellResueIdentifier = @"lyNewsDetail
                             if (!objectUser) {
                                 NSString *strObjectName = [LyUtil getUserNameWithUserId:strObjectId];
                                 objectUser = [LyUser userWithId:strObjectId
-                                                       userNmae:strObjectName];
+                                                       userName:strObjectName];
                                 
                                 [[LyUserManager sharedInstance] addUser:objectUser];
                             }
@@ -885,7 +885,14 @@ static NSString *const lyNewsDetailTableViewCellResueIdentifier = @"lyNewsDetail
 
 
 - (void)needRefresh:(LyNewsTableViewCell *)aCell {
-    [_tvNews reloadRowsAtIndexPaths:@[[_tvNews indexPathForCell:aCell]] withRowAnimation:UITableViewRowAnimationNone];
+//    [_tvNews reloadRowsAtIndexPaths:@[[_tvNews indexPathForCell:aCell]] withRowAnimation:UITableViewRowAnimationNone];
+//    NSIndexPath *indexPath = [_tvNews indexPathForCell:aCell];
+//    if (indexPath) {
+//        [_tvNews reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    }
+    
+    [_tvNews reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]]
+                  withRowAnimation:UITableViewRowAnimationNone];
 }
 
 

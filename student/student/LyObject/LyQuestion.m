@@ -146,7 +146,8 @@
 
 
 - (void)setQueImgUrl:(NSString *)queImgUrl {
-    if (![LyUtil validateString:queImgUrl]) {
+    if (!queImgUrl || ![queImgUrl isKindOfClass:[NSString class]] || queImgUrl.length < 1 || [[queImgUrl lowercaseString] rangeOfString:@"null"].length > 0)
+    {
         return;
     }
     

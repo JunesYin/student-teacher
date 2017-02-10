@@ -124,6 +124,9 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
     
     [self.indicator startAnimation];
     
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(arrCon) weakArrCon = arrCon;
+    
     [LyHttpRequest startHttpRequest:conList_url
                                body:@{
                                       objectIdKey: _user.userId,
@@ -135,13 +138,16 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                                type:LyHttpType_asynPost
                             timeOut:0
                   completionHandler:^(NSString *resStr, NSData *resData, NSError *error) {
+                      __strong typeof(weakSelf) strongSelf = weakSelf;
+                      __weak typeof(weakArrCon) strongArrCon = weakArrCon;
+                      
                       if (error) {
-                          [self handleHttpFailed:YES];
+                          [strongSelf handleHttpFailed:YES];
                           
                       } else {
                           NSDictionary *dic = [LyUtil analysisHttpResult:resStr delegate:self];
                           if (!dic) {
-                              [self handleHttpFailed:YES];
+                              [strongSelf handleHttpFailed:YES];
                               return ;
                           }
                           
@@ -150,10 +156,10 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                               case 0: {
                                   NSArray *arrConsult = dic[resultKey];
                                   if (![LyUtil validateArray:arrConsult]) {
-                                      [self.indicator stopAnimation];
-                                      [self.refreshControl endRefreshing];
-                                      [self.tvFooter stopAnimation];
-                                      self.tvFooter.status = LyTableViewFooterViewStatus_disable;
+                                      [strongSelf.indicator stopAnimation];
+                                      [strongSelf.refreshControl endRefreshing];
+                                      [strongSelf.tvFooter stopAnimation];
+                                      strongSelf.tvFooter.status = LyTableViewFooterViewStatus_disable;
                                       return;
                                   }
                                   
@@ -184,7 +190,7 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                                               }
                                           }
                                           
-                                          master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                                          master = [LyUser userWithId:sMasterId userName:sMasterName];
                                           [[LyUserManager sharedInstance] addUser:master];
                                       }
                                       
@@ -195,21 +201,21 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                                                                         content:sContent];
                                       con.replyCount = sReplyCount.integerValue;
                                       
-                                      [arrCon addObject:con];
+                                      [strongArrCon addObject:con];
                                   }
                                   
-                                  [self reloadData];
+                                  [strongSelf reloadData];
                                   
-                                  [self.indicator stopAnimation];
-                                  [self.refreshControl endRefreshing];
-                                  [self.tvFooter stopAnimation];
+                                  [strongSelf.indicator stopAnimation];
+                                  [strongSelf.refreshControl endRefreshing];
+                                  [strongSelf.tvFooter stopAnimation];
                                   
-                                  self.tvFooter.status = LyTableViewFooterViewStatus_normal;
+                                  strongSelf.tvFooter.status = LyTableViewFooterViewStatus_normal;
                                   
                                   break;
                               }
                               default: {
-                                  [self handleHttpFailed:YES];
+                                  [strongSelf handleHttpFailed:YES];
                                   break;
                               }
                           }
@@ -227,6 +233,9 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
     
     [self.tvFooter startAnimation];
     
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(arrCon) weakArrCon = arrCon;
+    
     [LyHttpRequest startHttpRequest:conList_url
                                body:@{
                                       objectIdKey: _user.userId,
@@ -238,13 +247,16 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                                type:LyHttpType_asynPost
                             timeOut:0
                   completionHandler:^(NSString *resStr, NSData *resData, NSError *error) {
+                      __strong typeof(weakSelf) strongSelf = weakSelf;
+                      __strong typeof(weakArrCon) strongArrCon = weakArrCon;
+                      
                       if (error) {
-                          [self handleHttpFailed:YES];
+                          [strongSelf handleHttpFailed:YES];
                           
                       } else {
                           NSDictionary *dic = [LyUtil analysisHttpResult:resStr delegate:self];
                           if (!dic) {
-                              [self handleHttpFailed:YES];
+                              [strongSelf handleHttpFailed:YES];
                               return ;
                           }
                           
@@ -253,10 +265,10 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                               case 0: {
                                   NSArray *arrConsult = dic[resultKey];
                                   if (![LyUtil validateArray:arrConsult]) {
-                                      [self.indicator stopAnimation];
-                                      [self.refreshControl endRefreshing];
-                                      [self.tvFooter stopAnimation];
-                                      self.tvFooter.status = LyTableViewFooterViewStatus_disable;
+                                      [strongSelf.indicator stopAnimation];
+                                      [strongSelf.refreshControl endRefreshing];
+                                      [strongSelf.tvFooter stopAnimation];
+                                      strongSelf.tvFooter.status = LyTableViewFooterViewStatus_disable;
                                       return;
                                   }
                                   
@@ -287,7 +299,7 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                                               }
                                           }
                                           
-                                          master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                                          master = [LyUser userWithId:sMasterId userName:sMasterName];
                                           [[LyUserManager sharedInstance] addUser:master];
                                       }
                                       
@@ -299,21 +311,21 @@ static NSString *const lyConsultTableViewCellReuseIdentifier = @"lyConsultTableV
                                       
                                       con.replyCount = sReplyCount.integerValue;
                                       
-                                      [arrCon addObject:con];
+                                      [strongArrCon addObject:con];
                                   }
                                   
-                                  [self reloadData];
+                                  [strongSelf reloadData];
                                   
-                                  [self.indicator stopAnimation];
-                                  [self.refreshControl endRefreshing];
-                                  [self.tvFooter stopAnimation];
+                                  [strongSelf.indicator stopAnimation];
+                                  [strongSelf.refreshControl endRefreshing];
+                                  [strongSelf.tvFooter stopAnimation];
                                   
-                                  self.tvFooter.status = LyTableViewFooterViewStatus_normal;
+                                  strongSelf.tvFooter.status = LyTableViewFooterViewStatus_normal;
                                   
                                   break;
                               }
                               default: {
-                                  [self handleHttpFailed:YES];
+                                  [strongSelf handleHttpFailed:YES];
                                   break;
                               }
                           }

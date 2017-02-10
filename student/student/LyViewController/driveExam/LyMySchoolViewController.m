@@ -830,8 +830,8 @@ static NSString *const lyMySchoolTvCoachCellReuseIdentifier = @"lyMySchoolTvCoac
                        
                        school = [[LyUserManager sharedInstance] getDriveSchoolWithDriveSchoolId:[LyCurrentUser curUser].userDriveSchoolId];
                        if (!school) {
-                           school = [LyDriveSchool driveSchoolWithId:[LyCurrentUser curUser].userDriveSchoolId
-                                                            dschName:strName];
+                           school = [LyDriveSchool userWithId:[LyCurrentUser curUser].userDriveSchoolId
+                                                            userName:strName];
                            [[LyUserManager sharedInstance] addUser:school];
                        } else {
                            [school setUserName:strName];

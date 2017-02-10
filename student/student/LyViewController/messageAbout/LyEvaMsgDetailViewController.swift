@@ -478,10 +478,10 @@ extension LyEvaMsgDetailViewController {
 // MARK: - LyReplyViewDelegate
 extension LyEvaMsgDetailViewController {
     func sendByReplyView(_ aReplyView: LyReplyView, text: String) {
+        let sText = text
         aReplyView.hide()
         
-//        _ = perform(#selector(reply), with: text, afterDelay: LyDelayTime)
-        _ = perform(#selector(LyEvaMsgDetailViewController.reply(_:)), with: text, afterDelay: LyDelayTime)
+        _ = perform(#selector(reply(_:)), with: sText, afterDelay: LyDelayTime)
     }
 }
 

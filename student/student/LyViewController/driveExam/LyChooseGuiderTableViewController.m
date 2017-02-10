@@ -285,7 +285,7 @@ typedef NS_ENUM( NSInteger, LyChooseGuiderTableViewControllerHttpMethod)
                         
                         
                         if ([LyUtil validateString:strId]) {
-                            LyGuider *guider = [LyGuider guiderWithIdNoAvatar:strId
+                            LyGuider *guider = [LyGuider userWithId:strId
                                                                      userName:strName];
                             
                             if ( !arrGuider) {

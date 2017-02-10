@@ -1065,7 +1065,7 @@ static NSString *const lySchoolDetailConsultTableViewCellReuseIdentifier = @"lyS
                                strName = [LyUtil getUserNameWithUserId:_schoolId];
                            }
                            
-                           school = [LyDriveSchool driveSchoolWithId:_schoolId dschName:strName];
+                           school = [LyDriveSchool userWithId:_schoolId userName:strName];
                            [[LyUserManager sharedInstance] addUser:school];
                        }
                        
@@ -1180,7 +1180,7 @@ static NSString *const lySchoolDetailConsultTableViewCellReuseIdentifier = @"lyS
                                    }
                                }
                                
-                               master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                               master = [LyUser userWithId:sMasterId userName:sMasterName];
                                [[LyUserManager sharedInstance] addUser:master];
                            }
                            
@@ -1218,7 +1218,7 @@ static NSString *const lySchoolDetailConsultTableViewCellReuseIdentifier = @"lyS
                                    }
                                }
                                
-                               master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                               master = [LyUser userWithId:sMasterId userName:sMasterName];
                                [[LyUserManager sharedInstance] addUser:master];
                            }
                            

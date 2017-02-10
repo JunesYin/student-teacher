@@ -71,11 +71,11 @@ static NSString *lySettingTableViewCellReuseIdentifier = @"lySettingTableViewCel
     UIView *viewHideFunc = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - viewHideFcunSize, SCREEN_HEIGHT - STATUSBAR_HEIGHT - NAVIGATIONBAR_HEIGHT - viewHideFcunSize, viewHideFcunSize, viewHideFcunSize)];
     [viewHideFunc setBackgroundColor:[UIColor clearColor]];
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(targetForDoubleTapGesture:)];
-    [doubleTap setNumberOfTapsRequired:3];
+    [doubleTap setNumberOfTapsRequired:2];
     [doubleTap setNumberOfTouchesRequired:1];
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(targetForLongPressGesture:)];
     [longPress setNumberOfTouchesRequired:1];
-    [longPress setMinimumPressDuration:3.0f];
+    [longPress setMinimumPressDuration:2];
     [viewHideFunc setUserInteractionEnabled:YES];
     [viewHideFunc addGestureRecognizer:doubleTap];
     [viewHideFunc addGestureRecognizer:longPress];
@@ -99,8 +99,15 @@ static NSString *lySettingTableViewCellReuseIdentifier = @"lySettingTableViewCel
     if (UIGestureRecognizerStateEnded == longPress.state) {
         preFlag = NO;
         
+        NSString *mode = @"";
+#if DEBUG
+        mode = @"DEBUG";
+#else
+        mode = @"RELEASE";
+#endif
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:realmName_517
+                                                        message:[[NSString alloc] initWithFormat:@"%@\n%@\n%@", realmName_517, mode, [LyUtil getApplicationVersion]]
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil, nil];

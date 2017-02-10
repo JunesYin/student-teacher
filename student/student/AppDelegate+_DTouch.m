@@ -13,8 +13,9 @@
 
 #import "LyBottomControl.h"
 #import "LySimulateLocalViewController.h"
-#import "LySweepViewController.h"
 #import "LyMyQRCodeViewController.h"
+
+#import "student-Swift.h"
 
 
 @implementation AppDelegate (_DTouch)
@@ -41,7 +42,7 @@
     if ([self.lastShortcutItem.localizedTitle isEqualToString:@"全真模考"]) {
         desVC = [[LySimulateLocalViewController alloc] init];
     } else if ([self.lastShortcutItem.localizedTitle isEqualToString:@"扫一扫"]) {
-        desVC = [[LySweepViewController alloc] init];
+        desVC = [[LyScanQRCodeViewController alloc] init];
     } else if ([self.lastShortcutItem.localizedTitle isEqualToString:@"我的二维码"]) {
         desVC = [[LyMyQRCodeViewController alloc] init];
     }

@@ -29,15 +29,19 @@ class LyReplyView: UIView, UITextViewDelegate {
     }
     */
     
+    var delegate: LyReplyViewDelegate?
+    
     
     var btnMask: UIButton!
     
     var viewContent: UIView!
     var tvContent: UITextView!
     
-
     var vcCenter: CGPoint!
-    var delegate: LyReplyViewDelegate?
+    
+    var bHideFlag = false
+    
+    
     
     
     convenience init(delegate: LyReplyViewDelegate) {
@@ -111,7 +115,8 @@ class LyReplyView: UIView, UITextViewDelegate {
     }
     
     public func hide() {
-        tvContent.resignFirstResponder()
+        bHideFlag = true
+        tvContent?.resignFirstResponder()
         
         removeObserverForKeyboard()
         
@@ -120,14 +125,12 @@ class LyReplyView: UIView, UITextViewDelegate {
                               initialPoint: CGPoint(x: vcCenter.x, y: vcCenter.y),
                               destinationPoint: CGPoint(x: vcCenter.x, y: vcCenter.y + repViewContentHeight),
                               completion: nil)
-        
         LyUtil.startAnimation(with: btnMask,
                               animationDuration: LyAnimationDuration,
                               initAlpha: 1,
-                              destinationAplhas: 0) { (isFinished) in
+                              destinationAplhas: 0) { [unowned self] _ in
                                 self.removeFromSuperview()
         }
-
     }
     
     
@@ -172,7 +175,9 @@ class LyReplyView: UIView, UITextViewDelegate {
     
     // MARK: - UIKeyboardWillHide
     internal func actionForKeyboardWillHide(_ notification: Notification) {
-        hide()
+        if !bHideFlag {
+            hide()
+        }
     }
     
     

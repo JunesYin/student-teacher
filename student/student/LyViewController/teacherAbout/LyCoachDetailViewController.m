@@ -957,8 +957,8 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
     
     [self.indicator startAnimation];
     
-    LyHttpRequest *hr = [LyHttpRequest new];
-    [hr startHttpRequest:getTeacherDetail_url
+    __weak typeof(self) weakSelf = self;
+    [LyHttpRequest startHttpRequest:getTeacherDetail_url
                     body:@{
                            objectIdKey:_coachId,
                            userTypeKey:userTypeCoachKey,
@@ -968,13 +968,15 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
                     type:LyHttpType_asynPost
                  timeOut:0
        completionHandler:^(NSString *resStr, NSData *resData, NSError *error) {
+           __strong typeof(weakSelf) strongSelf = weakSelf;
+           
            if (error) {
-               [self handleHttpFailed:YES];
+               [strongSelf handleHttpFailed:YES];
                
            } else {
                NSDictionary *dic = [self analysisHttpResult:resStr];
                if (!dic) {
-                   [self handleHttpFailed:YES];
+                   [strongSelf handleHttpFailed:YES];
                    return ;
                }
                
@@ -983,10 +985,10 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
                    case 0: {
                        NSDictionary *dicResult = [dic objectForKey:resultKey];
                        if (![LyUtil validateDictionary:dicResult]) {
-                           [self.indicator stopAnimation];
-                           [self.refreshControl endRefreshing];
+                           [strongSelf.indicator stopAnimation];
+                           [strongSelf.refreshControl endRefreshing];
                            
-                           [self showViewError];
+                           [strongSelf showViewError];
                            return;
                        }
                        
@@ -1030,7 +1032,7 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
                                sName = [LyUtil getUserNameWithUserId:_coachId];
                            }
                            
-                           coach = [LyCoach coachWithId:_coachId coaName:sName];
+                           coach = [LyCoach userWithId:_coachId userName:sName];
                            [[LyUserManager sharedInstance] addUser:coach];
                        }
                        
@@ -1061,14 +1063,14 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
                            [coach setUserPhoneNum:strPhone];
                        }
                        
-                       [self.controlBar setAttentionStatus:[strAttenteFlag boolValue]];
+                       [strongSelf.controlBar setAttentionStatus:[strAttenteFlag boolValue]];
                        
                        LyDriveSchool *driveSchool = [[LyUserManager sharedInstance] getDriveSchoolWithDriveSchoolId:strMasterId];
                        if ( !driveSchool) {
                            NSString *strMasterName = [LyUtil getUserNameWithUserId:strMasterId];
                            
-                           driveSchool = [LyDriveSchool driveSchoolWithId:strMasterId
-                                                                 dschName:strMasterName];
+                           driveSchool = [LyDriveSchool userWithId:strMasterId
+                                                                 userName:strMasterName];
                            [[LyUserManager sharedInstance] addUser:driveSchool];
                        }
                        
@@ -1168,7 +1170,7 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
                                    }
                                }
                                
-                               master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                               master = [LyUser userWithId:sMasterId userName:sMasterName];
                                [[LyUserManager sharedInstance] addUser:master];
                            }
                            
@@ -1206,7 +1208,7 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
                                    }
                                }
                                
-                               master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                               master = [LyUser userWithId:sMasterId userName:sMasterName];
                                [[LyUserManager sharedInstance] addUser:master];
                            }
                            
@@ -1219,16 +1221,16 @@ static NSString *const lyCoachDetailConsultTableViewCellReuseIdentifier = @"lyCo
                            con.replyCount = sReplyCount.integerValue;
                        }
                        
-                       [self reloadData];
+                       [strongSelf reloadData];
                        
-                       [self.refreshControl endRefreshing];
-                       [self.indicator stopAnimation];
+                       [strongSelf.refreshControl endRefreshing];
+                       [strongSelf.indicator stopAnimation];
                        
                        
                        break;
                    }
                    default: {
-                       [self handleHttpFailed:YES];
+                       [strongSelf handleHttpFailed:YES];
                        break;
                    }
                }

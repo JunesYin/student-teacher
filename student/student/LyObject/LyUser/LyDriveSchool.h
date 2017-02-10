@@ -65,21 +65,26 @@
 @property ( assign, nonatomic)           double          deposit;
 
 
++ (nullable instancetype)userWithId:(nullable NSString *)userId
+                           userName:(nullable NSString *)userName;
+
+- (nullable instancetype)initWithId:(nullable NSString *)userId
+                           userName:(nullable NSString *)userName;
 
 
 
-+ (instancetype)driveSchoolWithIdNoAvatar:(NSString *)userId
-                                 userName:(NSString *)userName;
-
-- (instancetype)initWithIdNoAvatar:(NSString *)userId
-                          userName:(NSString *)userName;
-
-
-+ (instancetype)driveSchoolWithId:(NSString *)dschId
-                         dschName:(NSString *)dschName;
-
-- (instancetype)initWithId:(NSString *)dschId
-                  dschName:(NSString *)dschName;
+//+ (instancetype)driveSchoolWithIdNoAvatar:(NSString *)userId
+//                                 userName:(NSString *)userName;
+//
+//- (instancetype)initWithIdNoAvatar:(NSString *)userId
+//                          userName:(NSString *)userName;
+//
+//
+//+ (instancetype)driveSchoolWithId:(NSString *)dschId
+//                         dschName:(NSString *)dschName;
+//
+//- (instancetype)initWithId:(NSString *)dschId
+//                  dschName:(NSString *)dschName;
 
 
 + (instancetype)driveShcoolWithDschId:(NSString *)dschId

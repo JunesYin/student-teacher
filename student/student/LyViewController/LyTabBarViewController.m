@@ -29,7 +29,6 @@
 
 #import "LyCurrentUser.h"
 
-#import "LySweepViewController.h"
 #import "LyMyQRCodeViewController.h"
 
 #import "LyBottomControl.h"
@@ -69,7 +68,6 @@ lySingle_implementation(LyTabBarViewController)
     
     
     _theoryStudyNavigationController = [[UINavigationController alloc] initWithRootViewController:[LyTheoryStudyViewController sharedInstance]];
-//    _theoryStudyNavigationController.
     
     _coachNavigationController = [[UINavigationController alloc] initWithRootViewController:[LyCoachViewController sharedInstance]];
     
@@ -239,11 +237,11 @@ lySingle_implementation(LyTabBarViewController)
             
         case 202:
         {
-#if DEBUG
+//#if DEBUG
             LyScanQRCodeViewController *sweep = [[LyScanQRCodeViewController alloc] init];
-#else
-            LySweepViewController *sweep = [[LySweepViewController alloc] init];
-#endif
+//#else
+//            LySweepViewController *sweep = [[LySweepViewController alloc] init];
+//#endif
             
             nextVc = sweep;
             needLogin = NO;

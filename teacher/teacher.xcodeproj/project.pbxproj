@@ -61,6 +61,7 @@
 		2F4BC59E1E2F53E900800137 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F4BC5A01E2F53E900800137 /* Localizable.strings */; };
 		2F5269441E16686C0097BA92 /* LyMsgCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5269431E16686C0097BA92 /* LyMsgCenterTableViewController.swift */; };
 		2F5DD2C61E345C340078528F /* LyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5DD2C51E345C340078528F /* LyWebViewController.swift */; };
+		2F68B57F1E4AB65D00D16F28 /* LySweepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F68B57E1E4AB65D00D16F28 /* LySweepViewController.m */; };
 		2F88B5241E1CD88E00CA868A /* LyReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B5231E1CD88E00CA868A /* LyReplyView.swift */; };
 		2FF7C2FE1E1B74680054D1FB /* LySUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7C2FD1E1B74680054D1FB /* LySUtil.swift */; };
 		2FF99F1E1E1E19CC0042B19B /* LyConMsgDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF99F1D1E1E19CC0042B19B /* LyConMsgDetailViewController.swift */; };
@@ -215,7 +216,6 @@
 		9C57824D1DDEE66B0058BEFB /* LyMyQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5782361DDEE66B0058BEFB /* LyMyQRCodeViewController.m */; };
 		9C57824E1DDEE66B0058BEFB /* LyOrderCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5782381DDEE66B0058BEFB /* LyOrderCenterViewController.m */; };
 		9C5782501DDEE66B0058BEFB /* LySettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C57823C1DDEE66B0058BEFB /* LySettingTableViewController.m */; };
-		9C5782521DDEE66B0058BEFB /* LySweepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5782401DDEE66B0058BEFB /* LySweepViewController.m */; };
 		9C5782531DDEE66B0058BEFB /* LyTeachManageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5782421DDEE66B0058BEFB /* LyTeachManageTableViewController.m */; };
 		9C5782541DDEE66B0058BEFB /* LyUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5782441DDEE66B0058BEFB /* LyUserInfoViewController.m */; };
 		9C5BE0CF1DB7712C0074B0FA /* LySendNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5BE0CE1DB7712C0074B0FA /* LySendNewsViewController.m */; };
@@ -444,6 +444,8 @@
 		2F4BC5A11E2F53EB00800137 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2F5269431E16686C0097BA92 /* LyMsgCenterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyMsgCenterTableViewController.swift; sourceTree = "<group>"; };
 		2F5DD2C51E345C340078528F /* LyWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyWebViewController.swift; sourceTree = "<group>"; };
+		2F68B57D1E4AB65D00D16F28 /* LySweepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LySweepViewController.h; sourceTree = "<group>"; };
+		2F68B57E1E4AB65D00D16F28 /* LySweepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LySweepViewController.m; sourceTree = "<group>"; };
 		2F88B5231E1CD88E00CA868A /* LyReplyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyReplyView.swift; sourceTree = "<group>"; };
 		2FF7C2FD1E1B74680054D1FB /* LySUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LySUtil.swift; sourceTree = "<group>"; };
 		2FF99F1D1E1E19CC0042B19B /* LyConMsgDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyConMsgDetailViewController.swift; sourceTree = "<group>"; };
@@ -747,8 +749,6 @@
 		9C5782381DDEE66B0058BEFB /* LyOrderCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyOrderCenterViewController.m; sourceTree = "<group>"; };
 		9C57823B1DDEE66B0058BEFB /* LySettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LySettingTableViewController.h; sourceTree = "<group>"; };
 		9C57823C1DDEE66B0058BEFB /* LySettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LySettingTableViewController.m; sourceTree = "<group>"; };
-		9C57823F1DDEE66B0058BEFB /* LySweepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LySweepViewController.h; sourceTree = "<group>"; };
-		9C5782401DDEE66B0058BEFB /* LySweepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LySweepViewController.m; sourceTree = "<group>"; };
 		9C5782411DDEE66B0058BEFB /* LyTeachManageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyTeachManageTableViewController.h; sourceTree = "<group>"; };
 		9C5782421DDEE66B0058BEFB /* LyTeachManageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyTeachManageTableViewController.m; sourceTree = "<group>"; };
 		9C5782431DDEE66B0058BEFB /* LyUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyUserInfoViewController.h; sourceTree = "<group>"; };
@@ -2029,8 +2029,8 @@
 				9C5782381DDEE66B0058BEFB /* LyOrderCenterViewController.m */,
 				9C57823B1DDEE66B0058BEFB /* LySettingTableViewController.h */,
 				9C57823C1DDEE66B0058BEFB /* LySettingTableViewController.m */,
-				9C57823F1DDEE66B0058BEFB /* LySweepViewController.h */,
-				9C5782401DDEE66B0058BEFB /* LySweepViewController.m */,
+				2F68B57D1E4AB65D00D16F28 /* LySweepViewController.h */,
+				2F68B57E1E4AB65D00D16F28 /* LySweepViewController.m */,
 				9C5782411DDEE66B0058BEFB /* LyTeachManageTableViewController.h */,
 				9C5782421DDEE66B0058BEFB /* LyTeachManageTableViewController.m */,
 				9C5782431DDEE66B0058BEFB /* LyUserInfoViewController.h */,
@@ -2527,7 +2527,6 @@
 				9C44C5591D923BCA00CDB273 /* LyLeftMenuSettingTableViewCell.m in Sources */,
 				9C5EFAA31DCC4E1A002124DE /* SDWebImageManager.m in Sources */,
 				9C4BA4401D61C3BF000F02A7 /* LyUserDetailViewController.m in Sources */,
-				9C5782521DDEE66B0058BEFB /* LySweepViewController.m in Sources */,
 				2F0745171E1B899400E734F4 /* LyEvaMsgTableViewController.swift in Sources */,
 				9C72E90F1DD59306007DE43C /* LyCoachDetailTableViewController.m in Sources */,
 				9C4BA44C1D61C3BF000F02A7 /* LyAutoLoginViewController.m in Sources */,
@@ -2606,6 +2605,7 @@
 				9C78D85D1D93CB4B009EFF5B /* LyOrderStateView.m in Sources */,
 				9C4BA4101D61C3BF000F02A7 /* ZLPhotoPickerBrowserViewController.m in Sources */,
 				9C4BA42B1D61C3BF000F02A7 /* LyUtil.m in Sources */,
+				2F68B57F1E4AB65D00D16F28 /* LySweepViewController.m in Sources */,
 				9C78D8601D93CB4B009EFF5B /* LyShareView.m in Sources */,
 				9C4BA4151D61C3BF000F02A7 /* ZLPhotoAssets.m in Sources */,
 				9C72E90B1DD59306007DE43C /* LyAddCoachViewController.m in Sources */,

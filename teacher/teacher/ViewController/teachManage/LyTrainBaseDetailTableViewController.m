@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, LyTrainBaseDetailHttpMethod) {
 //    UILabel                 *lbStudentCount;
     UILabel                 *lbAddress;
     
-    NSIndexPath             *lastIp;
+    NSIndexPath             *curIdx;
     NSMutableArray          *arrCoaches;
     
     NSArray                 *arrTrainBase;

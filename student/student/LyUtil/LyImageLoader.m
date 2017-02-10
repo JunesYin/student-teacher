@@ -70,6 +70,8 @@ static const NSTimeInterval timeOut = 600.0f;
     NSURL *url = nil;
     switch (imageMode) {
         case LyImageMode_Unknown: {
+            
+            __weak typeof(self) weakSelf = self;
             url = [LyUtil getUserAvatarUrlWithUserId:userId];
             [self loadImageWithUrl:url
                           complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSURL * _Nullable url) {
@@ -77,8 +79,11 @@ static const NSTimeInterval timeOut = 600.0f;
                                   completeHandler(image, error, userId);
                                   
                               } else {
+                                  
+                                  __strong typeof(weakSelf) strongSelf = weakSelf;
+                                  
                                   url = [LyUtil getJpgUserAvatarUrlWithUserId:userId];
-                                  [self loadImageWithUrl:url
+                                  [strongSelf loadImageWithUrl:url
                                                 complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSURL * _Nullable url) {
                                                     completeHandler(image, error, userId);
                                                 }];

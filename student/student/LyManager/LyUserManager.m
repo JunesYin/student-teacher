@@ -36,7 +36,7 @@ lySingle_implementation(LyUserManager)
 
 - (void)addUser:(LyUser *)user {
     
-    if (!user) {// || ![LyUtil validateUserId:user.userId]) {
+    if (!user || !user.userId) {// || ![LyUtil validateUserId:user.userId]) {
         return;
     }
     
@@ -86,7 +86,7 @@ lySingle_implementation(LyUserManager)
             NSString *strUserName = [LyUtil getUserNameWithUserId:userId];
             
             LyUser *user = [LyUser userWithId:userId
-                                     userNmae:strUserName];
+                                     userName:strUserName];
             [self addUser:user];
         });
     }
@@ -96,7 +96,7 @@ lySingle_implementation(LyUserManager)
 - (void)addUserWithUserId:(NSString *)userId andUserName:(NSString *)userName {
 
     LyUser *user = [LyUser userWithId:userId
-                             userNmae:userName];
+                             userName:userName];
     
     [self addUser:user];
 }

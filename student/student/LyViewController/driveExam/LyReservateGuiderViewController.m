@@ -117,8 +117,8 @@ typedef NS_ENUM(NSInteger, LyReservateGuiderHttpMethod) {
         } else {
             strGuiderName = [LyUtil getUserNameWithUserId:_guiderId];
         }
-        guider = [LyGuider guiderWithGuiderId:_guiderId
-                                      guiName:strGuiderName];
+        guider = [LyGuider userWithId:_guiderId
+                                      userName:strGuiderName];
         
         [[LyUserManager sharedInstance] addUser:guider];
     }

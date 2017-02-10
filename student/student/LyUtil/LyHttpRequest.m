@@ -28,7 +28,6 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
 
 @interface LyHttpRequest () <NSURLSessionTaskDelegate>
 {
-    NSMutableData           *receiveData;
 }
 @end
 
@@ -187,6 +186,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                           delegate:self
                                                      delegateQueue:[NSOperationQueue mainQueue]];
+    __weak typeof(_delegate) weakDelegate = _delegate;
     NSURLSessionDataTask *task =  [session dataTaskWithRequest:request
                                              completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                  dispatch_async(dispatch_get_main_queue(), ^{
@@ -199,15 +199,17 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
                                                              completionHandler(strResult, data, nil);
                                                          };
                                                      } else {
+                                                         __strong typeof(weakDelegate) strongDelegate = weakDelegate;
+                                                         
                                                          if ( error) {
                                                              NSLog(@"connection failed---error=%@", error);
-                                                             [_delegate onLyHttpRequestAsynchronousFailed:self];
+                                                             [strongDelegate onLyHttpRequestAsynchronousFailed:self];
                                                          } else {
                                                              NSString *strResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                                              strResult = [strResult stringByReplacingEmojiCheatCodesWithUnicode];
                                                              NSLog(@"httpSuccessed--%@", strResult);
-                                                             [_delegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
-                                                         };
+                                                             [strongDelegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
+                                                         }
                                                      }
                                                  });
                                              }];
@@ -245,6 +247,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                            delegate:self
                                                       delegateQueue:[NSOperationQueue mainQueue]];
+    __weak typeof(_delegate) weakDelegatge = _delegate;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                              completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                  dispatch_async(dispatch_get_main_queue(), ^{
@@ -259,14 +262,16 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
                                                              completionHandler(strResult, data, nil);
                                                          };
                                                      } else {
+                                                         __strong typeof(weakDelegatge) strongDelegate = weakDelegatge;
+                                                         
                                                          if ( error) {
                                                              NSLog(@"connection failed---error=%@", error);
-                                                             [_delegate onLyHttpRequestAsynchronousFailed:self];
+                                                             [strongDelegate onLyHttpRequestAsynchronousFailed:self];
                                                          } else {
                                                              NSString *strResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                                              strResult = [strResult stringByReplacingEmojiCheatCodesWithUnicode];
                                                              NSLog(@"httpSuccessed--%@", strResult);
-                                                             [_delegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
+                                                             [strongDelegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
                                                          };
                                                      }
                                                  });
@@ -378,7 +383,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     //设置HTTPHeader
     [request setValue:content forHTTPHeaderField:@"Content-Type"];
     //设置Content-Length
-    [request setValue:[[NSString alloc] initWithFormat:@"%lu", [myRequestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[[NSString alloc] initWithFormat:@"%lu", myRequestData.length] forHTTPHeaderField:@"Content-Length"];
     //设置http body
     [request setHTTPBody:myRequestData];
     //http method
@@ -390,22 +395,25 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                           delegate:self
                                                      delegateQueue:[NSOperationQueue mainQueue]];
-    
+    __weak typeof(_delegate) weakDelegatge = _delegate;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                              completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                                     
+                                                 
                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                     
+                                                     __strong typeof(weakDelegatge) strongDelegate = weakDelegatge;
+                                                     
                                                      if ( error)
                                                      {
                                                          NSLog(@"connection failed---error=%@", error);
-                                                         [_delegate onLyHttpRequestAsynchronousFailed:self];
+                                                         [strongDelegate onLyHttpRequestAsynchronousFailed:self];
                                                      }
                                                      else
                                                      {
                                                          NSString *strResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                                          strResult = [strResult stringByReplacingEmojiCheatCodesWithUnicode];
                                                          NSLog(@"httpSuccessed--%@", strResult);
-                                                         [_delegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
+                                                         [strongDelegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
                                                      };
                                                  });
                                                                      
@@ -502,7 +510,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     //设置HTTPHeader
     [request setValue:content forHTTPHeaderField:@"Content-Type"];
     //设置Content-Length
-    [request setValue:[[NSString alloc] initWithFormat:@"%lu", [myRequestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[[NSString alloc] initWithFormat:@"%lu", myRequestData.length] forHTTPHeaderField:@"Content-Length"];
     //设置http body
     [request setHTTPBody:myRequestData];
     //http method
@@ -511,18 +519,21 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                            delegate:self
                                                       delegateQueue:[NSOperationQueue mainQueue]];
+    __weak typeof(_delegate) weakDelegatge = _delegate;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                                      
                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                    __strong typeof(weakDelegatge) strongDelegate = weakDelegatge;
+                                                    
                                                     if ( error) {
                                                         NSLog(@"connection failed---error=%@", error);
-                                                        [_delegate onLyHttpRequestAsynchronousFailed:self];
+                                                        [strongDelegate onLyHttpRequestAsynchronousFailed:self];
                                                     } else {
                                                         NSString *strResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                                         strResult = [strResult stringByReplacingEmojiCheatCodesWithUnicode];
                                                         NSLog(@"httpSuccessed--%@", strResult);
-                                                        [_delegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
+                                                        [strongDelegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
                                                     };
                                                 });
                                                                      
@@ -627,7 +638,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     //设置HTTPHeader
     [request setValue:content forHTTPHeaderField:@"Content-Type"];
     //设置Content-Length
-    [request setValue:[[NSString alloc] initWithFormat:@"%lu", [myRequestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[[NSString alloc] initWithFormat:@"%lu", myRequestData.length] forHTTPHeaderField:@"Content-Length"];
     //设置http body
     [request setHTTPBody:myRequestData];
     //http method
@@ -636,10 +647,13 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                           delegate:self
                                                      delegateQueue:[NSOperationQueue mainQueue]];
+    __weak typeof(_delegate) weakDelegatge = _delegate;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                 
                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                    __strong typeof(weakDelegatge) strongDelegate = weakDelegatge;
+                                                    
                                                     if ( error) {
                                                         
                                                         NSLog(@"connection failed---error=%@", error);
@@ -647,7 +661,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
                                                         if (completionHandler) {
                                                             completionHandler(nil, nil, error);
                                                         } else {
-                                                            [_delegate onLyHttpRequestAsynchronousFailed:self];
+                                                            [strongDelegate onLyHttpRequestAsynchronousFailed:self];
                                                         }
                                                         
                                                     } else {
@@ -658,7 +672,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
                                                         if (completionHandler) {
                                                             completionHandler(strResult, data, nil);
                                                         } else {
-                                                            [_delegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
+                                                            [strongDelegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
                                                         }
                                                         
                                                     };
@@ -831,7 +845,7 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     //设置HTTPHeader
     [request setValue:content forHTTPHeaderField:@"Content-Type"];
     //设置Content-Length
-    [request setValue:[[NSString alloc] initWithFormat:@"%lu", [myRequestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[[NSString alloc] initWithFormat:@"%lu", myRequestData.length] forHTTPHeaderField:@"Content-Length"];
     //设置http body
     [request setHTTPBody:myRequestData];
     //http method
@@ -844,18 +858,21 @@ float const LyHttpRequestGetUserNameTimeOunt = 5.0f;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                           delegate:self
                                                      delegateQueue:[NSOperationQueue mainQueue]];
+    __weak typeof(_delegate) weakDelegatge = _delegate;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                 
                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                    __strong typeof(weakDelegatge) strongDelegate = weakDelegatge;
+                                                    
                                                     if ( error) {
                                                         NSLog(@"connection failed---error=%@", error);
-                                                        [_delegate onLyHttpRequestAsynchronousFailed:self];
+                                                        [strongDelegate onLyHttpRequestAsynchronousFailed:self];
                                                     } else {
                                                         NSString *strResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                                         strResult = [strResult stringByReplacingEmojiCheatCodesWithUnicode];
                                                         NSLog(@"httpSuccessed--%@", strResult);
-                                                        [_delegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
+                                                        [strongDelegate onLyHttpRequestAsynchronousSuccessed:self andResult:strResult];
                                                     };
                                                 });
                                                                      

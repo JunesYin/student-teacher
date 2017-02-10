@@ -18,10 +18,15 @@ CGFloat const GEBTNPUSHWIDTH = 120.0f;
 CGFloat const GEBTNPUSHHEIGHTSPACE = 60.0f;
 
 
+CGFloat const geBtnSkipSize = 50;
+
+
 @interface LyGuideViewController () <UIScrollViewDelegate>
 {
     NSMutableDictionary     *geDicImage;
     NSInteger               geImageCount;
+    
+    UIButton        *btnSkip;
     
     UIButton                *geBtnPush;
     NSInteger               geCurrentIndex;
@@ -134,13 +139,22 @@ CGFloat const GEBTNPUSHHEIGHTSPACE = 60.0f;
     [gePageControl setBounds:CGRectMake( 0, 0, sizeGePageControl.width, sizeGePageControl.height)];
     [gePageControl setCenter:CGPointMake( SCREEN_WIDTH/2, SCREEN_HEIGHT-30)];
     gePageControl.pageIndicatorTintColor=[UIColor colorWithRed:193/255.0 green:219/255.0 blue:249/255.0 alpha:1];
-    //设置当前页颜色
+    // set color for cur page
     gePageControl.currentPageIndicatorTintColor=[UIColor colorWithRed:0 green:150/255.0 blue:1 alpha:1];
-    //设置总页数
+    // set count for page
     gePageControl.numberOfPages = geImageCount;
     [self.view addSubview:gePageControl];
     
     
+    // Skip
+    btnSkip = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - geBtnSkipSize - horizontalSpace, horizontalSpace, geBtnSkipSize, geBtnSkipSize)];
+    btnSkip.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.7];
+    btnSkip.layer.cornerRadius = geBtnSkipSize / 2.0;
+    btnSkip.clipsToBounds = YES;
+    [btnSkip setTitle:@"跳过" forState:UIControlStateNormal];
+    [btnSkip addTarget:self action:@selector(actionForBtnSkip) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:btnSkip];
 }
 
 
@@ -162,8 +176,10 @@ CGFloat const GEBTNPUSHHEIGHTSPACE = 60.0f;
     
     if (geCurrentIndex >= geDicImage.count - 1) {
         [gePageControl setHidden:YES];
+        btnSkip.hidden = YES;
     } else {
         [gePageControl setHidden:NO];
+        btnSkip.hidden = NO;
         [gePageControl setCurrentPage:geCurrentIndex];
     }
 }
@@ -175,8 +191,15 @@ CGFloat const GEBTNPUSHHEIGHTSPACE = 60.0f;
     
     if (_delegate && [_delegate respondsToSelector:@selector(onClickButtonStart:)]) {
         [_delegate onClickButtonStart:self];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     
+}
+
+
+- (void)actionForBtnSkip {
+    [self geTargetForBtnPush];
 }
 
 

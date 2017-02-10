@@ -253,8 +253,8 @@ static NSString *lyDriveExamTvCellReuseIdentifier = @"lyDriveExamTvCellReuseIden
                     if (strDschId && [LyUtil validateString:strDschId]) {
                         LyDriveSchool *driveSchool = [[LyUserManager sharedInstance] getDriveSchoolWithDriveSchoolId:strDschId];
                         if ( !driveSchool) {
-                            driveSchool = [LyDriveSchool driveSchoolWithId:strDschId
-                                                                  dschName:strDschName];
+                            driveSchool = [LyDriveSchool userWithId:strDschId
+                                                                  userName:strDschName];
                             [[LyUserManager sharedInstance] addUser:driveSchool];
                         }
                     }
@@ -263,8 +263,8 @@ static NSString *lyDriveExamTvCellReuseIdentifier = @"lyDriveExamTvCellReuseIden
                     if (strCoachId && [LyUtil validateString:strCoachId]) {
                         LyCoach *coach = [[LyUserManager sharedInstance] getCoachWithCoachId:strCoachId];
                         if ( !coach) {
-                            coach = [LyCoach coachWithId:strCoachId
-                                                 coaName:strCoachName];
+                            coach = [LyCoach userWithId:strCoachId
+                                                 userName:strCoachName];
                             [[LyUserManager sharedInstance] addUser:coach];
                             
                         }
@@ -274,8 +274,8 @@ static NSString *lyDriveExamTvCellReuseIdentifier = @"lyDriveExamTvCellReuseIden
                     if (strGuiderId && [LyUtil validateString:strGuiderId]) {
                         LyGuider *guider = [[LyUserManager sharedInstance] getGuiderWithGuiderId:strGuiderId];
                         if ( !guider) {
-                            guider = [LyGuider guiderWithGuiderId:strGuiderId
-                                                          guiName:strGuiderName];
+                            guider = [LyGuider userWithId:strGuiderId
+                                                          userName:strGuiderName];
                             [[LyUserManager sharedInstance] addUser:guider];
                         }
                     }

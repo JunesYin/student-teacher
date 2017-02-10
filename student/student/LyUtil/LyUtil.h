@@ -51,6 +51,9 @@
 #define LyLocalize(key)                                 NSLocalizedString(key, key)
 //#define LyLocalize(key, comment)                        NSLocalizedString(key, comment)
 
+//#define LyWeakObject(object)                            __weak __typeof(object) weakObject = object;
+//#define LyStrongObject(object)                          __strong __typeof(object) strongObject = object;
+
 
 #pragma mark 517主题颜色
 #define Ly517ThemeColor                                 [UIColor colorWithRed:255/255.0 green:90/255.0 blue:0/255.0 alpha:1]

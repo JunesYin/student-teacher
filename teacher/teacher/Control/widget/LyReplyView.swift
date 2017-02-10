@@ -14,6 +14,10 @@ import UIKit
 }
 
 
+fileprivate let repViewContentHeight = CGFloat(70)
+fileprivate let repTvCOntentFont = LySFont(14)
+
+
 @objc(LyReplyView)
 class LyReplyView: UIView, UITextViewDelegate {
 
@@ -25,18 +29,19 @@ class LyReplyView: UIView, UITextViewDelegate {
     }
     */
     
-    let repViewContentHeight = CGFloat(70)
-    let repTvCOntentFont = LySFont(14)
-
+    var delegate: LyReplyViewDelegate?
+    
     
     var btnMask: UIButton!
     
     var viewContent: UIView!
     var tvContent: UITextView!
     
-
     var vcCenter: CGPoint!
-    var delegate: LyReplyViewDelegate?
+    
+    var bHideFlag = false
+    
+    
     
     
     convenience init(delegate: LyReplyViewDelegate) {
@@ -55,7 +60,7 @@ class LyReplyView: UIView, UITextViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal func initSubviews() {
+    func initSubviews() {
         
         btnMask = UIButton(frame: SCREEN_BOUNDS)
         btnMask.backgroundColor = UIColor.clear
@@ -98,19 +103,20 @@ class LyReplyView: UIView, UITextViewDelegate {
         LyUtil.startAnimation(with: btnMask,
                               animationDuration: LyAnimationDuration,
                               initAlpha: 0,
-                              destinationAplhas: 1) { [weak tvContent] (isFinished) in
-                                tvContent?.becomeFirstResponder()
-        }
+                              destinationAplhas: 1,
+                              comletion: nil)
+        
+        tvContent?.perform(#selector(becomeFirstResponder), with: nil, afterDelay: LyAnimationDuration - 0.2)
     }
     
     
     public func show() {
         showInView(UIApplication.shared.keyWindow!)
-        
     }
     
     public func hide() {
-        tvContent.resignFirstResponder()
+        bHideFlag = true
+        tvContent?.resignFirstResponder()
         
         removeObserverForKeyboard()
         
@@ -119,14 +125,12 @@ class LyReplyView: UIView, UITextViewDelegate {
                               initialPoint: CGPoint(x: vcCenter.x, y: vcCenter.y),
                               destinationPoint: CGPoint(x: vcCenter.x, y: vcCenter.y + repViewContentHeight),
                               completion: nil)
-        
         LyUtil.startAnimation(with: btnMask,
                               animationDuration: LyAnimationDuration,
                               initAlpha: 1,
-                              destinationAplhas: 0) { (isFinished) in
+                              destinationAplhas: 0) { [unowned self] _ in
                                 self.removeFromSuperview()
         }
-
     }
     
     
@@ -171,7 +175,9 @@ class LyReplyView: UIView, UITextViewDelegate {
     
     // MARK: - UIKeyboardWillHide
     internal func actionForKeyboardWillHide(_ notification: Notification) {
-        hide()
+        if !bHideFlag {
+            hide()
+        }
     }
     
     

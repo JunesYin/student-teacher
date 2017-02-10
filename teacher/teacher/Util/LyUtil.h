@@ -718,6 +718,7 @@ lySingle_interface
 + (__kindof NSArray *)sortArrByDate:(__kindof NSArray *)arr andKey:(NSString *)key asc:(BOOL)asc;
 //+ (__kindof NSArray *)sortTeacherArr:(__kindof NSArray *)arr sortMode:(LySortMode)sortMode;
 + (__kindof NSArray *)sortArrByStr:(__kindof NSArray *)arr andKey:(NSString *)key;
++ (__kindof NSArray *)sortArrByStr:(__kindof NSArray *)arr andKey:(NSString *)key asc:(BOOL)asc;
 
 
 #pragma mark 唯一化并排序

@@ -185,7 +185,7 @@ CGFloat const tvReplyHeight = 10.0f;
     {
         NSString *strName = [LyUtil getUserNameWithUserId:[_aboutMe amMasterId]];
         master = [LyUser userWithId:[_aboutMe amMasterId]
-                           userNmae:strName];
+                           userName:strName];
         
         [[LyUserManager sharedInstance] addUser:master];
     }
@@ -195,7 +195,7 @@ CGFloat const tvReplyHeight = 10.0f;
     {
         NSString *strName = [LyUtil getUserNameWithUserId:[_aboutMe amObjectId]];
         object = [LyUser userWithId:[_aboutMe amObjectId]
-                           userNmae:strName];
+                           userName:strName];
         
         [[LyUserManager sharedInstance] addUser:object];
     }
@@ -206,7 +206,7 @@ CGFloat const tvReplyHeight = 10.0f;
     if ( !statusMaster) {
         NSString *strName = [LyUtil getUserNameWithUserId:news.newsMasterId];
         statusMaster = [LyUser userWithId:news.newsMasterId
-                                 userNmae:strName];
+                                 userName:strName];
         
         [[LyUserManager sharedInstance] addUser:statusMaster];
     }

@@ -18,10 +18,14 @@ CGFloat const btnPushHeight = 40.0f;
 
 CGFloat const btnPushBottomSpace = 60.0f;
 
+CGFloat const geBtnSkipSize = 50;
+
 
 @interface LyGuideViewController () <UIScrollViewDelegate>
 {
     NSMutableDictionary     *geDicImage;
+    
+    UIButton        *btnSkip;
     
     UIButton                *geBtnPush;
     NSInteger               geCurrentIndex;
@@ -119,6 +123,17 @@ CGFloat const btnPushBottomSpace = 60.0f;
     _gePageControl.numberOfPages = geDicImage.count;
     [self.view addSubview:_gePageControl];
     
+    
+    // Skip
+    btnSkip = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - geBtnSkipSize - horizontalSpace, horizontalSpace, geBtnSkipSize, geBtnSkipSize)];
+    btnSkip.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.7];
+    btnSkip.layer.cornerRadius = geBtnSkipSize / 2.0;
+    btnSkip.clipsToBounds = YES;
+    [btnSkip setTitle:@"跳过" forState:UIControlStateNormal];
+    [btnSkip addTarget:self action:@selector(actionForBtnSkip) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:btnSkip];
+    
 }
 
 
@@ -144,8 +159,10 @@ CGFloat const btnPushBottomSpace = 60.0f;
     
     if (geCurrentIndex >= geDicImage.count - 1) {
         [_gePageControl setHidden:YES];
+        btnSkip.hidden = YES;
     } else {
         [_gePageControl setHidden:NO];
+        btnSkip.hidden = NO;
         [_gePageControl setCurrentPage:geCurrentIndex];
     }
 }
@@ -161,6 +178,10 @@ CGFloat const btnPushBottomSpace = 60.0f;
     }
 }
 
+
+- (void)actionForBtnSkip {
+    [self geTargetForBtnPush];
+}
 
 
 - (void)didReceiveMemoryWarning {

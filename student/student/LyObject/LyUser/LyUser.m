@@ -25,7 +25,7 @@
 
 
 + (instancetype)userWithId:(NSString *)userId
-                  userNmae:(NSString *)userName
+                  userName:(NSString *)userName
 {
     LyUser *tmpUser = [[LyUser alloc] initWithId:userId
                                         userName:userName];

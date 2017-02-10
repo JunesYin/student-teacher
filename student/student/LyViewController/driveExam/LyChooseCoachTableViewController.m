@@ -283,8 +283,7 @@ static NSString *const lyChooseCoachTableViewCellReuseIdentifier = @"lyChooseCoa
                         
                         
                         if ([LyUtil validateString:strId]) {
-                            LyCoach *coach = [LyCoach coachWithIdNoAvatar:strId
-                                                                     name:strName];
+                            LyCoach *coach = [LyCoach userWithId:strId userName:strName];
                             if ( !arrCoach) {
                                 arrCoach = [[NSMutableArray alloc] initWithCapacity:1];
                             }

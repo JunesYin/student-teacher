@@ -32,7 +32,7 @@ fileprivate let sqBtnMarginY = (sqViewBarHeight - sqBtnHeight) / 2.0
 
 
 
-fileprivate let sqScanGridAnimationKey = "LyScanGrid"
+fileprivate let sqScanGridAnimationKey = "LyScanGridAnimationKey"
 fileprivate let sqScanGridKeyPath = "transform.translation.y"
 fileprivate let sqScanAnimationDuration: TimeInterval = 1.5
 
@@ -135,7 +135,6 @@ class LyScanQRCodeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         initSubviews()
-        
     }
     
     func initSubviews() {
@@ -359,6 +358,45 @@ class LyScanQRCodeViewController: UIViewController {
                                 switch iCode {
                                 case 0:
                                     
+                                    let dicResult: Dictionary! = json[resultKey].dictionaryValue
+                                    guard nil != dicResult && !dicResult.isEmpty else {
+                                        self.handleHttpFailed(true)
+                                        return
+                                    }
+                                    
+                                    let sUserType = dicResult[userTypeKey]?.stringValue
+                                    let sNickName = dicResult[nickNameKey]?.stringValue
+                                    let sSignature = dicResult[signatureKey]?.stringValue
+                                    
+                                    var sSex: String? = nil
+                                    var sBirthday: String? = nil
+                                    
+                                    var user: LyUser! = nil
+                                    
+                                    let iUserType = LyUtil.userType(from: sUserType)
+                                    switch iUserType {
+                                    case .normal:
+                                        user = LyUser(id: self.userId, userName: sNickName)
+                                    case .coach:
+                                        user = LyCoach(id: self.userId, userName: sNickName)
+                                    case .school:
+                                        user = LyDriveSchool(id: self.userId, userName: sNickName)
+                                    case .guider:
+                                        user = LyGuider(id: self.userId, userName: sNickName)
+                                    }
+                                    
+                                    
+                                    user.userSignature = sSignature
+                                    if .school != iUserType {
+                                        sSex = dicResult[sexKey]?.stringValue
+                                        sBirthday = dicResult[birthdayKey]?.string
+                                        
+                                        user.userSex = LySex(rawValue: Int(sSex!)!)!
+                                        user.userBirthday = sBirthday
+                                    }
+                                    
+                                    LyUserManager.sharedInstance().add(user)
+                                    
                                     indicator?.stopAnimation()
                                     
                                     let userDetail = LyUserDetailViewController()
@@ -399,9 +437,18 @@ extension LyScanQRCodeViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(actionForNotification_AppDidBecomeActive), name: NSNotification.Name(rawValue: LyAppDidBecomeActive), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(actionForNotification_AppDidEnterBackgroud), name: NSNotification.Name(rawValue: LyAppDidEnterBackground), object: nil)
+        
         indicator.title = ""
         indicator.startAnimation()
     }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -465,3 +512,18 @@ extension LyScanQRCodeViewController: LyUserDetailDelegate {
         return userId
     }
 }
+
+
+// MARK: - Notification
+extension LyScanQRCodeViewController {
+    func actionForNotification_AppDidBecomeActive() {
+        startScan()
+    }
+    
+    func actionForNotification_AppDidEnterBackgroud() {
+        scanGrid.layer.removeAllAnimations()
+        scanSession?.stopRunning()
+    }
+}
+
+

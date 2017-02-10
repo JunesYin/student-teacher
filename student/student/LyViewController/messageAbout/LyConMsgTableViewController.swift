@@ -198,11 +198,14 @@ extension LyConMsgTableViewController {
                                                 case .normal:
                                                     break
                                                 case .school:
-                                                    teacher = LyDriveSchool(idNoAvatar: sMasterId, userName: sNickName)
+//                                                    teacher = LyDriveSchool(idNoAvatar: sMasterId, userName: sNickName)
+                                                    teacher = LyDriveSchool(id: sMasterId, userName: sNickName)
                                                 case .coach:
-                                                    teacher = LyCoach(idNoAvatar: sMasterId, name: sNickName)
+                                                    //                                                    teacher = LyCoach(idNoAvatar: sMasterId, name: sNickName)
+                                                    teacher = LyCoach(id: sMasterId, userName: sNickName)
                                                 case .guider:
-                                                    teacher = LyGuider(idNoAvatar: sMasterId, userName: sNickName)
+                                                    //                                                    teacher = LyGuider(idNoAvatar: sMasterId, userName: sNickName)
+                                                    teacher = LyGuider(id: sMasterId, userName: sNickName)
                                                 }
                                                 
                                                 LyUserManager.sharedInstance().add(teacher)
@@ -326,11 +329,14 @@ extension LyConMsgTableViewController {
                                                 case .normal:
                                                     break
                                                 case .school:
-                                                    teacher = LyDriveSchool(idNoAvatar: sMasterId, userName: sNickName)
+                                                    //                                                    teacher = LyDriveSchool(idNoAvatar: sMasterId, userName: sNickName)
+                                                    teacher = LyDriveSchool(id: sMasterId, userName: sNickName)
                                                 case .coach:
-                                                    teacher = LyCoach(idNoAvatar: sMasterId, name: sNickName)
+                                                    //                                                    teacher = LyCoach(idNoAvatar: sMasterId, name: sNickName)
+                                                    teacher = LyCoach(id: sMasterId, userName: sNickName)
                                                 case .guider:
-                                                    teacher = LyGuider(idNoAvatar: sMasterId, userName: sNickName)
+                                                    //                                                    teacher = LyGuider(idNoAvatar: sMasterId, userName: sNickName)
+                                                    teacher = LyGuider(id: sMasterId, userName: sNickName)
                                                 }
                                                 
                                                 LyUserManager.sharedInstance().add(teacher)
@@ -466,9 +472,10 @@ extension LyConMsgTableViewController {
 // MARK: - LyReplyViewDelegate
 extension LyConMsgTableViewController {
     func sendByReplyView(_ aReplyView: LyReplyView, text: String) {
+        let sText = text
         aReplyView.hide()
         
-        _ = perform(#selector(LyConMsgTableViewController.reply), with: text, afterDelay: LyDelayTime)
+        _ = perform(#selector(reply(_:)), with: sText, afterDelay: LyDelayTime)
     }
 }
 

@@ -35,60 +35,79 @@
 @synthesize stuAllCount = _stuAllCount;
 
 
-+ (instancetype)guiderWithIdNoAvatar:(NSString *)userId
-                            userName:(NSString *)userName
++ (instancetype)userWithId:(NSString *)userId userName:(NSString *)userName
 {
-    LyGuider *guider = [[LyGuider alloc] initWithIdNoAvatar:userId
-                                                   userName:userName];
+    LyGuider *guider = [[LyGuider alloc] initWithId:userId userName:userName];
     
     return guider;
 }
 
-- (instancetype)initWithIdNoAvatar:(NSString *)userId
-                          userName:(NSString *)userName
+- (instancetype)initWithId:(NSString *)userId userName:(NSString *)userName
 {
-    if (self = [super init]) {
+    if (self = [super initWithId:userId userName:userName]) {
         _userId = userId;
         _userName = userName;
+        _userType = LyUserType_guider;
     }
-    
-    _userType = LyUserType_guider;
     
     return self;
 }
 
 
-+ (instancetype)guiderWithGuiderId:(NSString *)guiId
-                           guiName:(NSString *)guiName
-{
-    LyGuider *tmpGuider = [[LyGuider alloc] initWithGuiderId:guiId
-                                                     guiName:guiName];
-    
-    return tmpGuider;
-}
-
-- (instancetype)initWithGuiderId:(NSString *)guiId
-                         guiName:(NSString *)guiName
-{
-    if ( self = [super init])
-    {
-        _userId = guiId;
-        _userName = guiName;
-        
-        [LyImageLoader loadAvatarWithUserId:_userId
-                                   complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSString * _Nullable userId) {
-                                       if (!image) {
-                                           image = [LyUtil defaultAvatarForTeacher];
-                                       }
-                                       _userAvatar = image;
-                                   }];
-    }
-    
-    _userType = LyUserType_guider;
-    _distance = MAXFLOAT;
-    
-    return self;
-}
+//+ (instancetype)guiderWithIdNoAvatar:(NSString *)userId
+//                            userName:(NSString *)userName
+//{
+//    LyGuider *guider = [[LyGuider alloc] initWithIdNoAvatar:userId
+//                                                   userName:userName];
+//    
+//    return guider;
+//}
+//
+//- (instancetype)initWithIdNoAvatar:(NSString *)userId
+//                          userName:(NSString *)userName
+//{
+//    if (self = [super init]) {
+//        _userId = userId;
+//        _userName = userName;
+//    }
+//    
+//    _userType = LyUserType_guider;
+//    
+//    return self;
+//}
+//
+//
+//+ (instancetype)guiderWithGuiderId:(NSString *)guiId
+//                           guiName:(NSString *)guiName
+//{
+//    LyGuider *tmpGuider = [[LyGuider alloc] initWithGuiderId:guiId
+//                                                     guiName:guiName];
+//    
+//    return tmpGuider;
+//}
+//
+//- (instancetype)initWithGuiderId:(NSString *)guiId
+//                         guiName:(NSString *)guiName
+//{
+//    if ( self = [super init])
+//    {
+//        _userId = guiId;
+//        _userName = guiName;
+//        
+//        [LyImageLoader loadAvatarWithUserId:_userId
+//                                   complete:^(UIImage * _Nullable image, NSError * _Nullable error, NSString * _Nullable userId) {
+//                                       if (!image) {
+//                                           image = [LyUtil defaultAvatarForTeacher];
+//                                       }
+//                                       _userAvatar = image;
+//                                   }];
+//    }
+//    
+//    _userType = LyUserType_guider;
+//    _distance = MAXFLOAT;
+//    
+//    return self;
+//}
 
 
 

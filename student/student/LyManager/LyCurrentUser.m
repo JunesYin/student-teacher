@@ -95,7 +95,7 @@
     LyUser *user = [[LyUserManager sharedInstance] getUserWithUserId:_userId];
     if (!user) {
         user = [LyUser userWithId:_userId
-                         userNmae:_userName];
+                         userName:_userName];
         
         [[LyUserManager sharedInstance] addUser:user];
     }
@@ -111,7 +111,7 @@
     LyUser *user = [[LyUserManager sharedInstance] getUserWithUserId:_userId];
     if (!user) {
         user = [LyUser userWithId:_userId
-                         userNmae:_userName];
+                         userName:_userName];
         
         [[LyUserManager sharedInstance] addUser:user];
     }

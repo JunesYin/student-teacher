@@ -161,27 +161,31 @@ lySingle_implementation(LyActivity)
         return;
     }
     
-    LyHttpRequest *hr = [[LyHttpRequest alloc] init];
-    [hr startHttpRequest:activityCount_url
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [LyHttpRequest startHttpRequest:activityCount_url
              body:nil
              type:LyHttpType_asynPost
                  timeOut:0
        completionHandler:^(NSString *resStr, NSData *resData, NSError *error) {
+           __strong typeof(weakSelf) strongSelf = weakSelf;
+           
            if (error) {
                
            } else {
-               NSDictionary *dic = [self analysisHttpResult:resStr];
+               NSDictionary *dic = [strongSelf analysisHttpResult:resStr];
                if (!dic) {
-                   [self handleHttpFailed];
+                   [strongSelf handleHttpFailed];
                }
                
                NSString *strCount = [[NSString alloc] initWithFormat:@"%@", [dic objectForKey:resultKey]];
                if (![LyUtil validateString:strCount]) {
-                   [self handleHttpFailed];
+                   [strongSelf handleHttpFailed];
                }
                
                _count = strCount.integerValue;
-               [self loadData:_count];
+               [strongSelf loadData:_count];
            }
        }];
 }

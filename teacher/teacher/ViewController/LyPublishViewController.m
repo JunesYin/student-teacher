@@ -200,7 +200,7 @@ typedef NS_ENUM(NSInteger, LyPublishHttpMethod)
     NSString                        *curPickRange;
     NSString                        *curSynopsis;
     
-    NSIndexPath                     *lastIp_tc;
+    NSIndexPath                     *curIdx_tc;
     UIView                          *viewError;
     
     
@@ -1054,7 +1054,7 @@ static NSString *const publishCvEnvrionmentCellReuseIdentifier = @"publishCvEnvr
     [hr setDelegate:self];
     bHttpFlag = [[hr startHttpRequest:deleteTrainClass_url
                                  body:@{
-                                        trainClassIdKey:[[arrTrainClass objectAtIndex:lastIp_tc.row] tcId],
+                                        trainClassIdKey:[[arrTrainClass objectAtIndex:curIdx_tc.row] tcId],
                                         userIdKey:[LyCurrentUser curUser].userId,
                                         sessionIdKey:[LyUtil httpSessionId],
                                         userTypeKey:[[LyCurrentUser curUser] userTypeByString]
@@ -1538,7 +1538,7 @@ static NSString *const publishCvEnvrionmentCellReuseIdentifier = @"publishCvEnvr
             switch ([strCode integerValue]) {
                 case 0: {
                     
-                    [[LyTrainClassManager sharedInstance] removeTrainClassWithId:[[arrTrainClass objectAtIndex:lastIp_tc.row] tcId]];
+                    [[LyTrainClassManager sharedInstance] removeTrainClassWithId:[[arrTrainClass objectAtIndex:curIdx_tc.row] tcId]];
                     arrTrainClass = [[LyTrainClassManager sharedInstance] getTrainClassWithTeacherId:[LyCurrentUser curUser].userId];
                     [tvTrainClass reloadData];
                     
@@ -1741,7 +1741,7 @@ static NSString *const publishCvEnvrionmentCellReuseIdentifier = @"publishCvEnvr
 #pragma mark -LyTrainClassTableViewCellDeleagte
 - (void)onClickBtnDelete:(LyTrainClassTableViewCell *)aTrainClassCell
 {
-    lastIp_tc = [tvTrainClass indexPathForCell:aTrainClassCell];
+    curIdx_tc = [tvTrainClass indexPathForCell:aTrainClassCell];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除课程"
                                                                    message:[[NSString alloc] initWithFormat:@"确定要删除「%@」课程吗？", aTrainClassCell.trainClass.tcName]
@@ -1772,7 +1772,7 @@ static NSString *const publishCvEnvrionmentCellReuseIdentifier = @"publishCvEnvr
 #pragma mark -LyTrainClassDetailTableViewControllerDelegate
 - (LyTrainClass *)obtainTrainClassByTrainClassDetailTVC:(LyTrainClassDetailTableViewController *)aTrainClassDetailTVC
 {
-    return [[tvTrainClass cellForRowAtIndexPath:lastIp_tc] trainClass];
+    return [[tvTrainClass cellForRowAtIndexPath:curIdx_tc] trainClass];
 }
 
 - (void)onDeleteByTrainClassByTrainClassDetailTVC:(LyTrainClassDetailTableViewController *)aTrainClassDetailTVC {
@@ -2023,7 +2023,7 @@ static NSString *const publishCvEnvrionmentCellReuseIdentifier = @"publishCvEnvr
 
 #pragma mark -UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    lastIp_tc = indexPath;
+    curIdx_tc = indexPath;
     
     if (tableView == tvTrainClass) {
         LyTrainClassDetailTableViewController *tcd = [[LyTrainClassDetailTableViewController alloc] init];

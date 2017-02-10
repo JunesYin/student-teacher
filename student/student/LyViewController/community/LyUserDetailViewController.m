@@ -22,13 +22,11 @@
 #import "UIScrollView+LyExtension.h"
 #import "LyUtil.h"
 
+#import "student-Swift.h"
 
 #import "LyLoginViewController.h"
 #import "LyNewsDetailViewController.h"
 #import "LyEvaluateNewsViewController.h"
-
-
-#import "LySweepViewController.h"
 
 #import "UIViewController+backButtonHandler.h"
 
@@ -616,7 +614,7 @@ NSString *const lyUserDetailStatusTableViewCellReuseIdentifier = @"lyUserDetailS
     
     LyHttpRequest *httpRequest = [LyHttpRequest httpRequestWithMode:userDetailHttpMethod_transmit];
     [httpRequest setDelegate:self];
-    bHttpFlag = [httpRequest startHttpRequest:statusTransmit_url
+    bHttpFlag = [[httpRequest startHttpRequest:statusTransmit_url
                                          body:@{
                                                 newsIdKey:news.newsId,
                                                 objectIdKey:news.newsMasterId,
@@ -627,7 +625,7 @@ NSString *const lyUserDetailStatusTableViewCellReuseIdentifier = @"lyUserDetailS
                                                 userTypeKey:[[LyCurrentUser curUser] userTypeByString],
                                                 }
                                          type:LyHttpType_asynPost
-                                      timeOut:0];
+                                      timeOut:0] boolValue];
 }
 
 
@@ -718,10 +716,14 @@ NSString *const lyUserDetailStatusTableViewCellReuseIdentifier = @"lyUserDetailS
                     NSString *strFlag = [dicResult objectForKey:flagKey];
                     [controlBar setAttentionStatus:[strFlag boolValue]];
                     
-                    if ( !user)
+                    if (!user)
                     {
+                        if (![LyUtil validateString:strNickName]) {
+                            strNickName = [LyUtil getUserNameWithUserId:_userId];
+                        }
+                        
                         user = [LyUser userWithId:_userId
-                                         userNmae:strNickName];
+                                         userName:strNickName];
                         
                         [[LyUserManager sharedInstance] addUser:user];
                     }
@@ -1157,7 +1159,14 @@ NSString *const lyUserDetailStatusTableViewCellReuseIdentifier = @"lyUserDetailS
 }
 
 - (void)needRefresh:(LyNewsTableViewCell *)aCell {
-    [tvNews reloadRowsAtIndexPaths:@[[tvNews indexPathForCell:aCell]] withRowAnimation:UITableViewRowAnimationNone];
+//    [tvNews reloadRowsAtIndexPaths:@[[tvNews indexPathForCell:aCell]] withRowAnimation:UITableViewRowAnimationNone];
+//    NSIndexPath *indexPath = [tvNews indexPathForCell:aCell];
+//    if (indexPath) {
+//        [tvNews reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    }
+    
+    [tvNews reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[arrNews indexOfObject:aCell.news] inSection:0]]
+                  withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
@@ -1176,22 +1185,21 @@ NSString *const lyUserDetailStatusTableViewCellReuseIdentifier = @"lyUserDetailS
 
 
 
-#pragma mark -BackButtonHandlerProtocol
-- (BOOL)navigationShouldPopOnBackButton
-{
-    if ( [_delegate isKindOfClass:[LySweepViewController class]])
-    {
-        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [self.navigationController.navigationBar setShadowImage:nil];
-        
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-    
-    
-    return YES;
-}
+//#pragma mark -BackButtonHandlerProtocol
+//- (BOOL)navigationShouldPopOnBackButton
+//{
+//    if ( [_delegate isKindOfClass:[LyScanQRCodeViewController class]])
+//    {
+//        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setShadowImage:nil];
+//        
+//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//        
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    }
+//    
+//    return YES;
+//}
 
 
 #pragma mark -UITableViewDelegate

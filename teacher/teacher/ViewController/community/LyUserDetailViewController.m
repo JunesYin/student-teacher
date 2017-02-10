@@ -712,7 +712,11 @@ NSString *const lyUserDetailStatusTableViewCellReuseIdentifier = @"lyUserDetailS
                     NSString *strFlag = [dicResult objectForKey:flagKey];
                     [controlBar setAttentionStatus:[strFlag boolValue]];
                     
-                    if ( !user) {
+                    if (!user) {
+                        if (![LyUtil validateString:strNickName]) {
+                            strNickName = [LyUtil getUserNameWithUserId:_userId];
+                        }
+                        
                         user = [LyUser userWithId:_userId
                                          userNmae:strNickName];
                         

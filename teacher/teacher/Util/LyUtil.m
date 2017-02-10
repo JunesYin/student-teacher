@@ -1184,16 +1184,55 @@ NSData* getDataFromHexString(NSString *strSour)
 + (__kindof NSArray *)sortArrByStr:(__kindof NSArray *)arr andKey:(NSString *)key
 {
     if (!arr || arr.count < 1) {
-        return nil;
+        return arr;
     }
     
     if ([arr isKindOfClass:[NSMutableArray class]]) {
+        
         [arr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+            if ([arr[0] isKindOfClass:[NSObject class]]) {
+                return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+            } else {
+                return obj1 > obj2;
+            }
         }];
+        
     } else {
         arr = [arr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+            if ([arr[0] isKindOfClass:[NSObject class]]) {
+                return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+            } else {
+                return obj1 > obj2;
+            }
+        }];
+    }
+    
+    return arr;
+}
+
++ (__kindof NSArray *)sortArrByStr:(__kindof NSArray *)arr andKey:(NSString *)key asc:(BOOL)asc
+{
+    if (!arr || arr.count < 1) {
+        return arr;
+    }
+    
+    if ([arr isKindOfClass:[NSMutableArray class]]) {
+        
+        [arr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            if (asc) {
+                return [[obj1 valueForKey:key] compare:[obj2 valueForKey:key] options:NSCaseInsensitiveSearch];
+            } else {
+                return [[obj2 valueForKey:key] compare:[obj1 valueForKey:key] options:NSCaseInsensitiveSearch];
+            }
+        }];
+        
+    } else {
+        arr = [arr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            if (asc) {
+                return [[obj1 valueForKey:key] compare:[obj2 valueForKey:key] options:NSCaseInsensitiveSearch];
+            } else {
+                return [[obj2 valueForKey:key] compare:[obj1 valueForKey:key] options:NSCaseInsensitiveSearch];
+            }
         }];
     }
     
@@ -2901,8 +2940,6 @@ NSData* getDataFromHexString(NSString *strSour)
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    
-    
     return image;
 }
 
@@ -2917,7 +2954,6 @@ NSData* getDataFromHexString(NSString *strSour)
     
     //    [target presentViewController:nav animated:YES completion:nil];
     [target.navigationController pushViewController:web animated:YES];
-    
 }
 
 

@@ -253,6 +253,8 @@ static NSString *const lyConsultDetailTableViewCellReuseIdentifier = @"lyConsult
     
     [self.indicator startAnimation];
     
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(arrRep) weakArrRep = arrRep;
     [LyHttpRequest startHttpRequest:consultDetail_url
                                body:@{
                                       idKey: _con.oId,
@@ -261,14 +263,18 @@ static NSString *const lyConsultDetailTableViewCellReuseIdentifier = @"lyConsult
                                type:LyHttpType_asynPost
                             timeOut:0
                   completionHandler:^(NSString *resStr, NSData *resData, NSError *error) {
+                      __strong typeof(weakSelf) strongSelf = weakSelf;
+                      __strong typeof(weakArrRep) strongArrRep = weakArrRep;
+                      
+                      
                       if (error) {
-                          [self handleHttpFailed:YES];
+                          [strongSelf handleHttpFailed:YES];
                           return ;
                       }
                       
                       NSDictionary *dic = [LyUtil analysisHttpResult:resStr delegate:self];
                       if (!dic) {
-                          [self handleHttpFailed:YES];
+                          [strongSelf handleHttpFailed:YES];
                           return ;
                       }
                       
@@ -295,14 +301,14 @@ static NSString *const lyConsultDetailTableViewCellReuseIdentifier = @"lyConsult
                                                                time:sTime
                                                          objectRpId:nil];
                               
-                              [arrRep addObject:reply];
+                              [strongArrRep addObject:reply];
                           }
                       }
                       
-                      [self reloadData];
+                      [strongSelf reloadData];
                       
-                      [self.indicator stopAnimation];
-                      [self.refreshControl endRefreshing];
+                      [strongSelf.indicator stopAnimation];
+                      [strongSelf.refreshControl endRefreshing];
                   }];
     
 }

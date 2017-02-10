@@ -404,7 +404,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                         if ( !master) {
                             NSString *strName = [LyUtil getUserNameWithUserId:strMasterId];
                             master = [LyUser userWithId:strMasterId
-                                               userNmae:strName];
+                                               userName:strName];
                             [[LyUserManager sharedInstance] addUser:master];
                         }
                         
@@ -413,7 +413,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                         if ( !objectUser) {
                             NSString *strName = [LyUtil getUserNameWithUserId:strObjectId];
                             objectUser = [LyUser userWithId:strObjectId
-                                                   userNmae:strName];
+                                                   userName:strName];
                             [[LyUserManager sharedInstance] addUser:objectUser];
                         }
                         
@@ -427,7 +427,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                                 NSString *strNewsMasterName = [LyUtil getUserNameWithUserId:strNewsMasterId];
                                 
                                 newsMaster = [LyUser userWithId:strNewsMasterId
-                                                 userNmae:strNewsMasterName];
+                                                 userName:strNewsMasterName];
                                 [[LyUserManager sharedInstance] addUser:newsMaster];
                             }
                         }
@@ -581,7 +581,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                                 NSString *strNewsMasterName = [LyUtil getUserNameWithUserId:strNewsMasterId];
                                 
                                 user = [LyUser userWithId:strNewsMasterId
-                                                 userNmae:strNewsMasterName];
+                                                 userName:strNewsMasterName];
                                 [[LyUserManager sharedInstance] addUser:user];
                             }
                         }
@@ -634,7 +634,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                         if ( !master) {
                             NSString *strName = [LyUtil getUserNameWithUserId:strMasterId];
                             master = [LyUser userWithId:strMasterId
-                                               userNmae:strName];
+                                               userName:strName];
                             [[LyUserManager sharedInstance] addUser:master];
                         }
                         
@@ -642,7 +642,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                         if ( !objectUser) {
                             NSString *strName = [LyUtil getUserNameWithUserId:strObjectId];
                             objectUser = [LyUser userWithId:strObjectId
-                                                   userNmae:strName];
+                                                   userName:strName];
                             [[LyUserManager sharedInstance] addUser:objectUser];
                         }
                         
@@ -716,7 +716,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                     {
                         NSString *strName = [LyUtil getUserNameWithUserId:strMasterId];
                         master = [LyUser userWithId:strMasterId
-                                           userNmae:strName];
+                                           userName:strName];
                         [[LyUserManager sharedInstance] addUser:master];
                     }
                     
@@ -724,7 +724,7 @@ typedef NS_ENUM( NSInteger, LyAboutMeHttpMethod)
                     if ( !objectUser) {
                         NSString *strName = [LyUtil getUserNameWithUserId:strObjectId];
                         objectUser = [LyUser userWithId:strObjectId
-                                               userNmae:strName];
+                                               userName:strName];
                         [[LyUserManager sharedInstance] addUser:objectUser];
                     }
                     

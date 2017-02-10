@@ -119,15 +119,19 @@
     }
     _reply = reply;
     
-    
-    NSMutableAttributedString *strText;
 
     NSString *strMasterName = [[LyUserManager sharedInstance] getUserNameWithId:[_reply masterId]];
     NSString *strObjectName = [[LyUserManager sharedInstance] getUserNameWithId:[_reply objectId]];
+//    NSString *strTextTmp = [[NSString alloc] initWithFormat:@"%@回复%@：%@", strMasterName, strObjectName, [_reply content]];
     NSString *strTextTmp = [[NSString alloc] initWithFormat:@"%@回复%@：%@", strMasterName, strObjectName, [_reply content]];
+    NSMutableAttributedString *strText = [[NSMutableAttributedString alloc] initWithString:strTextTmp];
+#if DEBUG
+    NSString *time = [LyUtil translateTime:_reply.time];
+    strTextTmp = [[NSString alloc] initWithFormat:@"%@回复%@ %@：%@", strMasterName, strObjectName, time, [_reply content]];
     strText = [[NSMutableAttributedString alloc] initWithString:strTextTmp];
-//    [strText addAttribute:NSForegroundColorAttributeName value:Ly517ThemeColor range:[strTextTmp rangeOfString:strMasterName]];
-//    [strText addAttribute:NSForegroundColorAttributeName value:Ly517ThemeColor range:[strTextTmp rangeOfString:strObjectName]];
+    [strText addAttribute:NSForegroundColorAttributeName value:LyGreenColor range:[strTextTmp rangeOfString:[LyUtil translateTime:_reply.time]]];
+#endif
+    
     if ([strMasterName isEqualToString:strObjectName])
     {
         [strText addAttribute:NSForegroundColorAttributeName value:Ly517ThemeColor range:[strTextTmp rangeOfString:strMasterName]];
@@ -139,6 +143,9 @@
         [strText addAttribute:NSForegroundColorAttributeName value:Ly517ThemeColor range:[strTextTmp rangeOfString:strObjectName]];
     }
 
+    
+    
+    
     
     [lbContent setAttributedText:strText];
     CGFloat fHeightLb = [lbContent sizeThatFits:CGSizeMake(rcellWidth, 100.0f)].height;

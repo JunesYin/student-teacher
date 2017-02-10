@@ -141,6 +141,8 @@ static NSString *lyPriceDetailObjectThirdTableViewCellReuseIdentifier = @"lyPric
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    _curLicense = [LyCurrentUser curUser].userLicense;
+    
     arrPriceDetail = [[LyPriceDetailManager sharedInstance] priceDetailWithUserId:[LyCurrentUser curUser].userId license:_curLicense];
     if (!arrPriceDetail || arrPriceDetail.count < 1) {
         [self load];
@@ -239,7 +241,7 @@ static NSString *lyPriceDetailObjectThirdTableViewCellReuseIdentifier = @"lyPric
     [svMain addSubview:viewObjectSecond];
     [svMain addSubview:viewObjectThird];
     
-    _curLicense = LyLicenseType_C1;
+    _curLicense = [LyCurrentUser curUser].userLicense;
     [btnLicense setTitle:[LyUtil driveLicenseStringFrom:_curLicense] forState:UIControlStateNormal];
 }
 

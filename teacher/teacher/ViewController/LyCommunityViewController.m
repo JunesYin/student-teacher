@@ -381,7 +381,7 @@ static NSString *const lyCommunityTableViewCellReuseIdentifier = @"lyCommunityTa
     
     LyHttpRequest *httpRequest = [LyHttpRequest httpRequestWithMode:communityHttpMethod_transmit];
     [httpRequest setDelegate:self];
-    bHttpFlag = [httpRequest startHttpRequest:statusTransmit_url
+    bHttpFlag = [[httpRequest startHttpRequest:statusTransmit_url
                                          body:@{
                                                 newsIdKey:news.newsId,
                                                 objectIdKey:news.newsMasterId,
@@ -392,7 +392,7 @@ static NSString *const lyCommunityTableViewCellReuseIdentifier = @"lyCommunityTa
                                                 userTypeKey:[[LyCurrentUser curUser] userTypeByString]
                                                 }
                                          type:LyHttpType_asynPost
-                                      timeOut:0];
+                                      timeOut:0] boolValue];
 }
 
 

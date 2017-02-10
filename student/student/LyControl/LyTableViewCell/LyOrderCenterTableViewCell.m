@@ -250,8 +250,8 @@ typedef NS_ENUM(NSInteger, LyOrderCenterTableViewCellButtonMode)
             teacher = [[LyUserManager sharedInstance] getDriveSchoolWithDriveSchoolId:_order.orderObjectId];
             if ( !teacher) {
                 NSString *strName = [LyUtil getUserNameWithUserId:_order.orderObjectId];
-                teacher = [LyDriveSchool driveSchoolWithId:_order.orderObjectId
-                                                      dschName:strName];
+                teacher = [LyDriveSchool userWithId:_order.orderObjectId
+                                                      userName:strName];
                 [[LyUserManager sharedInstance] addUser:teacher];
             }
             
@@ -271,8 +271,8 @@ typedef NS_ENUM(NSInteger, LyOrderCenterTableViewCellButtonMode)
             teacher = [[LyUserManager sharedInstance] getCoachWithCoachId:_order.orderObjectId];
             if ( !teacher) {
                 NSString *strName = [LyUtil getUserNameWithUserId:_order.orderObjectId];
-                teacher = [LyCoach coachWithId:_order.orderObjectId
-                                     coaName:strName];
+                teacher = [LyCoach userWithId:_order.orderObjectId
+                                     userName:strName];
                 [[LyUserManager sharedInstance] addUser:teacher];
             }
             
@@ -292,8 +292,8 @@ typedef NS_ENUM(NSInteger, LyOrderCenterTableViewCellButtonMode)
             teacher = [[LyUserManager sharedInstance] getGuiderWithGuiderId:_order.orderObjectId];
             if ( !teacher) {
                 NSString *strName = [LyUtil getUserNameWithUserId:_order.orderObjectId];
-                teacher = [LyGuider guiderWithGuiderId:_order.orderObjectId
-                                              guiName:strName];
+                teacher = [LyGuider userWithId:_order.orderObjectId
+                                              userName:strName];
                 [[LyUserManager sharedInstance] addUser:teacher];
             }
             
@@ -315,7 +315,7 @@ typedef NS_ENUM(NSInteger, LyOrderCenterTableViewCellButtonMode)
             if ( !teacher) {
                 NSString *strName = [LyUtil getUserNameWithUserId:_order.orderObjectId];
                 teacher = [LyUser userWithId:_order.orderObjectId
-                                    userNmae:strName];
+                                    userName:strName];
                 [[LyUserManager sharedInstance] addUser:teacher];
             }
             

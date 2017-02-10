@@ -490,8 +490,8 @@ static NSString *lySelfStudyToExamFuncsCollectionViewCellReuseIdentifier = @"lyS
                     if ([LyUtil validateString:strId]) {
                         guider = [[LyUserManager sharedInstance] getGuiderWithGuiderId:strId];
                         if ( !guider || LyUserType_guider != guider.userType) {
-                            guider = [LyGuider guiderWithGuiderId:strId
-                                                          guiName:strName];
+                            guider = [LyGuider userWithId:strId
+                                                          userName:strName];
                             
                             [[LyUserManager sharedInstance] addUser: guider];
                         }

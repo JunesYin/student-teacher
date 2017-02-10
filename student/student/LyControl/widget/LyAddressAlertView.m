@@ -336,7 +336,7 @@ CGFloat const aavPickerRowHeight = 30.0f;
                          initAlpha:1.0f
                  destinationAplhas:0.0f
                          completion:^(BOOL finished) {
-                             [btnMask setHidden:NO];
+                             [btnMask setHidden:YES];
                              [self removeFromSuperview];
                          }];
 }

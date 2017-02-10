@@ -320,26 +320,26 @@ static NSString *const lyOrderInfoTableViewCellReuseIdentifier = @"lyOrderInfoTa
         
         switch (_order.orderMode) {
             case LyOrderMode_driveSchool: {
-                LyDriveSchool *school = [LyDriveSchool driveSchoolWithId:_order.orderObjectId dschName:userName];
+                LyDriveSchool *school = [LyDriveSchool userWithId:_order.orderObjectId userName:userName];
                 teacher = school;
                 break;
             }
             case LyOrderMode_coach: {
-                LyCoach *coach = [LyCoach coachWithId:_order.orderObjectId coaName:userName];
+                LyCoach *coach = [LyCoach userWithId:_order.orderObjectId userName:userName];
                 teacher = coach;
                 break;
             }
             case LyOrderMode_guider: {
-                LyGuider *guider = [LyGuider guiderWithGuiderId:_order.orderObjectId guiName:userName];
+                LyGuider *guider = [LyGuider userWithId:_order.orderObjectId userName:userName];
                 teacher = guider;
                 break;
             }
             case LyOrderMode_reservation: {
                 if ([_order.orderName rangeOfString:@"指导员"].length > 0) {
-                    LyGuider *guider = [LyGuider guiderWithGuiderId:_order.orderObjectId guiName:userName];
+                    LyGuider *guider = [LyGuider userWithId:_order.orderObjectId userName:userName];
                     teacher = guider;
                 } else {
-                    LyCoach *coach = [LyCoach coachWithId:_order.orderObjectId coaName:userName];
+                    LyCoach *coach = [LyCoach userWithId:_order.orderObjectId userName:userName];
                     teacher = coach;
                 }
                 break;

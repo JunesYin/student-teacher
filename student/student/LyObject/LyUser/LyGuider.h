@@ -60,18 +60,25 @@
 @property ( assign, nonatomic)           double          deposit;
 
 
-+ (instancetype)guiderWithIdNoAvatar:(NSString *)userId
-                            userName:(NSString *)userName;
++ (nullable instancetype)userWithId:(nullable NSString *)userId
+                           userName:(nullable NSString *)userName;
 
-- (instancetype)initWithIdNoAvatar:(NSString *)userId
-                          userName:(NSString *)userName;
+- (nullable instancetype)initWithId:(nullable NSString *)userId
+                           userName:(nullable NSString *)userName;
 
 
-+ (instancetype)guiderWithGuiderId:(NSString *)guiId
-                           guiName:(NSString *)guiName;
-
-- (instancetype)initWithGuiderId:(NSString *)guiId
-                         guiName:(NSString *)guiName;
+//+ (instancetype)guiderWithIdNoAvatar:(NSString *)userId
+//                            userName:(NSString *)userName;
+//
+//- (instancetype)initWithIdNoAvatar:(NSString *)userId
+//                          userName:(NSString *)userName;
+//
+//
+//+ (instancetype)guiderWithGuiderId:(NSString *)guiId
+//                           guiName:(NSString *)guiName;
+//
+//- (instancetype)initWithGuiderId:(NSString *)guiId
+//                         guiName:(NSString *)guiName;
 
 
 + (instancetype)guiderWithId:(NSString *)guiId

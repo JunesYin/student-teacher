@@ -1040,7 +1040,7 @@ static NSString *const lyGuiderDetailConsultTableViewCellReuseIdentifier = @"lyG
                                strName = [LyUtil getUserNameWithUserId:_userId];
                            }
                            
-                           guider = [LyGuider guiderWithGuiderId:_userId guiName:strName];
+                           guider = [LyGuider userWithId:_userId userName:strName];
                            
                            [[LyUserManager sharedInstance] addUser:guider];
                        }
@@ -1152,7 +1152,7 @@ static NSString *const lyGuiderDetailConsultTableViewCellReuseIdentifier = @"lyG
                                    }
                                }
                                
-                               master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                               master = [LyUser userWithId:sMasterId userName:sMasterName];
                                [[LyUserManager sharedInstance] addUser:master];
                            }
                            
@@ -1191,7 +1191,7 @@ static NSString *const lyGuiderDetailConsultTableViewCellReuseIdentifier = @"lyG
                                    }
                                }
                                
-                               master = [LyUser userWithId:sMasterId userNmae:sMasterName];
+                               master = [LyUser userWithId:sMasterId userName:sMasterName];
                                [[LyUserManager sharedInstance] addUser:master];
                            }
                            
